@@ -25,8 +25,10 @@ if ( isset($_GET['topic_id']) ) :
 				</div>
 				<div id="column2" class="prefix_7 grid_4.1">
 					<div class="researcher-topic">
-						<ul><span style="color:#000;font-size:15px;font-weight:bolder;">相关研究者</span>';
-						echo '<li style="margin-top:20px;"></li>';
+						<p>
+							<span style="color:#000;font-weight:bolder;line-height:50px;">相关研究者</span>
+						</p>
+						<ul>';
 						$count = 0;
 						foreach ( $rschs as $r ) {
 							//$rsch = explode("（",$rscher);
