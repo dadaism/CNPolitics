@@ -29,14 +29,15 @@ if ( isset($_GET['topic_id']) ) :
 							<span style="color:#000;font-weight:bolder;line-height:50px;">相关研究者</span>
 						</p>
 						<ul>';
-						$count = 0;
-						foreach ( $rschs as $r ) {
-							//$rsch = explode("（",$rscher);
-							echo '<li>'.$r.'</li>';
-							$count = $count + 1;
-							//if ( $count == 4 )	break;
+						if ( !empty($rschs) ) {
+							$count = 0;
+							foreach ( $rschs as $r ) {
+								//$rsch = explode("（",$rscher);
+								echo '<li><a href="'.get_bloginfo('url')."/researcher/?rsch_id=".$r->id.'">'.$r->name. '</a> </li>';
+								$count = $count + 1;
+								//if ( $count == 4 )	break;
+							}
 						}
-		
 		echo '
 						</ul>
 					</div>

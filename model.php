@@ -589,6 +589,20 @@ function CNPolitics_save_post($post_id) {
 	}
 }
 
+function get_rsch_bypostid( $post_id ) {
+	global $wpdb;
+	//var_dump( $rsch_regions );
+	//$region_id = array_search( $rsch_region, $regions);
+	//var_dump($myrsch);
+	$sql = "SELECT info_id
+			FROM {$wpdb->prefix}post_info
+			 WHERE type = '2' AND post_id = '$post_id';";
+	$rsch_id_array = $wpdb->get_results($sql);
+	//var_dump($rsch_id_array[0]);
+	$rsch = get_rsch_byID( $rsch_id_array[0]->info_id );
+	return $rsch;
+}
+
 function get_rsch_bytopic( $tid ) {
 	global $wpdb;
 	//var_dump( $rsch_regions );
@@ -601,17 +615,17 @@ function get_rsch_bytopic( $tid ) {
 	$key = 0;
 	foreach ( $rsch_id_array as $rid ) {
 		$rid = $rid->rsch_id;
-		$sql = "SELECT name
+		$sql = "SELECT name, id
 				FROM {$wpdb->prefix}rschs
 				WHERE id = $rid";
-		$rsch_array = $wpdb->get_results($sql);
-		if ( empty($rsch_array) )
+		$rsch_obj_array = $wpdb->get_results($sql);
+		if ( empty($rsch_obj_array) )
 			die("Wrong researcher id in get_rsch_bytopic");
-		$rsch = $rsch_array[0];
-		$rsch_name[$key] = $rsch->name;
+		$rsch_obj = $rsch_obj_array[0];
+		$rsch[$key] = $rsch_obj;
 		$key = $key + 1;
 	}
-	return $rsch_name;
+	return $rsch;
 }
 
 function get_rsch_byID( $id )
@@ -665,6 +679,20 @@ function get_checked_id($post_id, $type) {
 	}
 }
 
+function get_topic_bypostid( $post_id ) {
+	global $wpdb;
+	//var_dump( $rsch_regions );
+	//$region_id = array_search( $rsch_region, $regions);
+	//var_dump($myrsch);
+	$sql = "SELECT info_id
+			FROM {$wpdb->prefix}post_info
+			 WHERE type = '1' AND post_id = '$post_id';";
+	$topic_id_array = $wpdb->get_results($sql);
+	//var_dump($rsch_id_array[0]);
+	$topic = get_topic_byID( $topic_id_array[0]->info_id );
+	return $topic;
+}
+
 function get_topic_byrsch( $rid ) {
 	global $wpdb;
 	//var_dump( $rsch_regions );
@@ -677,17 +705,17 @@ function get_topic_byrsch( $rid ) {
 	$key = 0;
 	foreach ( $topic_id_array as $tid ) {
 		$tid = $tid->topic_id;
-		$sql = "SELECT subject
+		$sql = "SELECT subject, id
 				FROM {$wpdb->prefix}topics
 				WHERE id = $tid";
-		$topic_array = $wpdb->get_results($sql);
-		if ( empty($topic_array) )
+		$topic_obj_array = $wpdb->get_results($sql);
+		if ( empty($topic_obj_array) )
 			die("Wrong topic id in get_topic_byrsch");
-		$topic = $topic_array[0];
-		$topic_subject[$key] = $topic->subject;
+		$topic_obj = $topic_obj_array[0];
+		$topic[$key] = $topic_obj;
 		$key = $key + 1;
 	}
-	return $topic_subject;
+	return $topic;
 }
 
 function get_topic_byID( $id ) {

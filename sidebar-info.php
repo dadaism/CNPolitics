@@ -30,43 +30,63 @@
 				<p style="margin-bottom:20px;margin-top:0px;"><a href="" style="color:#b9b9b9;font-size:12px;float:right;">浏览更多>></a></p>
 			</div>
 		</div>
+<?php
+		$r = get_rsch_bypostid($post->ID);
+?>
 		<div class="post-info-box">
 			<img class="expand-researcher-info" src="<?php bloginfo('template_directory'); ?>/images/arrow-expand.png">
 			<img class="collapse-researcher-info" src="<?php bloginfo('template_directory'); ?>/images/arrow-collapse.png">
-			研究者：<a href="">研究者名（F.M. Lastname）</a>
+<?php
+	echo '	研究者：	<a href="'.get_bloginfo('url')."/researcher/?rsch_id=".$r->id.'">'.$r->name. '</a>
 			<div class="researcher-info">
-				<p style="margin-top:20px;">个人简介：</p>
-				<p style="color:#777;">个人简介，字号14px，栏宽20em。个人简介，字号14px，栏宽20em。</p>
+				<p style="margin-top:20px;">个人简介：</p> 
+				<p style="color:#777;">'.$r->intro.'</p>
 				<p style="margin-top:20px;">相关文章：</p>
 				<p>
-				<ul>
-					<li><a href="">文章1</a></li>
-					<li><a href="">文章1</a></li>
-					<li><a href="">文章1</a></li>
-					<li><a href="">文章1</a></li>
+				<ul>';
+	$post_id_array = get_postid_byrschid($r->id);
+	foreach ( $post_id_array as $post_id ) :
+		//if ( $post_id!=$post->ID ) {
+			$related_post = get_post($post_id);
+			//var_dump($related_post);
+			echo '<li><a href="'.$related_post->guid.'">'.$related_post->post_title.'</a></li>';
+		//}
+	endforeach;
+	echo '
 				</ul>
 				</p>
 				<p style="margin-bottom:20px;margin-top:0px;"><a href="" style="color:#b9b9b9;font-size:12px;float:right;">浏览更多>></a></p>
 			</div>
-		</div>
+		</div>';
+	$t = get_topic_bypostid($post->ID);
+	//var_dump($t);
+?>
 		<div class="post-info-box">
 			<img class="expand-theme-info" src="<?php bloginfo('template_directory'); ?>/images/arrow-expand.png">
 			<img class="collapse-theme-info" src="<?php bloginfo('template_directory'); ?>/images/arrow-collapse.png">
-			主题名：<a href="">主题名称</a>
+<?php
+	echo '	主题名：<a href="'.get_bloginfo('url')."/topic/?topic_id=".$t->id.'">'.$t->subject.'</a>
 			<div class="theme-info">
 				<p style="margin-top:20px;">主题简介：</p>
-				<p style="color:#777;">个人简介，字号14px，栏宽20em。个人简介，字号14px，栏宽20em。</p>
+				<p style="color:#777;">'.$t->intro.'</p>
 				<p style="margin-top:20px;">相关文章：</p>
 				<p>
-				<ul>
-					<li><a href="">文章1</a></li>
-					<li><a href="">文章1</a></li>
-					<li><a href="">文章1</a></li>
-					<li><a href="">文章1</a></li>
+				<ul>';
+	$post_id_array = get_postid_bytopicid($t->id);
+	$count = 0;
+	foreach ( $post_id_array as $post_id ) :
+		if ( $post_id!=$post->ID ) {
+			$related_post = get_post($post_id); $count = $count+1;
+			echo '<li><a href="'.$related_post->guid.'">'.$related_post->post_title.'</a></li>';
+			if ($count>=4)	break;
+		}
+	endforeach;
+	echo '
 				</ul>
 				</p>
 				<p style="margin-bottom:20px;margin-top:0px;"><a href="" style="color:#b9b9b9;font-size:12px;float:right;">浏览更多>></a></p>
-			</div>
+			</div>';
+?>
 		</div>
 		<p><a href=""><b>政见 CNPolitics.org</b></a> 是一个独立团队，向你介绍世界上最聪明的脑袋是怎样分析中国的。我们致力于发掘海内外学者和智库的智慧成果，引进思想资源。｜更多关于我们 »</p>
 		<p style="color:#777777;margin-bottom:10px;">关注政见动向：</p>

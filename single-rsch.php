@@ -58,13 +58,15 @@ if ( isset($_GET['rsch_id']) ) :
 
 				<div id="column2" class="prefix_7 grid_4.1">
 				<div class="researcher-topic">
-					<ul><span style="color:#000;font-size:15px;font-weight:bolder;">研究主题</span>';
-						echo '<li style="margin-top:20px;"></li>';
+					<p>
+					<span style="color:#000;font-weight:bolder;line-height:50px;">研究主题</span>
+					</p>
+					<ul>';
 						if ( !empty($topics) ) {
 							$count = 0;
-							foreach ( $topics as $topic ) {
+							foreach ( $topics as $t ) {
 								//echo '<li style="margin-top:20px;">'.$topic.'</li>';
-								echo '<li>'.$topic.'</li>';
+								echo '<li><a href="'.get_bloginfo('url')."/topic/?topic_id=".$t->id.'">'.$t->subject.'</a></li>';
 								$count = $count + 1;
 								//if ( $count == 4 )	break;
 							}

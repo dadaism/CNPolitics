@@ -136,26 +136,6 @@
 			$(this).parent().find(".expand-nav").show();
 		})
 
-
-
-		//For abstract
-		/*$(".box-abstract").mouseover(function()	{
-			$(this).css("border","1px solid #777");
-			$(this).css("background-color","#fff");
-			$(this).animate({ boxShadow : "0 0 5px rgba(0,0,0,0.75)"});
-			$(this).text("此处为最新一篇位于相应分类下的文章的摘要。摘要实际长度不限；默认显示字数有限——若标题长度为一行，摘要默认最长四行；若标题长度为两行，则默认最长三行。鼠标悬停至摘要文本区域时，展开显示完整摘要。鼠标移出摘要文本区域时，恢复默认折叠视图。字号 15 px，行高 24 px，栏宽 25 em，色彩 #777777。");
-		})
-
-		$(".box-abstract").mouseout(function()	{
-			$(this).animate({ boxShadow : "none"});
-			$(this).css("background-color","transparent");
-			$(this).css("border","none");
-			$(this).text("此处为最新一篇位于相应分类下的文章的摘要。摘要实际长度不限；默认显示字数有限:若标题长度为一行，摘要默认最长四行；若标题长度为两行……｜完整摘要");
-		})*/
-
-
-
-
 	})
 
 </script>
