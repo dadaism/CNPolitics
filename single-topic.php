@@ -53,9 +53,8 @@ if ( isset($_GET['topic_id']) ) :
 				</div>';
 
 	// get post id via rsch_id
-
 	$pid_array = get_postid_bytopicid($tid);
-	$args = array(	'post__in' => $pid_array );
+	$args = array(	'posts_per_page'   => 3, 'post__in' => $pid_array );
 	$postslist = get_posts($args);
 
 	foreach ($postslist as $post):
@@ -74,6 +73,7 @@ if ( isset($_GET['topic_id']) ) :
 			<div class="clear"></div>';
 	endforeach;
 ?>
+<?php wp_pagenavi(); ?>  
 
 <div class="post-end-button back-to-top">
 	<p style="padding-top:20px;">回到开头</p>
