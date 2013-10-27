@@ -565,7 +565,7 @@ input.emailbox_input:focus	{outline-width: 0px;}
 	color:#b9b9b9;
 }
 
-.pagination .currentPage {
+.pagination .current {
 	color:#b42800;
 	font-weight: bold;
 }
@@ -603,3 +603,6 @@ li.first-arrow {
 .pagination a:active {color:#b42800;}
 .first-arrow:active {border-right:7px solid #b42800;}
 .last-arrow:active {border-left:7px solid #b42800;}
+
+.page-numbers {padding-left:5px;padding-right: 5px;}
+

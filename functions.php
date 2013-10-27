@@ -280,8 +280,10 @@ function wp_pagenavi() {
 		'type'      => 'plain',
 		'end_size'  => '1',
 		'mid_size'  => '4',
-		'prev_next' => '上一页',
-		'next_next' => '下一页'
+		'prev_text' => __(' << '),
+		'next_text' => __(' >> ')
+		//'prev_text' => __(' <li>囧</li> '),
+		//'next_text' => __(' 下一页>> ')
 	);
 	echo paginate_links($pagination);
 }

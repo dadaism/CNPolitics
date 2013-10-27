@@ -31,11 +31,20 @@
 		<p>欢迎分享。如需全文转载，请阅读<a href="#">版权声明</a>。</p>
 		<div class="social">
 		<ul>
-			<li><a href="#" class="sina" style="margin-right:15px;"><img src="<?php bloginfo('template_directory'); ?>/images/sina.png"></a></li>
-			<li><a href="#" class="tecent" style="margin-right:15px;"><img src="<?php bloginfo('template_directory'); ?>/images/tecent.png"></a></li>
-			<li><a href="#" class="a163" style="margin-right:15px;"><img src="<?php bloginfo('template_directory'); ?>/images/a163.png"></a></li>
-			<li><a href="#" class="gplus" style="margin-right:15px;"><img src="<?php bloginfo('template_directory'); ?>/images/gplus.png"></a></li>
-			<li><a href="#" class="renren" style="margin-right:15px;"><img src="<?php bloginfo('template_directory'); ?>/images/renren.png"></a></li>
+<?php 
+	$share_title = "» ". get_the_title(). " 政见 CNPolitics.org "; 
+	$pic_url = "";	
+	if (has_post_thumbnail( $post->ID ) ) {
+		$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
+		$pic_url = $image[0];
+	}
+	$share_href = "http://www.jiathis.com/send/?url=".get_permalink($post->ID)."&title=".$share_title."&pic=".$pic_url."&uid=1657293";
+?>
+			<li><a href="<?php echo $share_href;?>&webid=tsina" class="sina" style="margin-right:15px;"><img src="<?php bloginfo('template_directory'); ?>/images/sina.png"></a></li>
+			<li><a href="<?php echo $share_href;?>&webid=tqq" class="tecent" style="margin-right:15px;"><img src="<?php bloginfo('template_directory'); ?>/images/tecent.png"></a></li>
+			<li><a href="<?php echo $share_href;?>&webid=t163" class="a163" style="margin-right:15px;"><img src="<?php bloginfo('template_directory'); ?>/images/a163.png"></a></li>
+			<li><a href="<?php echo $share_href;?>&webid=googleplus" class="gplus" style="margin-right:15px;"><img src="<?php bloginfo('template_directory'); ?>/images/gplus.png"></a></li>
+			<li><a href="<?php echo $share_href;?>&webid=renren" class="renren" style="margin-right:15px;"><img src="<?php bloginfo('template_directory'); ?>/images/renren.png"></a></li>
 			<li><a href="#" class="copy-link" style="margin-right:15px;"><img src="<?php bloginfo('template_directory'); ?>/images/copy-link.png"></a></li>
 		</ul>
 		</div> <!-- icon list -->

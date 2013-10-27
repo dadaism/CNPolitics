@@ -54,7 +54,7 @@ if ( isset($_GET['topic_id']) ) :
 
 	// get post id via rsch_id
 	$pid_array = get_postid_bytopicid($tid);
-	$args = array(	'posts_per_page'   => 3, 'post__in' => $pid_array );
+	/*$args = array(	'posts_per_page'   => 3, 'post__in' => $pid_array );
 	$postslist = get_posts($args);
 
 	foreach ($postslist as $post):
@@ -71,9 +71,35 @@ if ( isset($_GET['topic_id']) ) :
 				</div>
 			</div>
 			<div class="clear"></div>';
-	endforeach;
+	endforeach;*/
+	
+	// The Loop
+	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+	$args = array('posts_per_page' =>5, 'paged' => $paged, 'post__in' => $pid_array );
+	query_posts($args); 
+
+	/* the loop */
+	if ( have_posts() ) : 
+		while (have_posts()) : the_post();
+			$post_thumbnail_id = get_post_thumbnail_id();
+			echo '<div class="article-latest">
+					<img class="latest-img" width="150" height="150" src="'.wp_get_attachment_thumb_url( $post_thumbnail_id ).'">
+					<div class="latest-text">';
+			echo '		<p class="latest-head"><a href="'.get_permalink().'">'.get_the_title().'</a></p>
+						<p class="latest-author"><a href="#">'.get_the_author().'</a><span style="font-size:13px;color:#b9b9b9;"> | '.get_the_date('Y-m-d').'</span></p>
+						<div class="box-abstract"><p class="latest-abstract">'.get_excerpt('96').'</p></div>		
+				  	</div>
+				  </div>
+				  <div class="clear"></div>';
+			endwhile;
+			//previous_posts_link();
+			//next_posts_link();
+		else :
+			// No posts found
+	endif;
 ?>
-<?php wp_pagenavi(); ?>  
+<!--?php posts_nav_link(); ?-->
+<div class="pagination"><?php wp_pagenavi(); ?></div>
 
 <div class="post-end-button back-to-top">
 	<p style="padding-top:20px;">回到开头</p>
