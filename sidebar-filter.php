@@ -25,14 +25,21 @@
 			按<a href="">作者</a>筛选
 		</div>
 		<div class="author-filter">
-			<ul>
 <?php
-	global $author_array;
-	foreach( $author_array as $author ) :
-		echo '	<li><a href="">'.$author.'</a></li>';
-	endforeach;
+	global $authorid_array;
+	$author_array = array();
+	foreach ( $authorid_array as $authorid ) {
+		$user_info = get_userdata($authorid);
+		array_push( $author_array, $user_info->display_name);
+	}
+	if ( !empty($author_array) ) {
+		echo "<ul>";
+		foreach( $author_array as $key => $author ) :
+			echo '	<li><a href="'.add_query_arg('authorid',$authorid_array[$key]).'">'.$author.'</a></li>';
+		endforeach;
+		echo "</ul>";
+	}
 ?>
-			</ul>
 			<div class="clear"></div>
 			<p style="margin-bottom:35px;margin-top:5px;"><a href="" style="color:#B9B9B9;font-size:12px;float:right;">所有作者</a></p>
 		</div>
@@ -48,7 +55,7 @@
 <?php
 	global $quarter_array;
 	foreach( $quarter_array as $quarter ) :
-		echo '	<li><a href="">'.$quarter.'</a></li>';
+		echo '	<li><a href="'.add_query_arg('quarter',$quarter_array[$key]).'">'.$quarter.'</a></li>';
 	endforeach;
 ?>
 			</ul>

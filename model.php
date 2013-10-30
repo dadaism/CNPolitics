@@ -605,6 +605,7 @@ function get_rsch_bypostid( $post_id ) {
 
 function get_rsch_bytopic( $tid ) {
 	global $wpdb;
+	$rsch = array();
 	//var_dump( $rsch_regions );
 	//$region_id = array_search( $rsch_region, $regions);
 	//var_dump($myrsch);
@@ -867,17 +868,46 @@ function get_postid_bytopicid($topic_id) {
 
 function get_authorid_bypostid($pid_array) {
 	global $wpdb;
-	//var_dump($pid_array);
-	$myposts = get_posts( array('post__in' => $pid_array)  );
-	echo count($myposts);	
-	foreach($myposts as $post) {
-		setup_postdata($post);
-		$authorid = get_the_author_meta('ID');
-//		var_dump($authorid);
+	$authorid_array = array();
+	if ( empty($pid_array) ) 	return $authorid_array;
+	foreach ( $pid_array as $pid ) {
+		$mypost = get_post( $pid );
+		array_push($authorid_array, $mypost->post_author);	
 	}
-	echo count($pid_array);
-	return ;
+	$authorid_array = array_unique($authorid_array);
+	$authorid_array = array_values($authorid_array);
+	echo count($authorid_array);
+	return $authorid_array;
+}
 
-
+function get_quarter_bypostid($pid_array) {
+	global $wpdb;
+	$quarter_array = array();
+	if ( empty($pid_array) ) 	return $quarter_array;
+	foreach ( $pid_array as $pid ) {
+		$mypost = get_post( $pid );
+		array_push( $quarter_array,  substr($mypost->post_date, 0, 7) );
+	}
+	$quarter_array = array_unique($quarter_array);
+	$quarter_array = array_values($quarter_array);
+	arsort($quarter_array);
+	foreach ( $quarter_array as $key => $quarter ) {
+		$mon = substr($quarter, 5,6);
+		if ( $mon>0 && $mon<=3) {
+			$quarter_array[$key] = substr($quarter, 0,4)."年春季";
+		}
+		else if ( $mon>3 && $mon<=6) {
+			$quarter_array[$key] = substr($quarter, 0,4)."年夏季";
+		}
+		else if ( $mon>6 && $mon<=9) {
+			$quarter_array[$key] = substr($quarter, 0,4)."年秋季";
+		}
+		else if ( $mon>9 && $mon<=12) {
+			$quarter_array[$key] = substr($quarter, 0,4)."年冬季";
+		}
+	}
+	$quarter_array = array_unique($quarter_array);
+	$quarter_array = array_values($quarter_array);
+	return $quarter_array;
 }
 ?>

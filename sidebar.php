@@ -1,6 +1,6 @@
 <div class="column-head"><a href="#"><b>政见精选</b></a></div>
 <?php 
-	global $author_array;
+	global $authorid_array;
 	global $issue_array;
 	global $quarter_array;
 	$postslist = get_posts( 'numberposts=6&orderby=rand' );

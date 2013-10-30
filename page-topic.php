@@ -6,6 +6,7 @@ Template Name: Topic
 <?php  get_header();?>
 <?php
 	if ( isset($_GET['topic_id']) ) :
+		echo "hahaha";
 		require_once('single-topic.php');	
 	//elseif ( isset($_GET['toptopic']) ) :
 	//	require_once('category-topic.php');
