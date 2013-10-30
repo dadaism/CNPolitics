@@ -864,4 +864,20 @@ function get_postid_bytopicid($topic_id) {
 	//var_dump($pid_array);
 	return $pid_array;
 }
+
+function get_authorid_bypostid($pid_array) {
+	global $wpdb;
+	//var_dump($pid_array);
+	$myposts = get_posts( array('post__in' => $pid_array)  );
+	echo count($myposts);	
+	foreach($myposts as $post) {
+		setup_postdata($post);
+		$authorid = get_the_author_meta('ID');
+//		var_dump($authorid);
+	}
+	echo count($pid_array);
+	return ;
+
+
+}
 ?>

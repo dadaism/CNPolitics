@@ -7,12 +7,12 @@
 		</div>
 	<div class="topic-filter">
 		<ul>
-			<li><a href="">两会专题</a></li>
-			<li><a href="">中美关系</a></li>
-			<li><a href="">文章1</a></li>
-			<li><a href="">文章1</a></li>
-			<li><a href="">文章1</a></li>
-			<li><a href="">文章1</a></li>
+<?php
+	global $issue_array;
+	foreach( $issue_array as $issue ) :
+		echo '	<li><a href="">'.$issue.'</a></li>';
+	endforeach;
+?>		
 		</ul>
 		<div class="clear"></div>
 		<p style="margin-bottom:35px;margin-top:5px;"><a href="" style="color:#b9b9b9;font-size:12px;float:right;">不限专题</a></p>
@@ -26,12 +26,12 @@
 		</div>
 		<div class="author-filter">
 			<ul>
-				<li><a href="">张三</a></li>
-				<li><a href="">李四</a></li>
-				<li><a href="">王五</a></li>
-				<li><a href="">娃哈哈</a></li>
-				<li><a href="">囧囧囧</a></li>
-				<li><a href="">苏凉</a></li>
+<?php
+	global $author_array;
+	foreach( $author_array as $author ) :
+		echo '	<li><a href="">'.$author.'</a></li>';
+	endforeach;
+?>
 			</ul>
 			<div class="clear"></div>
 			<p style="margin-bottom:35px;margin-top:5px;"><a href="" style="color:#B9B9B9;font-size:12px;float:right;">所有作者</a></p>
@@ -45,12 +45,12 @@
 		</div>
 		<div class="quarter-filter">
 			<ul>
-				<li><a href="">2013年春</a></li>
-				<li><a href="">2012年东</a></li>
-				<li><a href="">2012年秋</a></li>
-				<li><a href="">2013年春</a></li>
-				<li><a href="">2012年东</a></li>
-				<li><a href="">2012年秋</a></li>
+<?php
+	global $quarter_array;
+	foreach( $quarter_array as $quarter ) :
+		echo '	<li><a href="">'.$quarter.'</a></li>';
+	endforeach;
+?>
 			</ul>
 			<div class="clear"></div>
 			<p style="margin-bottom:35px;margin-top:5px;"><a href="" style="color:#b9b9b9;font-size:12px;float:right;">全部季度</a></p>
