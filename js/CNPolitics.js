@@ -1,10 +1,8 @@
 jQuery(document).ready( function($) {
-
- //   var newCat, noSyncChecks = false, syncChecks, catAddAfter;
-
-   // $('#link_name').focus();
+	//   var newCat, noSyncChecks = false, syncChecks, catAddAfter;
+	// $('#link_name').focus();
     // postboxes
-   // postboxes.add_postbox_toggles('link');
+	// postboxes.add_postbox_toggles('link');
 
     $('#topic-tabs a').click(function(){
         var t = $(this).attr('href');
@@ -94,11 +92,25 @@ function showtab(tabAreaId, tabId, taxonomyId, divId) {
 }
 
 function check_checkbox( prefixID, arrayID ) {
-	//var arrayID = [1,2,3];	
-	//alert(arrayID.length);
-
 	for(var i = 0; i < arrayID.length; i++) {
 		//alert("topicid-"+arrayID[i]);    //no .value here
 		document.getElementById(prefixID+arrayID[i]).checked = true;
 	}
+}
+
+function decorate_filter_box(authorname, quarter) {
+	alert(authorid);
+	//alert(quarter);
+	//alert( $('.filter-list li').text() );
+	if (authorid!='') {
+		$(".author-filter").slideUp();
+		$(".collapse-author-filter").hide();
+		$(".expand-author-filter").show();
+	}
+	/*var authors = document.getElementsByClassName("filter-list");
+	alert(authors);
+	for (i=0; i<divs.length; ++i) {
+		alert(author[i]);
+	}*/
+	//alert( $('.filter-list li a'):contains("guisu").text() );
 }

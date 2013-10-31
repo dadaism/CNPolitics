@@ -876,7 +876,6 @@ function get_authorid_bypostid($pid_array) {
 	}
 	$authorid_array = array_unique($authorid_array);
 	$authorid_array = array_values($authorid_array);
-	echo count($authorid_array);
 	return $authorid_array;
 }
 
@@ -909,5 +908,52 @@ function get_quarter_bypostid($pid_array) {
 	$quarter_array = array_unique($quarter_array);
 	$quarter_array = array_values($quarter_array);
 	return $quarter_array;
+}
+
+function pid_filter($pid_array, $authorid, $quarter) {
+	//var_dump($authorid);
+	//var_dump($quarter);
+	//echo strlen($quarter);
+	if ( !empty($quarter) ) {
+		$season = substr($quarter,7);
+		//var_dump($season);
+		if ( $season=="春季" ){
+			$mon_min = "01";
+			$mon_max = "03";		
+		}
+		else if ( $season=="夏季" ){
+			$mon_min = "04";
+			$mon_max = "06";		
+		}
+		else if ( $season=="秋季" ){
+			$mon_min = "07";
+			$mon_max = "09";
+		}
+		else if ( $season=="冬季" ){
+			$mon_min = "10";
+			$mon_max = "12";		
+		
+		}
+		//var_dump($mon_min);
+		//var_dump($mon_max);
+	}
+	foreach ( $pid_array as $key => $pid ) {
+		$mypost = get_post( $pid );
+		// filter according to author id
+		if ( !empty($authorid) && $authorid!=$mypost->post_author ) {
+			unset($pid_array[$key]);
+		}
+		// filter according to quarter
+		if ( !empty($quarter) ) {
+			//echo $mypost->post_date."<br>";
+			$date = substr($mypost->post_date,0,7);
+			$mon = substr($date, 5, 6);
+			if ( $mon<$mon_min || $mon>$mon_max )
+				unset($pid_array[$key]);
+		}
+	}
+	$pid_array = array_values($pid_array);
+	//var_dump($pid_array);
+	return $pid_array;
 }
 ?>

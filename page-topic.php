@@ -6,8 +6,15 @@ Template Name: Topic
 <?php  get_header();?>
 <?php
 	if ( isset($_GET['topic_id']) ) :
-		echo "hahaha";
-		require_once('single-topic.php');	
+		$authorid = isset($_GET['authorid']) ? $_GET['authorid'] : '';
+		$quarter = isset($_GET['quarter']) ? $_GET['quarter'] : '';
+		require_once('single-topic.php');
+
+		echo '<script>
+				var authorid = '.json_encode($authorid).';
+				var quarter = '.json_encode($quarter).';
+				decorate_filter_box(authorid, quarter);
+			  </script>';
 	//elseif ( isset($_GET['toptopic']) ) :
 	//	require_once('category-topic.php');
 	else :

@@ -399,6 +399,10 @@ input.emailbox_input:focus	{outline-width: 0px;}
 .post-filter-box	a {color: #b42800;}
 .post-filter-box img {margin: 5px 0px;float: right;}
 
+.post-filter-selected {color: #b42800; font-weight: bold;}
+
+
+
 .post-sidebar p {margin-top: 40px;width: 280px;color: #b9b9b9;margin-left: 10px;}
 .post-sidebar p a {color: #b42800;}
 .post-sidebar-social ul {display: inline;margin-left: 5px;}
@@ -605,4 +609,6 @@ li.first-arrow {
 .last-arrow:active {border-left:7px solid #b42800;}
 
 .page-numbers {padding-left:5px;padding-right: 5px;}
+
+
 

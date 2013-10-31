@@ -135,7 +135,6 @@
 			$(this).hide();
 			$(this).parent().find(".expand-nav").show();
 		})
-
 	})
 
 </script>
