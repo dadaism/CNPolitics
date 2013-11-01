@@ -52,7 +52,7 @@ if ( isset($_GET['topic_id']) ) :
 					<span style="font-size:15px;color:#000;font-weight:bold;">'.$t->subject.'</span>
 				</div>';
 
-	// get post id via rsch_id
+	// get post id via topic_id
 	$pid_array = get_postid_bytopicid($tid);
 	global $authorid_array;
 	$authorid_array = get_authorid_bypostid($pid_array);

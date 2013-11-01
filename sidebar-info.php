@@ -92,17 +92,23 @@
 		<p style="color:#777777;margin-bottom:10px;">关注政见动向：</p>
 		<div class="post-sidebar-social">
 			<ul>
-			<li><a href="#" class="fav" style="margin-right:14px;"><img src="<?php bloginfo('template_directory'); ?>/images/social_fav.png"></a></li>
-			<li><a href="#" class="rss" style="margin-right:14px;"><img src="<?php bloginfo('template_directory'); ?>/images/social_rss.png"></a></li>
-			<li><a href="#" class="sina" style="margin-right:14px;"><img src="<?php bloginfo('template_directory'); ?>/images/social_sina.png"></a></li>
-			<li><a href="#" class="tecent" style="margin-right:14px;"><img src="<?php bloginfo('template_directory'); ?>/images/social_tecent.png"></a></li>
-			<li><a href="#" class="a163" style="margin-right:14px;"><img src="<?php bloginfo('template_directory'); ?>/images/social_163.png"></a></li>
+			<li><a href="#" class="fav" style="margin-right:14px;"><img src="<?php bloginfo('template_directory'); ?>/images/social_fav.png" onmouseover="this.title='添加至收藏夹'"></a></li>
+			<li><a href="http://cnpolitics.org/feed/" class="rss" style="margin-right:14px;"><img src="<?php bloginfo('template_directory'); ?>/images/social_rss.png" onmouseover="this.title='订阅RSS'"></a></li>
+			<li><a href="http://weibo.com/cnpolitics" class="sina" style="margin-right:14px;"><img src="<?php bloginfo('template_directory'); ?>/images/social_sina.png" onmouseover="this.title='访问新浪微博'"></a></li>
+			<li><a href="http://t.qq.com/chinapolitics" class="tecent" style="margin-right:14px;"><img src="<?php bloginfo('template_directory'); ?>/images/social_tecent.png" onmouseover="this.title='访问腾讯微博'"></a></li>
+			<li><a href="http://t.163.com/cnpolitics" class="a163" style="margin-right:14px;"><img src="<?php bloginfo('template_directory'); ?>/images/social_163.png" onmouseover="this.title='访问网易微博'"></a></li>
 			</ul>
 		</div>
 		<p style="color:#777777;margin-bottom:15px;float:left;">订阅最新文章，自动推送至你的邮箱：</p>
-		<form style="display:inline;" method="get" action="#">
-			<input type="text" value="输入你的Email地址" onblur="if (this.value==''){this.value='输入你的Email地址'}" onfocus="if (this.value=='输入你的Email地址') {this.value=''}" class="post-sidebar-emailbox-input"/>
-			<input type="image" style="margin-bottom:-30px;verticle-align:middle;" src="<?php bloginfo('template_directory'); ?>/images/footer_inputting.png">
+		<!--以下是QQ邮件列表订阅嵌入代码-->
+		<script >var nId = "384aadf45363c5d64f96fe9a5b020d0b8acee304fd40cdee"</script>
+		<script src="http://list.qq.com/zh_CN/htmledition/js/qf/page/qfcode.js" charset="gb18030"></script>
+
+		<form style="display:inline;"  action="http://list.qq.com/cgi-bin/qf_compose_send" target='_blank' method="post">
+			<input type="hidden" name="t" value="qf_booked_feedback">
+			<input type="hidden" name="id" value="384aadf45363c5d64f96fe9a5b020d0b8acee304fd40cdee">
+			<input type="text" id="to" name="to" value="输入你的Email地址" onblur="if (this.value==''){this.value='输入你的Email地址'}" onfocus="if (this.value=='输入你的Email地址') {this.value=''}" class="post-sidebar-emailbox-input"/>
+			<input type="image" class="emailbox_img" src="<?php bloginfo('template_directory'); ?>/images/footer_input.png">
+			<img style="margin-left:-15px;" class="emailbox_shadow" src="<?php bloginfo('template_directory'); ?>/images/shadow_emailbox.png">
 		</form>
-		<img src="<?php bloginfo('template_directory'); ?>/images/shadow_emailbox.png" style="margin-left:-15px;margin-top:-5px;">
 </div>

@@ -23,11 +23,12 @@
 			<input type="hidden" name="id" value="384aadf45363c5d64f96fe9a5b020d0b8acee304fd40cdee">
 			<input type="text" id="to" name="to" value="输入你的Email地址" onblur="if (this.value==''){this.value='输入你的Email地址'}" onfocus="if (this.value=='输入你的Email地址') {this.value=''}" class="emailbox_input"/>
 			<input type="image" class="emailbox_img" src="<?php bloginfo('template_directory'); ?>/images/footer_input.png">
-			<input type="image" class="emailbox_shadow" src="<?php bloginfo('template_directory'); ?>/images/shadow_emailbox.png">
+			<img class="emailbox_shadow" src="<?php bloginfo('template_directory'); ?>/images/shadow_emailbox.png">
 		</form>
 		</div>
 		<ul style="font-size:13px; color:#f1f1f1;">
-			<?php cnpolitics_list_page(); ?>
+			<!--?php cnpolitics_list_page(); ?-->
+			<?php cnpolitics_list_static(); ?>
 		</ul>
 		<p style="font-size:13px;margin-top:7px;">&copy; 2011 - 2013 政见 CNPolitics.org</p>
 		</div>

@@ -2,8 +2,8 @@
 require_once('config.php');
 
 /* For wordpress backend admin */
-error_reporting(E_ALL);
-ini_set('display_errors',1);
+//error_reporting(E_ALL);
+//ini_set('display_errors',1);
 require_once('backend.php');
 
 
@@ -182,9 +182,16 @@ function cnpolitics_list_page() {
 		}
 		else {
 			//echo '<li><a href="'.$page->guid.'"> '.$page->post_title.' |</a></li>';
-			echo '<li><a href="'. get_page_link($page->ID).'"> '.$page->post_title.' |</a></li>';
+			echo '<li><a href="'. get_page_link($page->ID).'"> '.$page->post_title.' | </a></li>';
 		}
 	}
+}
+
+function cnpolitics_list_static() {
+	echo '<li><a href="'.get_bloginfo('url').'/static/?static_page=about.html">关于政见 | </a></li>';
+	echo '<li><a href="'.get_bloginfo('url').'/static/?static_page=copyright.php">版权声明 | </a></li>';
+	echo '<li><a href="'.get_bloginfo('url').'/static/?static_page=coop.php">交流合作 | </a></li>';
+	echo '<li><a href="'.get_bloginfo('url').'/static/?static_page=join-us.php">加入我们</a></li>';
 }
 
 register_sidebars( //register sidebar

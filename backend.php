@@ -8,8 +8,9 @@ add_action( 'submitpost_box', 'CNPolitics_add_box');
 add_action( 'post_updated', 'CNPolitics_save_post');
 add_action( 'init', 'CNPolitics_add_script');
 
-
-session_start();
+if (!isset($_SESSION)){
+	session_start();
+}
 
 function CNPolitics_add_submenu() {
 	//create custom top-level menu

@@ -90,6 +90,18 @@ if ( isset($_GET['rsch_id']) ) :
 	// get post id via rsch_id
 
 	$pid_array = get_postid_byrschid($rid);
+	global $authorid_array;
+	$authorid_array = get_authorid_bypostid($pid_array);
+	global $issue_array;	
+	$issue_array = array("次贷危机" , "中东局势", "亚洲策略");
+	//$issue_array = get_issue_bypostid($pid_array);
+	global $quarter_array;
+	$quarter_array = get_quarter_bypostid($pid_array);
+
+	$pid_array = pid_filter($pid_array, $authorid, $quarter);
+
+
+/*
 	$args = array(	'post__in' => $pid_array );
 	$postslist = get_posts($args);
 
@@ -108,15 +120,41 @@ if ( isset($_GET['rsch_id']) ) :
 			</div>
 			<div class="clear"></div>';
 	endforeach;
+*/
+	if ( !empty($pid_array) ) {
+		// The Loop
+		$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+		$args = array('posts_per_page' =>5, 'paged' => $paged, 'post__in' => $pid_array );
+		query_posts($args);
+
+		/* the loop */
+		if ( have_posts() ) : 
+			while (have_posts()) : the_post();
+				$post_thumbnail_id = get_post_thumbnail_id();
+				echo '<div class="article-latest">
+						<img class="latest-img" width="150" height="150" src="'.wp_get_attachment_thumb_url( $post_thumbnail_id ).'">
+						<div class="latest-text">';
+				echo '		<p class="latest-head"><a href="'.get_permalink().'">'.get_the_title().'</a></p>
+							<p class="latest-author"><a href="#">'.get_the_author().'</a><span style="font-size:13px;color:#b9b9b9;"> | '.get_the_date('Y-m-d').'</span></p>
+							<div class="box-abstract"><p class="latest-abstract">'.get_excerpt('96').'</p></div>		
+					  	</div>
+					  </div>
+					  <div class="clear"></div>';
+				endwhile;
+		else :
+			// No posts found
+		endif;
+	}
 ?>
-	<div class="post-end-button back-to-top">
-		<p style="padding-top:20px;">回到开头</p>
-	</div>
-	<div id="display_bar">
-		<img width="556px;" src="<?php bloginfo('template_directory'); ?>/images/shadow-post-end.png">
-	</div>
-	<div><p style="text-align:center; color:#b9b9b9;">1</p></div>
+<div class="pagination"><?php wp_pagenavi(); ?></div>
+<div class="post-end-button back-to-top">
+	<p style="padding-top:20px;">回到开头</p>
 </div>
+<div id="display_bar">
+	<img width="556px;" src="<?php bloginfo('template_directory'); ?>/images/shadow-post-end.png">
+</div>
+<div><p style="text-align:center; color:#b9b9b9;">1</p></div>
+</div> <!-- End column1 -->
 
 <div id="column2" class="prefix_1 grid_4">	
 	<div style="margin-bottom:40px;">
@@ -124,8 +162,6 @@ if ( isset($_GET['rsch_id']) ) :
 	</div>
 	<?php get_sidebar('filter'); ?>
 </div><!--column2-->
-
-
 
 <?php
 	endif;

@@ -6,8 +6,20 @@ Template Name: Researcher
 <?php  get_header();?>
 <?php
 	if ( isset($_GET['rsch_id']) ) :
+		$authorid = isset($_GET['authorid']) ? $_GET['authorid'] : '';
+		$quarter = isset($_GET['quarter']) ? $_GET['quarter'] : '';
+		if ($authorid=='')
+			$authorname = '';
+		else {
+			$user_info = get_userdata($authorid);
+			$authorname = $user_info->display_name;
+		}
 		require_once('single-rsch.php');
-
+		echo '<script>
+				var authorid = '.json_encode($authorname).';
+				var quarter = '.json_encode($quarter).';
+				decorate_filter_box(authorid, quarter);
+			  </script>';
 //	elseif ( isset($_GET['region']) ) :
 //		require_once('region-researcher.php');
 		
