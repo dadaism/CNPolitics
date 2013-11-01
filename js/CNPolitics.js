@@ -99,18 +99,65 @@ function check_checkbox( prefixID, arrayID ) {
 }
 
 function decorate_filter_box(authorname, quarter) {
-	alert(authorid);
+	//alert(authorname);
 	//alert(quarter);
 	//alert( $('.filter-list li').text() );
-	if (authorid!='') {
-		$(".author-filter").slideUp();
+	//document.getElementsById("author-all-a");
+	
+	var authors = document.getElementsByClassName("author-all-a");
+	authors[0].style.color = '#b42800';
+	authors[0].style.fontWeight = 'bold';
+	if (authorname) {
+		$(".author-filter").slideDown();
 		$(".collapse-author-filter").hide();
 		$(".expand-author-filter").show();
+		
+		authors = document.getElementsByClassName("author-all-a");
+		authors[0].style.color = '#777';
+		authors[0].style.fontWeight = '';
+		//document.getElementsById("author-all-a")[0].style.fontWeight = '';
+		var authors = document.getElementsByClassName("author-filter-a");
+		for (var i=0; i<authors.length; ++i) {
+			//alert(authors[i].innerHTML);
+		
+			if ( authors[i].innerHTML == authorname ){
+				//alert(authors[i].innerHTML);
+				authors[i].style.color = '#b42800'; 
+				authors[i].style.fontWeight = 'bold';
+			}
+			else {
+				authors[i].style.color = '#777'; 
+				authors[i].style.fontWeight = '';
+			}
+		}
 	}
-	/*var authors = document.getElementsByClassName("filter-list");
-	alert(authors);
-	for (i=0; i<divs.length; ++i) {
-		alert(author[i]);
-	}*/
+	var quarters = document.getElementsByClassName("quarter-all-a");
+	quarters[0].style.color = '#b42800';
+	quarters[0].style.fontWeight = 'bold';
+	if (quarter) {
+		$(".quarter-filter").slideDown();
+		$(".expand-quarter-filter").hide();
+		$(".collapse-quarter-filter").show();
+	
+		quarters = document.getElementsByClassName("quarter-all-a");
+		quarters[0].style.color = '#777';
+		quarters[0].style.fontWeight = '';
+		//document.getElementsById("author-all-a")[0].style.fontWeight = '';
+		var quarters = document.getElementsByClassName("quarter-filter-a");
+		for (var i=0; i<quarters.length; ++i) {
+			//alert(authors[i].innerHTML);
+		
+			if ( quarters[i].innerHTML == quarter ){
+				//alert(authors[i].innerHTML);
+				quarters[i].style.color = '#b42800'; 
+				quarters[i].style.fontWeight = 'bold';
+			}
+			else {
+				quarters[i].style.color = '#777'; 
+				quarters[i].style.fontWeight = '';
+			}
+		}
+	}
+	
 	//alert( $('.filter-list li a'):contains("guisu").text() );
 }

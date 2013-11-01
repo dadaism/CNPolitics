@@ -2,8 +2,8 @@
 require_once('config.php');
 
 /* For wordpress backend admin */
-//error_reporting(E_ALL);
-//ini_set('display_errors',1);
+error_reporting(E_ALL);
+ini_set('display_errors',1);
 require_once('backend.php');
 
 
@@ -84,7 +84,7 @@ function cnpolitics_list_category() {
 	 	endforeach;
 		echo	'			</ul>
 							<div class="clear"></div>
-							<div class="more"><a href="">阅读更多</a></div>
+							<div class="more"><a href="'.get_category_link($category->cat_ID).'">阅读更多</a></div>
 						</div>
 					</div>';
 	}
@@ -270,10 +270,11 @@ function wp_pagenavi() {
 	global $wp_query;
 	global $wp_rewrite;
 	$wp_query->query_vars['paged'] > 1 ? $current = $wp_query->query_vars['paged'] : $current = 1;
-	//echo $current;
 	$pagination = array(
 		'base'      => @add_query_arg('paged','%#%'),
 		'format'    => '',
+		//'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+		//'format' => '?paged=%#%',
 		'total'     => $wp_query->max_num_pages,
 		'current'   => $current,
 		'show_all'  => false,
@@ -285,6 +286,7 @@ function wp_pagenavi() {
 		//'prev_text' => __(' <li>囧</li> '),
 		//'next_text' => __(' 下一页>> ')
 	);
+	//echo $wp_query->max_num_pages;
 	echo paginate_links($pagination);
 }
 ?>

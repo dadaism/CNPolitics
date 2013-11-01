@@ -704,17 +704,21 @@ function get_topic_byrsch( $rid ) {
 			WHERE rsch_id = $rid";// LIMIT 4";
 	$topic_id_array = $wpdb->get_results($sql);
 	$key = 0;
-	foreach ( $topic_id_array as $tid ) {
-		$tid = $tid->topic_id;
-		$sql = "SELECT subject, id
-				FROM {$wpdb->prefix}topics
-				WHERE id = $tid";
-		$topic_obj_array = $wpdb->get_results($sql);
-		if ( empty($topic_obj_array) )
-			die("Wrong topic id in get_topic_byrsch");
-		$topic_obj = $topic_obj_array[0];
-		$topic[$key] = $topic_obj;
-		$key = $key + 1;
+	if ( empty($topic_id_array) )
+		$topic = '';
+	else {
+		foreach ( $topic_id_array as $tid ) {
+			$tid = $tid->topic_id;
+			$sql = "SELECT subject, id
+					FROM {$wpdb->prefix}topics
+					WHERE id = $tid";
+			$topic_obj_array = $wpdb->get_results($sql);
+			if ( empty($topic_obj_array) )
+				die("Wrong topic id in get_topic_byrsch");
+			$topic_obj = $topic_obj_array[0];
+			$topic[$key] = $topic_obj;
+			$key = $key + 1;
+		}
 	}
 	return $topic;
 }
@@ -861,6 +865,27 @@ function get_postid_bytopicid($topic_id) {
 	$pid_array = NULL;
 	foreach ( $pid_obj_array as $key => $pid ) {
 		$pid_array[$key] = $pid->post_id;
+	}
+	//var_dump($pid_array);
+	return $pid_array;
+}
+
+function get_postid_bycatid($cat_id) {
+	global $wpdb;
+	$sql = "SELECT ID
+			FROM $wpdb->posts
+			LEFT JOIN $wpdb->term_relationships ON
+			($wpdb->posts.ID = $wpdb->term_relationships.object_id)
+			LEFT JOIN $wpdb->term_taxonomy ON
+			($wpdb->term_relationships.term_taxonomy_id = $wpdb->term_taxonomy.term_taxonomy_id)
+			WHERE $wpdb->posts.post_status = 'publish'
+			AND $wpdb->term_taxonomy.taxonomy = 'category'
+			AND $wpdb->term_taxonomy.term_id = '$cat_id'
+			ORDER BY post_date DESC";
+	$pid_obj_array = $wpdb->get_results($sql);
+	$pid_array = NULL;
+	foreach ( $pid_obj_array as $key => $pid ) {
+		$pid_array[$key] = $pid->ID;
 	}
 	//var_dump($pid_array);
 	return $pid_array;
