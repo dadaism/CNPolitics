@@ -15,7 +15,7 @@
 		<div class="post-info-box">
 			<img class="expand-observer-info" src="<?php bloginfo('template_directory'); ?>/images/arrow-expand.png">
 			<img class="collapse-observer-info" src="<?php bloginfo('template_directory'); ?>/images/arrow-collapse.png">
-			观察员：<a href=""><?php the_author();?></a>
+			观察员：<a href="<?php echo get_author_posts_url(get_the_author_meta('ID'));?>"><?php the_author();?></a>
 			<div class="observer-info">
 				<p style="margin-top:20px;">个人简介：</p>
 				<p style="color:#777;"><?php echo get_the_author_meta('description');?></p>

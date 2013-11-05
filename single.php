@@ -19,7 +19,7 @@
 	?>
 	</p>
 	<p class="post-author">
-		<a href="#"><?php echo get_the_author(); ?></a>
+		<a href="<?php echo get_author_posts_url(get_the_author_meta('ID'));?>"><?php echo get_the_author(); ?></a>
 		<span style="font-size:14px;color:#b9b9b9;">| <?php the_date('Y-m-d') ?></span>
 	</p>
 	<p class="post-lead"><?php echo get_the_excerpt();?></p>
