@@ -22,7 +22,7 @@ $comments = get_comments($args);
 	foreach($comments as $comment) :
 ?>
 <div class="comment-box">
-	<img class="avatar"	src="<?php bloginfo('template_directory'); ?>/images/avatar.png">
+	<img class="comment-avatar"	src="<?php bloginfo('template_directory'); ?>/images/avatar.png">
 	<div class="comment">
 		<p style="float:right;"><a href="#">分享</a> | <a href="#">回复</a></p>
 		<p><a href="#"><?php echo $comment->comment_author; ?></a> | 

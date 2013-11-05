@@ -67,7 +67,7 @@
 							<div class="latest-text">';
 				echo	'		<p class="latest-head"><a href="'.get_permalink().'">'.get_the_title().'</a></p>
 								<p class="latest-author">
-								<a href="#">'.get_the_author().'</a>
+								<a href="'.get_author_posts_url(get_the_author_meta('ID')).'">'.get_the_author().'</a>
 								<span style="font-size:13px;color:#b9b9b9;"> | '.get_the_date('Y-m-d').'</span>
 								</p>
 								<p class="latest-abstract">'.get_excerpt('96').'</p>

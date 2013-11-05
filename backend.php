@@ -14,9 +14,9 @@ if (!isset($_SESSION)){
 
 function CNPolitics_add_submenu() {
 	//create custom top-level menu
-	add_submenu_page( 'edit.php', 'CNPolitics', 'Topics', 'manage_options', 
+	add_submenu_page( 'edit.php', 'CNPolitics', 'Topics', 'edit_pages', 
 						'CNPolitcs_topics_settings_page', 'CNPolitics_topics_setting' );
-	add_submenu_page( 'edit.php', 'CNPolitics', 'Researchers', 'manage_options', 
+	add_submenu_page( 'edit.php', 'CNPolitics', 'Researchers', 'edit_pages', 
 						'CNPolitcs_researchers_settings_page', 'CNPolitics_researchers_setting' );
 }
 
