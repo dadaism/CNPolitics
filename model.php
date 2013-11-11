@@ -981,4 +981,35 @@ function pid_filter($pid_array, $authorid, $quarter) {
 	//var_dump($pid_array);
 	return $pid_array;
 }
+
+function get_issue_table($region='', $key_word='') {
+/*
+* @para $region: "region" of researchers
+* @para $key_word: researcher's name
+*/
+	global $wpdb;
+	error_reporting(E_ALL);
+	ini_set('display_errors',1);
+	$sql = "SELECT id, name, region, intro, ordering
+			FROM {$wpdb->prefix}rschs";
+	//echo $region;
+	if ( $region!='') {
+		$sql = $sql . " WHERE region = '$region'";
+	}
+	else if ( $key_word!='' ) {
+		$sql = $sql . " WHERE name = '$key_word'";
+	}
+	$sql = $sql . " ORDER BY ordering";
+	//echo $sql;
+	$rsch_array = $wpdb->get_results($sql);
+	if ( !empty($rsch_array) ) {
+		foreach ( $rsch_array as $r ) {
+			$sql = "SELECT *
+					FROM {$wpdb->prefix}post_info
+					WHERE type = '2' AND info_id = '$r->id';";	// type 2 means rsch
+			$r->post_num = $wpdb->query($sql);
+		}
+	}
+	return $rsch_array;
+}
 ?>

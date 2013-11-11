@@ -398,6 +398,43 @@ function rsch_setting_disp($rsch_table, $filter_cat='') {
 <?php
 }
 
+function issue_setting_disp($rsch_table, $filter_cat='') {
+	global $page_setting_uri;
+	$tmp = explode('=', $page_setting_uri);
+	$page_type = $tmp[1];
+?>
+	<div class="wrap nosubsub">
+		<div id="icon-edit" class=icon32><br></div>
+		<h2>Researchers</h2>
+		<form class="search-form" action="<?php echo $_SERVER['REQUEST_URI'];?>" method="get">
+			<input type="hidden" name="page" value="<?php echo $page_type;?>">
+			<input type="hidden" name="action" value="search">
+			<p class="search-box"><label class="screen-reader-text" for="tag-search-input">Search Researchers:</label>
+			<input type="search" id="tag-search-input" name="s" value="">
+			<input type="submit" name="" id="search-submit" class="button" value="Search Researchers"></p>
+		</form>
+		<br class="clear">
+		<div id="col-container">
+			<div id="col-right">
+			<div class="col-wrap">
+			<div class="form-wrap">
+				<?php right_col_disp("rsch", $rsch_table, $filter_cat);?>
+			</div>
+			</div>
+			</div>
+			<div id="col-left">
+			<div class="col-wrap">
+			<div class="form-wrap">
+				<h3>Add New Researcher</h3>
+				<?php rsch_col_left_disp();?>
+			</div>
+			</div>
+			</div>
+		</div>
+	</div>
+<?php
+}
+
 function rsch_col_left_disp() {
 	global $toptopics;
 	global $page_setting_uri;
