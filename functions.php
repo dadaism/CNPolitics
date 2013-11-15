@@ -2,8 +2,8 @@
 require_once('config.php');
 
 /* For wordpress backend admin */
-//error_reporting(E_ALL);
-//ini_set('display_errors',1);
+error_reporting(E_ALL);
+ini_set('display_errors',1);
 require_once('backend.php');
 
 
@@ -296,10 +296,8 @@ function wp_pagenavi() {
 	//echo $wp_query->max_num_pages;
 	echo paginate_links($pagination);
 }
-?>
 
 
-<?php
 /* ????????????? does not work
 Plugin Name: Category pagination fix
 Plugin URI: http://www.htmlremix.com/projects/category-pagination-wordpress-plugin
@@ -334,12 +332,12 @@ Tested with WordPress 2.7, 2.8.4 only. Works with wp-pagenavi
 */
 function remove_page_from_query_string($query_string)
 {
-	if ($query_string['name'] == 'page' && isset($query_string['page'])) {
+	/*if ($query_string['name'] == 'page' && isset($query_string['page'])) {
 		unset($query_string['name']);
 		// 'page' in the query_string looks like '/2', so i'm spliting it out
 		list($delim, $page_index) = split('/', $query_string['page']);
 		$query_string['paged'] = $page_index;
-	}
+	}*/
 	return $query_string;
 }
 
