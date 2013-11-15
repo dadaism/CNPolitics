@@ -3,12 +3,14 @@
 	$key_word = get_search_query();
 	echo $key_word;
 	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-	$args = array('posts_per_page' =>5, 'paged' => $paged, 's' => $key_word );
+	$args = array('posts_per_page' =>8, 'paged' => $paged, 's' => $key_word );
 	query_posts($args);
  	if ( have_posts() ):
 		while ( have_posts() ) : the_post();?>
-<div><a href="<?php  echo get_permalink($post->ID); ?>"><?php the_title(); ?></a></div>
-
+		<div><a href="<?php  echo get_permalink($post->ID); ?>"><?php the_title(); ?> | 政见 CNPolitics.org </a></div>
+		<div class="box-abstract">
+			<p class="latest-abstract"><?php echo get_excerpt('96'); ?></p>
+		</div>
 <?php 
 		endwhile;?>
 <?php	else : ?>
@@ -23,5 +25,4 @@
 <?php endif; ?>
 
 <div class="pagination"><?php wp_pagenavi(); ?></div>
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>

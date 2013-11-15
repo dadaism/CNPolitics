@@ -14,7 +14,7 @@
 			$authorname = $user_info->display_name;
 	}
 	$cat_id = get_queried_object_id();
-	echo $cat_id."<br>";
+	//echo $cat_id."<br>";
 	$pid_array = get_postid_bycatid($cat_id);
 	
 	//$args = array( 'category' => 1 );
@@ -41,7 +41,7 @@
 		endwhile;
 		wp_reset_postdata(); 
 	endif;*/
-	echo count($pid_array);
+	//echo count($pid_array);
 	//var_dump($pid_array);
 	global $authorid_array;
 	$authorid_array = get_authorid_bypostid($pid_array);
@@ -54,7 +54,7 @@
 	if ( !empty($pid_array) ) {
 		// The Loop
 		$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-		$args = array('posts_per_page' =>5, 'paged' => $paged, 'post__in' => $pid_array );
+		$args = array('posts_per_page' =>5, 'paged' => $paged, 'post__in' => $pid_array, 'post__not_in' => get_option( 'sticky_posts' ) );
 		query_posts($args);
 		
 		/* the loop */

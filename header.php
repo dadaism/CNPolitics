@@ -5,14 +5,16 @@
 <title><?php wp_title(); ?> <?php bloginfo( 'name' ); ?></title>
 <link rel="stylesheet" type="text/css" media="screen" href="<?php bloginfo( 'stylesheet_url' ); ?>"/>
 <link href="<?php bloginfo('template_directory'); ?>/css/style_grid.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
 
 <!--WP Head-->
 <?php wp_head(); ?>
 <!--End of WP Head-->
 
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script src="<?php bloginfo('template_directory'); ?>/js/jquery.slides.min.js"></script>
-<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/jquery.slides.min.js"></script>
+<script type="text/javascript"  src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/fancybox/jquery.fancybox.pack.js"></script>
 
 <script>
 	$(document).ready(function(){
@@ -166,6 +168,17 @@ function add_favorite(){
     });
 </script>
 <!-- End SlidesJS Required -->
+
+<script>
+	$(document).ready(function() {
+		$("a[href$='.jpg'],a[href$='.jpeg'],a[href$='.png'],a[href$='.gif']").attr('rel', 'gallery').fancybox({
+			'autoSize': false,
+			'autoDimensions': false,
+			'autoScale'	: false,
+			'fitToView': false,
+		});
+	});
+</script>
 
 </head>
 <body>
