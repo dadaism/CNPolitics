@@ -24,6 +24,8 @@ $sexes = array(
 	'2' => '女'
 	);
 
+$cnpolitics_dir =  get_template_directory();
+
 $topic_image_dir = "/upload/topics/";
 $rsch_image_dir = "/upload/researchers/";
 

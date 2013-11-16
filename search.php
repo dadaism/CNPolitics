@@ -1,4 +1,13 @@
-<?php get_header(); ?>
+<!--?php get_header(); ?-->
+<? require_once( get_template_directory().'/inc/header_inc.php' ); ?>
+
+<div id="search">
+	<form style="display:inline" method="get" action="<?php bloginfo('siteurl'); ?>/">
+		<input type="text" name="s" value="搜索" onblur="if (this.value==''){this.value='搜索'}" onfocus="if (this.value=='搜索') {this.value=''}" class="topsearch_input"/>
+		<input type="image" class="topsearch_img" src="<?php bloginfo('template_directory'); ?>/images/search.png"/>
+	</form>
+</div>
+
 <?php
 	$key_word = get_search_query();
 	echo $key_word;
@@ -25,4 +34,9 @@
 <?php endif; ?>
 
 <div class="pagination"><?php wp_pagenavi(); ?></div>
-<?php get_footer(); ?>
+<script>
+	$(document).ready(function() {
+		$("a:not(.page-numbers)").attr("target", "_parent");
+	});
+</script>
+<? require_once( get_template_directory().'/inc/footer_inc.php' ); ?>
