@@ -443,7 +443,7 @@ function CNPolitics_issues_setting() {
 		}
 	else {
 		$issue_table = get_issue_table();
-		rsch_setting_disp($rsch_table);
+		issue_setting_disp($issue_table);
 	}
 }
 ?>
