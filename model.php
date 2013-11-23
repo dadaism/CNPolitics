@@ -1003,18 +1003,10 @@ function get_issue_table($region='', $key_word='') {
 		foreach ( $issue_array as $i ) {
 			$sql = "SELECT *
 					FROM {$wpdb->prefix}post_info
-<<<<<<< HEAD
 					WHERE type = '3' AND info_id = '$i->id';";	// type 3 means issue
-=======
-					WHERE type = '3' AND info_id = '$i->id';";	// type 2 means rsch
->>>>>>> 3efaa8ed828ecebd29013bae3d0760869867846c
 			$i->post_num = $wpdb->query($sql);
 		}
 	}
 	return $issue_array;
-<<<<<<< HEAD
-=======
-	//return NULL;
->>>>>>> 3efaa8ed828ecebd29013bae3d0760869867846c
 }
 ?>

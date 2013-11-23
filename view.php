@@ -217,17 +217,10 @@ function right_col_disp($type, $table, $filter_cat='') {
 		global $regions;
 		filter_option_select("filter-tag", $filter_cat, $regions);
 	}
-<<<<<<< HEAD
 	if ($type!="issue")	{
 		echo '	<input type="submit" name="" id="doaction" class="button action" value="Filter">';
 	}
 	echo'	</form>
-=======
-	if ($type!="issue") {
-		echo '	<input type="submit" name="" id="doaction" class="button action" value="Filter">';
-	}
-	echo '		</form>
->>>>>>> 3efaa8ed828ecebd29013bae3d0760869867846c
 		  </div>';
 	table_body_disp($type, array_slice($table, ($paged-1)*$table_page_size, $table_page_size), $filter_cat, $paged);
 	$visibility_prev_page = $visibility_next_page = '';
@@ -278,10 +271,6 @@ function table_body_disp($page_type, $table, $filter_cat, $paged) {
 	}
 	else if ($page_type=="issue") {
 		$column_2 = "";
-<<<<<<< HEAD
-=======
-		//$view_dir = "researcher";
->>>>>>> 3efaa8ed828ecebd29013bae3d0760869867846c
 		$id_type = "issue_id";
 	}
 	$sub_array = $table;
@@ -378,15 +367,9 @@ function table_body_disp($page_type, $table, $filter_cat, $paged) {
 			<?php 
 				if ($page_type=="topic") 
 					_e($toptopics[$s->category]); 
-<<<<<<< HEAD
 				else if ($page_type=="rsch") 	
 					_e($regions[$s->region]);
 				else if ($page_type=="issue")
-=======
-				else if ($page_type=="rsch") 
-					_e($regions[$s->region]);
-				else if ($page_type=="rsch")
->>>>>>> 3efaa8ed828ecebd29013bae3d0760869867846c
 					;
 			?>
 			</td>
@@ -473,29 +456,6 @@ function issue_setting_disp($issue_table, $filter_cat='') {
 }
 
 function issue_col_left_disp() {
-<<<<<<< HEAD
-  global $toptopics;
-  global $page_setting_uri;
-  global $topic_checkbox_contents;
-?>
-  <form id="addrsch" enctype="multipart/form-data" method="post" action="<?php echo $page_setting_uri;?>" class="validate">
-  <input type="hidden" name="action" value="add">
-  <div class="form-field form-required">
-    <label for="rsch-name">Name</label>
-    <input name="rsch-name" id="rsch-name" type="text" value="" size="40" aria-required="true">
-    <p>The name is how it appears on your site.</p>
-  </div>
-  <div class="form-field">
-    <label for="rsch-experience">Description</label>
-    <!--input name="slug" id="topic-slug" type="text" value="" size="40"-->
-    <textarea name="rsch-experience" id="rsch-experience" rows="5" cols="40"></textarea>
-    <p>The description should be related to the issue.</p>
-  </div>
-  <p class="submit">
-    <input type="submit" name="submit" id="submit" class="button button-primary" value="Add New Issue">
-  </p>
-  </form>
-=======
 	global $toptopics;
 	global $page_setting_uri;
 	global $topic_checkbox_contents;
@@ -517,7 +477,6 @@ function issue_col_left_disp() {
 		<input type="submit" name="submit" id="submit" class="button button-primary" value="Add New Issue">
 	</p>
 	</form>
->>>>>>> 3efaa8ed828ecebd29013bae3d0760869867846c
 
 <?php
 }
