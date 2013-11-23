@@ -216,9 +216,11 @@ function right_col_disp($type, $table, $filter_cat='') {
 	if ($type=="rsch") {
 		global $regions;
 		filter_option_select("filter-tag", $filter_cat, $regions);
-	}	
-	echo '	<input type="submit" name="" id="doaction" class="button action" value="Filter">
-			</form>
+	}
+	if ($type!="issue") {
+		echo '	<input type="submit" name="" id="doaction" class="button action" value="Filter">';
+	}
+	echo '		</form>
 		  </div>';
 	table_body_disp($type, array_slice($table, ($paged-1)*$table_page_size, $table_page_size), $filter_cat, $paged);
 	$visibility_prev_page = $visibility_next_page = '';
@@ -318,7 +320,14 @@ function table_body_disp($page_type, $table, $filter_cat, $paged) {
 				<input type="checkbox" name="delete_tags[]" value="7" id="cb-select-7">
 			</th>
 			<td class="description column-name">
-				<strong><a class="row-title" href="<?php echo $page_uri.'&action=edit&id='.$s->id; ?>"><?php if ($page_type=="rsch") _e($s->name); else _e($s->subject);?></a></strong>
+				<strong><a class="row-title" href="<?php echo $page_uri.'&action=edit&id='.$s->id; ?>">
+<?php 
+	if ($page_type=="rsch")	_e($s->name); 
+	else if ($page_type=="topic")	_e($s->subject);
+	else if ($page_type=="issue")	_e($s->name);
+?>
+					</a>
+				</strong>
 				<div class="row-actions">
 					<span class="edit"><a href="<?php echo $page_uri.'&action=edit&id='.$s->id; ?>">Edit</a> | </span>
 					<span class="delete"><a href="<?php echo $page_uri.'&action=delete&id='.$s->id.'&paged='.$paged; ?>">Delete</a> | </span>
