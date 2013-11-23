@@ -990,26 +990,23 @@ function get_issue_table($region='', $key_word='') {
 	global $wpdb;
 	error_reporting(E_ALL);
 	ini_set('display_errors',1);
-	$sql = "SELECT id, name, region, intro, ordering
-			FROM {$wpdb->prefix}rschs";
+	$sql = "SELECT id, name, intro, ordering
+			FROM {$wpdb->prefix}issues";
 	//echo $region;
-	if ( $region!='') {
-		$sql = $sql . " WHERE region = '$region'";
-	}
-	else if ( $key_word!='' ) {
+	if ( $key_word!='' ) {
 		$sql = $sql . " WHERE name = '$key_word'";
 	}
 	$sql = $sql . " ORDER BY ordering";
 	//echo $sql;
-	$rsch_array = $wpdb->get_results($sql);
-	if ( !empty($rsch_array) ) {
-		foreach ( $rsch_array as $r ) {
+	$issue_array = $wpdb->get_results($sql);
+	if ( !empty($issue_array) ) {
+		foreach ( $issue_array as $i ) {
 			$sql = "SELECT *
 					FROM {$wpdb->prefix}post_info
-					WHERE type = '2' AND info_id = '$r->id';";	// type 2 means rsch
-			$r->post_num = $wpdb->query($sql);
+					WHERE type = '3' AND info_id = '$i->id';";	// type 3 means issue
+			$i->post_num = $wpdb->query($sql);
 		}
 	}
-	return $rsch_array;
+	return $issue_array;
 }
 ?>

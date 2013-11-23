@@ -181,7 +181,7 @@ function topic_col_left_disp() {
 
 function right_col_disp($type, $table, $filter_cat='') {
 /*
-* @para $type: "topic" or "rsch"
+* @para $type: "topic" or "rsch" or "issue"
 * @para $table: information to display
 * @para $filter_cat: selected category to filter
 *
@@ -216,9 +216,11 @@ function right_col_disp($type, $table, $filter_cat='') {
 	if ($type=="rsch") {
 		global $regions;
 		filter_option_select("filter-tag", $filter_cat, $regions);
-	}	
-	echo '	<input type="submit" name="" id="doaction" class="button action" value="Filter">
-			</form>
+	}
+	if ($type!="issue")	{
+		echo '	<input type="submit" name="" id="doaction" class="button action" value="Filter">';
+	}
+	echo'	</form>
 		  </div>';
 	table_body_disp($type, array_slice($table, ($paged-1)*$table_page_size, $table_page_size), $filter_cat, $paged);
 	$visibility_prev_page = $visibility_next_page = '';
@@ -242,7 +244,7 @@ function right_col_disp($type, $table, $filter_cat='') {
 
 function table_body_disp($page_type, $table, $filter_cat, $paged) {
 /*
-* @para $page_type: "topic" or "researchers"
+* @para $page_type: "topic" or "researchers" or "issue"
 * @para $category: "category" for topic table, "region" for researcher table  
 * @para $cat_id:   category id or region id
 * @para $cur_order: order number
@@ -262,6 +264,10 @@ function table_body_disp($page_type, $table, $filter_cat, $paged) {
 		$column_2 = "Category";
 		$view_dir = "topic";
 		$id_type = "topic_id";
+	}
+	else if ($page_type=="issue") {
+		$column_2 = "";
+		$id_type = "issue_id";
 	}
 	$sub_array = $table;
 	//var_dump($sub_array);
@@ -283,7 +289,7 @@ function table_body_disp($page_type, $table, $filter_cat, $paged) {
 				</th>
 				<th scope="col" id="description" class="manage-column column-description" style>
 					<a>
-					<span>Introduction</span>
+					<span>Description</span>
 					<span class="sorting-indicator"></span>
 					</a>	
 				</th>
@@ -313,7 +319,14 @@ function table_body_disp($page_type, $table, $filter_cat, $paged) {
 				<input type="checkbox" name="delete_tags[]" value="7" id="cb-select-7">
 			</th>
 			<td class="description column-name">
-				<strong><a class="row-title" href="<?php echo $page_uri.'&action=edit&id='.$s->id; ?>"><?php if ($page_type=="rsch") _e($s->name); else _e($s->subject);?></a></strong>
+				<strong><a class="row-title" href="<?php echo $page_uri.'&action=edit&id='.$s->id; ?>">
+<?php 
+	if ($page_type=="rsch")	_e($s->name); 
+	else if ($page_type=="topic")	_e($s->subject);
+	else if ($page_type=="issue")	_e($s->name);
+?>
+					</a>
+				</strong>
 				<div class="row-actions">
 					<span class="edit"><a href="<?php echo $page_uri.'&action=edit&id='.$s->id; ?>">Edit</a> | </span>
 					<span class="delete"><a href="<?php echo $page_uri.'&action=delete&id='.$s->id.'&paged='.$paged; ?>">Delete</a> | </span>
@@ -350,7 +363,10 @@ function table_body_disp($page_type, $table, $filter_cat, $paged) {
 			<?php 
 				if ($page_type=="topic") 
 					_e($toptopics[$s->category]); 
-				else _e($regions[$s->region]);
+				else if ($page_type=="rsch") 	
+					_e($regions[$s->region]);
+				else if ($page_type=="issue")
+					;
 			?>
 			</td>
 			<td class="posts column-posts"><a href="#"><?php echo $s->post_num;?></a></td>
@@ -398,18 +414,18 @@ function rsch_setting_disp($rsch_table, $filter_cat='') {
 <?php
 }
 
-function issue_setting_disp($rsch_table, $filter_cat='') {
+function issue_setting_disp($issue_table, $filter_cat='') {
 	global $page_setting_uri;
 	$tmp = explode('=', $page_setting_uri);
 	$page_type = $tmp[1];
 ?>
 	<div class="wrap nosubsub">
 		<div id="icon-edit" class=icon32><br></div>
-		<h2>Researchers</h2>
+		<h2>Special Issues</h2>
 		<form class="search-form" action="<?php echo $_SERVER['REQUEST_URI'];?>" method="get">
 			<input type="hidden" name="page" value="<?php echo $page_type;?>">
 			<input type="hidden" name="action" value="search">
-			<p class="search-box"><label class="screen-reader-text" for="tag-search-input">Search Researchers:</label>
+			<p class="search-box"><label class="screen-reader-text" for="tag-search-input">Search Issues:</label>
 			<input type="search" id="tag-search-input" name="s" value="">
 			<input type="submit" name="" id="search-submit" class="button" value="Search Researchers"></p>
 		</form>
@@ -418,20 +434,46 @@ function issue_setting_disp($rsch_table, $filter_cat='') {
 			<div id="col-right">
 			<div class="col-wrap">
 			<div class="form-wrap">
-				<?php right_col_disp("rsch", $rsch_table, $filter_cat);?>
+				<?php right_col_disp("issue", $issue_table, $filter_cat);?>
 			</div>
 			</div>
 			</div>
 			<div id="col-left">
 			<div class="col-wrap">
 			<div class="form-wrap">
-				<h3>Add New Researcher</h3>
-				<?php rsch_col_left_disp();?>
+				<h3>Add New Issue</h3>
+				<?php issue_col_left_disp();?>
 			</div>
 			</div>
 			</div>
 		</div>
 	</div>
+<?php
+}
+
+function issue_col_left_disp() {
+  global $toptopics;
+  global $page_setting_uri;
+  global $topic_checkbox_contents;
+?>
+  <form id="addrsch" enctype="multipart/form-data" method="post" action="<?php echo $page_setting_uri;?>" class="validate">
+  <input type="hidden" name="action" value="add">
+  <div class="form-field form-required">
+    <label for="rsch-name">Name</label>
+    <input name="rsch-name" id="rsch-name" type="text" value="" size="40" aria-required="true">
+    <p>The name is how it appears on your site.</p>
+  </div>
+  <div class="form-field">
+    <label for="rsch-experience">Description</label>
+    <!--input name="slug" id="topic-slug" type="text" value="" size="40"-->
+    <textarea name="rsch-experience" id="rsch-experience" rows="5" cols="40"></textarea>
+    <p>The description should be related to the issue.</p>
+  </div>
+  <p class="submit">
+    <input type="submit" name="submit" id="submit" class="button button-primary" value="Add New Issue">
+  </p>
+  </form>
+
 <?php
 }
 
