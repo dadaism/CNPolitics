@@ -375,6 +375,20 @@ function add_rsch($rsch_info) {
 	}
 }
 
+function add_issue($issue_info) {
+	//var_dump($issue_info);
+	global $wpdb;
+	$issue_name = $issue_info['name'];
+	$issue_intro = $issue_info['intro'];
+	$sql = "INSERT INTO {$wpdb->prefix}issues
+			(id, name, intro) 
+			VALUES(NULL, '$issue_name', '$issue_intro');";
+	if ( !$wpdb->query( $sql ) ) {
+		echo __FUNCTION__;
+		die("DB connection fails!");
+	}
+}
+
 function delete_topic($id) {
 	global $wpdb;
 	$sql = "DELETE FROM {$wpdb->prefix}topics
@@ -777,12 +791,19 @@ function is_rsch_exist( $rsch_name ) {
 			FROM {$wpdb->prefix}rschs
 			WHERE name = '$rsch_name'";
 	$results = $wpdb->get_results($sql);
-	//var_dump($topic_name);
-	//echo "<br>";
-	//var_dump($results);
-	//var_dump($results[0]->subject);
-	//if ( $topic_name==$results[0]->subject )
-	//	echo "equal<br>";
+	if ( empty($results) )
+		return false;
+	else
+		return true;
+}
+
+function is_issue_exist( $issue_name ) {
+	global $wpdb;
+	//echo "Search $issue_name in rschs<br>";
+	$sql = "SELECT *
+			FROM {$wpdb->prefix}issues
+			WHERE name = '$issue_name'";
+	$results = $wpdb->get_results($sql);
 	if ( empty($results) )
 		return false;
 	else

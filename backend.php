@@ -341,47 +341,29 @@ function CNPolitics_issues_setting() {
 			$region = $_GET['filter-tag'];
 			//$rsch_array = get_rsch_table($region, NULL);
 			//rsch_setting_disp($rsch_array, $region);
-		
 		}
 		else if ( $_GET['action']=='search' ) {
 			$key_word = $_GET['s'];
-			$rsch_array = 	get_rsch_table(NULL, $key_word);
+			$rsch_array = get_rsch_table(NULL, $key_word);
 			//rsch_setting_disp($rsch_array);
 		}
-	
 	}
 	else if ( isset($_POST['action']) ) {
 			if ( $_POST['action']=='add' ) {
-				global $rsch_image_dir;
-				if ( trim($_POST['rsch-name'])=='' ) {
-					echo '<div id="message" class="error">Researcher name should not be empty!</div>';
+				echo $_POST['issue-name'];
+				echo $_POST['issue-intro'];
+				if ( trim($_POST['issue-name'])=='' ) {
+					echo '<div id="message" class="error">Issue name should not be empty!</div>';
 				}
-				else if ( is_rsch_exist( trim($_POST['rsch-name']) ) ) {
-					echo '<div id="message" class="error">Researcher "'.$_POST['rsch-name'].'" exist!</div>';
-				}
-				else if ( file_exists($_FILES['rsch-img']['tmp_name']) && file_exists( $rsch_image_dir.$_FILES['rsch-img']["name"]) ) {
-					echo '<div id="message" class="error">Image "'.$_FILES['rsch-img']["name"].'" exist! Rename your image!</div>';
+				else if ( is_issue_exist( trim($_POST['issue-name']) ) ) {
+					echo '<div id="message" class="error">Issue "'.$_POST['issue-name'].'" exist!</div>';
 				}
 				else {
-					$file_path = '';
-					if(  is_uploaded_file($_FILES['rsch-img']['tmp_name']) ) {
-						$file_tmp = $_FILES['rsch-img']["tmp_name"];
-						$file_path = $rsch_image_dir . $_FILES['rsch-img']["name"];
-						move_uploaded_file( $file_tmp, get_template_directory().$file_path);
-					}
-					$rsch_info = array (
-							'name'		=> trim($_POST['rsch-name']),
-							'alias'		=> $_POST['rsch-alias'],
-							'sex'		=> $_POST['rsch-sex'],
-							'birth'		=> $_POST['rsch-birth'],
-							'region'	=> $_POST['rsch-region'],
-							'title'		=> $_POST['rsch-title'],
-							'experience'=> $_POST['rsch-experience'],
-							'rep'		=> $_POST['rsch-rep'],							
-							'intro'		=> $_POST['rsch-intro'],
-							'img_path'	=> $file_path,
+					$issue_info = array (
+							'name'		=> trim($_POST['issue-name']),
+							'intro'=> $_POST['issue-intro']
 							);
-					add_rsch( $rsch_info );
+					add_issue( $issue_info );
 				}
 			}
 			else if ( $_POST['action']=='update') {
@@ -438,8 +420,8 @@ function CNPolitics_issues_setting() {
 			else {
 				// wrong post..
 			}
-			$rsch_table = get_rsch_table();
-			rsch_setting_disp($rsch_table);
+			$issue_table = get_issue_table();
+			issue_setting_disp($issue_table);
 		}
 	else {
 		$issue_table = get_issue_table();

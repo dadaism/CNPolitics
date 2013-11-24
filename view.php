@@ -460,24 +460,23 @@ function issue_col_left_disp() {
 	global $page_setting_uri;
 	global $topic_checkbox_contents;
 ?>
-	<form id="addrsch" enctype="multipart/form-data" method="post" action="<?php echo $page_setting_uri;?>" class="validate">
+	<form id="addissue" enctype="multipart/form-data" method="post" action="<?php echo $page_setting_uri;?>" class="validate">
 	<input type="hidden" name="action" value="add">
 	<div class="form-field form-required">
-		<label for="rsch-name">Name</label>
-		<input name="rsch-name" id="rsch-name" type="text" value="" size="40" aria-required="true">
+		<label for="issue-name">Name</label>
+		<input name="issue-name" id="issue-name" type="text" value="" size="40" aria-required="true">
 		<p>The name is how it appears on your site.</p>
 	</div>
 	<div class="form-field">
-		<label for="rsch-experience">Description</label>
+		<label for="issue-intro">Introduction</label>
 		<!--input name="slug" id="topic-slug" type="text" value="" size="40"-->
-		<textarea name="rsch-experience" id="rsch-experience" rows="5" cols="40"></textarea>
+		<textarea name="issue-intro" id="issue-intro" rows="5" cols="40"></textarea>
 		<p>The description should be related to the issue.</p>
 	</div>
 	<p class="submit">
 		<input type="submit" name="submit" id="submit" class="button button-primary" value="Add New Issue">
 	</p>
 	</form>
-
 <?php
 }
 
