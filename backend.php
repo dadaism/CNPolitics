@@ -29,6 +29,7 @@ function CNPolitics_add_script() {
 function CNPolitics_add_box () {
 	add_meta_box('choose-topic', 'Topics', 'topics_box', 'post', 'side', 'default');
 	add_meta_box('choose-researcher', 'Researchers', 'researchers_box', 'post', 'side', 'default');
+	add_meta_box('choose-issue', 'Special Issues', 'issues_box', 'post', 'side', 'default');
 	add_meta_box('choose-test', 'Test', 'test_box', 'post', 'side', 'default');
 }
 
@@ -202,7 +203,6 @@ function CNPolitics_researchers_setting() {
 			$region = $_GET['filter-tag'];
 			$rsch_array = get_rsch_table($region, NULL);
 			rsch_setting_disp($rsch_array, $region);
-		
 		}
 		else if ( $_GET['action']=='search' ) {
 			$key_word = $_GET['s'];
@@ -313,39 +313,30 @@ function CNPolitics_issues_setting() {
 	if ( isset($_GET['position']) ) {
 		$toward = $_GET['toward'];
 		$order_no  = $_GET['order_no'];
-		$cat = $_GET['cat'];
-		//move_position("rschs", "region", $cat, $order_no, $toward);
+		move_position("issues", "category", 1, $order_no, $toward);
 	}
 	if ( isset($_GET['action']) ) {
 		if ( $_GET['action']=='edit' ) {
 			$id = $_GET['id'];
-			$rsch_info = get_edit_rsch($id);
-			//edit_rsch_disp($rsch_info);
-			//var_dump($rsch_info->checked);
-			//$rsch_info->checked = array(4, 8, 10);
-			//var_dump($rsch_info->checked);
-			/*echo '<script type="text/javascript">
-					var arrayID='.json_encode($rsch_info->checked).';					
-					check_checkbox("topicid-",arrayID);
-				  </script>';*/
+			$issue_info = get_edit_issue($id);
+			edit_issue_disp($issue_info);
 		}
 		else if ( $_GET['action']=='delete' ) {
 			// delete_topic();
 			$id = $_GET['id'];
-			//delete_rsch($id);	
-			$rsch_array = get_rsch_table();
-			//rsch_setting_disp($rsch_array);
+			delete_issue($id);	
+			$issue_array = get_issue_table();
+			issue_setting_disp($issue_array);
 		}
 		else if ( $_GET['action']=='filter' ) {
-			// get_topic_table($category);
-			$region = $_GET['filter-tag'];
-			//$rsch_array = get_rsch_table($region, NULL);
-			//rsch_setting_disp($rsch_array, $region);
+			//$region = $_GET['filter-tag'];
+			$issue_table = get_issue_table();
+			issue_setting_disp($issue_table);
 		}
 		else if ( $_GET['action']=='search' ) {
 			$key_word = $_GET['s'];
-			$rsch_array = get_rsch_table(NULL, $key_word);
-			//rsch_setting_disp($rsch_array);
+			$issue_array = get_issue_table(NULL, $key_word);
+			issue_setting_disp($issue_array);
 		}
 	}
 	else if ( isset($_POST['action']) ) {
@@ -367,54 +358,17 @@ function CNPolitics_issues_setting() {
 				}
 			}
 			else if ( $_POST['action']=='update') {
-				global $rsch_image_dir;
-				if ( trim($_POST['rsch-name'])=='' ) {
-					echo '<div id="message" class="error">Researcher name should not be empty!</div>';
+				if ( trim($_POST['issue-name'])=='' ) {
+					echo '<div id="message" class="error">Issue name should not be empty!</div>';
 				}
 				else {
-					$file_path = $_POST['img-path'];
-					if ( file_exists($_FILES['rsch-img']['tmp_name']) ) { // file uploaded!
-						if ( $rsch_image_dir.$_FILES['rsch-img']["name"] != $_POST['img-path'] 
-							&& file_exists( get_template_directory().$rschs_image_dir.$_FILES['rsch-img']["name"]) ){
-							echo '<div id="message" class="error">Image "'.$_FILES['rsch-img']["name"].'" exist! Rename your image!</div>';
-						}
-						// remove old image
-						else {
-							if ( $_POST['img-path']!='' ) {
-								unlink( get_template_directory().$_POST['img-path'] );
-							}
-							$file_tmp = $_FILES['rsch-img']["tmp_name"];	
-							$file_path = $rsch_image_dir . $_FILES['rsch-img']["name"];
-							move_uploaded_file( $file_tmp, get_template_directory().$file_path);
-						}
-					}
 					// update database
-					$rsch_info = array (
+					$issue_info = array (
 							'id'		=> $_POST['id'],
-							'name'		=> trim($_POST['rsch-name']),
-							'alias'		=> $_POST['rsch-alias'],
-							'sex'		=> $_POST['rsch-sex'],
-							'birth'		=> $_POST['rsch-birth'],
-							'region'	=> $_POST['rsch-region'],
-							'title'		=> $_POST['rsch-title'],
-							'experience'=> $_POST['rsch-experience'],
-							'rep'		=> $_POST['rsch-rep'],							
-							'intro'		=> $_POST['rsch-intro'],
-							'img_path'	=> $file_path,
-							//'related_topics' => $_POST['topics_checkbox']
+							'name'		=> trim($_POST['issue-name']),					
+							'intro'		=> $_POST['issue-intro'],
 							);
-					if ( isset($_POST['topic_checkbox']) ) {
-						//echo "checked!\n";
-						$rsch_info['related_topics'] = $_POST['topic_checkbox'];
-						//var_dump( $rsch_info['related_topics'] );
-					}
-					else {
-						$rsch_info['related_topics'] = NULL;
-					}
-					//foreach ( $rsch_info['related_topics'] as $topic_id )
-					//	echo $topic_id."\n";
-					
-					update_rsch($rsch_info);
+					update_issue($issue_info);
 				}
 			}
 			else {

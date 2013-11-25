@@ -41,7 +41,7 @@ function get_excerpt($charlength) {
 	if ( mb_strlen( $excerpt ) > $charlength ) {
 		$subex = mb_substr( $excerpt, 0, $charlength-3 );
 		return $subex."...";
-	} 
+	}
 	else {
 		return $excerpt;
 	}

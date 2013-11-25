@@ -5,7 +5,7 @@
 			<img class="collapse-topic-filter" src="<?php bloginfo('template_directory'); ?>/images/arrow-collapse.png">
 			按<a href="">专题</a>筛选
 		</div>
-	<div class="topic-filter">
+	<div class="issue-filter">
 		<ul>
 <?php
 	$page_url = preg_replace('/page\/[0-9]+\//','',$_SERVER['REQUEST_URI']);

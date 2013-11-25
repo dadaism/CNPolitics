@@ -224,19 +224,27 @@ function right_col_disp($type, $table, $filter_cat='') {
 		  </div>';
 	table_body_disp($type, array_slice($table, ($paged-1)*$table_page_size, $table_page_size), $filter_cat, $paged);
 	$visibility_prev_page = $visibility_next_page = '';
-	if ( $paged==1 )
+	$link_first_page = $page_uri.'&paged=1';
+	$link_prev_page = $page_uri.'&paged='.($paged-1);
+	$link_next_page = $page_uri.'&paged='.($paged+1);
+	$link_last_page = $page_uri.'&paged='.$total_page_num;
+	if ( $paged==1 ) {
 		$visibility_prev_page = "disabled";
-	if ( $paged==$total_page_num )
+		$link_first_page = $link_prev_page = "";
+	}
+	if ( $paged==$total_page_num ) {
 		$visibility_next_page = "disabled";
+		$link_next_page = $link_last_page = "";
+	}
 	echo '<div class="tablenav bottom">
 			<div class="tablenav-pages">
 				<span class="displaying-num">' . count($table) . ' items</span>
 				<span class="pagination-links">
-					<a class="first-page ' . $visibility_prev_page .'" title="Go to the first page" href="'.$page_uri.'&paged=1">«</a>
-					<a class="prev-page ' . $visibility_prev_page .'" title="Go to the previous page" href="'.$page_uri.'&paged='.($paged-1).'">‹</a>
+					<a class="first-page ' . $visibility_prev_page .'" title="Go to the first page" href="'.$link_first_page.'">«</a>
+					<a class="prev-page ' . $visibility_prev_page .'" title="Go to the previous page" href="'.$link_prev_page.'">‹</a>
 					<span class="paging-input">' . $paged .' of <span class="total-pages">' . $total_page_num. '</span></span>
-					<a class="next-page ' . $visibility_next_page . '" title="Go to the next page" href="'.$page_uri.'&paged='.($paged+1).'">›</a>
-					<a class="last-page ' . $visibility_next_page . '" title="Go to the last page" href="'.$page_uri.'&paged='.$total_page_num.'">»</a>	
+					<a class="next-page ' . $visibility_next_page . '" title="Go to the next page" href="'.$link_next_page.'">›</a>
+					<a class="last-page ' . $visibility_next_page . '" title="Go to the last page" href="'.$link_last_page.'">»</a>	
 				</span>
 			</div>
 		  </div>';
@@ -332,13 +340,15 @@ function table_body_disp($page_type, $table, $filter_cat, $paged) {
 					</a>
 				</strong>
 				<div class="row-actions">
-					<span class="edit"><a href="<?php echo $page_uri.'&action=edit&id='.$s->id; ?>">Edit</a> | </span>
-					<span class="delete"><a href="<?php echo $page_uri.'&action=delete&id='.$s->id.'&paged='.$paged; ?>">Delete</a> | </span>
-					<span class="view"><a href="
-					<?php 
-						echo site_url()."/".$view_dir."?".$id_type."=".$s->id; 
-					?>
-					">View</a></span>
+					<span class="edit"><a href="<?php echo $page_uri.'&action=edit&id='.$s->id; ?>">Edit</a></span>
+					<span class="delete"> | <a href="<?php echo $page_uri.'&action=delete&id='.$s->id.'&paged='.$paged; ?>">Delete</a></span>
+<?php 
+	if ($page_type!="issue") {
+		echo '		<span class="view"> | <a href="';
+		echo 			site_url()."/".$view_dir."?".$id_type."=".$s->id; 
+		echo '		">View</a></span>';
+	}
+?>
 				</div>
 				<div class="row-actions">
 				<?php 
@@ -477,6 +487,42 @@ function issue_col_left_disp() {
 		<input type="submit" name="submit" id="submit" class="button button-primary" value="Add New Issue">
 	</p>
 	</form>
+<?php
+}
+
+function edit_issue_disp($i) {
+/*
+* display issue editing page
+* @para $t: topic information
+*/
+	//var_dump($topic_info);
+	global $page_setting_uri;
+?>
+<div class="wrap">
+	<div id="icon-edit" class=icon32><br></div>
+	<h2>Issue</h2>
+	<form name="editissue" id="editissue" enctype="multipart/form-data" method="post" action="<?php echo $page_setting_uri;?>" class="validate">
+		<input type="hidden" name="action" value="update">
+		<input type="hidden" name="id", value="<?php echo $i->id;?>">
+		<table class="form-table">
+		<tbody>
+			<tr class="form-field form-required">
+				<th scope="row" valign="top"><label for="rsch-name">Name</label></th>
+				<td><input name="issue-name" id="issue-name" type="text" value="<?php echo $i->name; ?>" size="40" aria-required="true">
+				<p class="description">The name is how it appears on your site.</p></td>
+			</tr>
+			<tr class="form-field">
+				<th scope="row" valign="top"><label for="issue-intro">Introduction</label></th>
+				<td><textarea name="issue-intro" id="issue-intro" rows="5" cols="50" class="large-text"><?php echo $i->intro;?></textarea><br>
+				<span class="description">The description is not prominent by default; however, some themes may show it.</span></td>
+			</tr>
+		</tbody>
+		</table>
+			<p class="submit">
+				<input type="submit" name="submit" id="submit" class="button button-primary" value="Update">
+			</p>
+	</form>
+</div>
 <?php
 }
 
@@ -664,6 +710,12 @@ function check_box($type, $tabs, $contents ) {
 		$panel = "rsch-list";
 		$content = "rsch-list-content";
 	}
+	else if ( $type=="issue" ) {
+		$name = "name";
+		$category = "category";
+		$panel = "issue-list";
+		$content = "issue-list-content";
+	}
 	
 	echo '<div id="taxonomy-'.$type.'" class="categorydiv">';
 	echo '	<ul id="'.$type.'-tabs" class="category-tabs">';
@@ -724,6 +776,19 @@ function researchers_box() {
 	//$checked = array(4,5,6);
 	check_checkbox_php("rschid-", $checked);
 }
+
+function issues_box() {
+	global $post;
+	global $issue_checkbox_contents;
+	//var_dump($issue_checkbox_contents);
+	$categoris = array( '1' => '所有专题');
+	check_box("issue", $categoris, $issue_checkbox_contents);
+	$checked = get_checked_id($post->ID, "issue");
+	//var_dump($checked);
+	//$checked = array(4,5,6);
+	check_checkbox_php("issueid-", $checked);
+}
+
 
 function test_box() {
 	global $post;

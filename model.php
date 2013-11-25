@@ -4,7 +4,7 @@ $page_setting_uri = $page_setting_total_uri[0];
 
 $topic_checkbox_contents = get_checkbox_contents("topic");
 $rsch_checkbox_contents = get_checkbox_contents("rsch");
-
+$issue_checkbox_contents = get_checkbox_contents("issue");
 
 function move_position($db_table, $category, $cat_no, $cur_order, $toward) {
 /*
@@ -119,6 +119,7 @@ function move_position($db_table, $category, $cat_no, $cur_order, $toward) {
 			echo "Already the first one";
 		}
 		else {
+			
 			$pre_order = $pre_order_obj[0]->ordering;
 			$pre_id    = $pre_order_obj[0]->id;
 			// update the order number of moved recoder
@@ -299,6 +300,12 @@ function get_checkbox_contents($type)
 			$checkbox_contents[$key] = $content;
 		}
 	}
+	else if ( $type=="issue" ) {
+		$sql = "SELECT id, name
+				FROM {$wpdb->prefix}issues";	
+		$content = $wpdb->get_results($sql);
+		$checkbox_contents[1] = $content;
+	}
 
 	return $checkbox_contents;
 }
@@ -420,6 +427,18 @@ function delete_rsch($id) {
 	$wpdb->query($sql);
 }
 
+function delete_issue($id) {
+	global $wpdb;
+	$sql = "DELETE FROM {$wpdb->prefix}issues
+			WHERE id = $id";
+	if ( !$wpdb->query($sql) )
+		die("DB connection fails!");
+
+	$sql = "DELETE FROM {$wpdb->prefix}post_info
+			WHERE type '3' = AND info_id = '$id';";
+	$wpdb->query($sql);
+}
+
 function update_topic($t) {
 /*
 * @para $t: "topic" information
@@ -529,6 +548,25 @@ function update_rsch($r) {
 	//	die("Editing topic fails!");
 }
 
+
+function update_issue($i) {
+/*
+* @para $i: "issue" information
+*/
+	//var_dump($rsch_info);
+	global $wpdb;
+	$id = $i['id'];
+	$issue_name = $i['name'];
+	$issue_intro = $i['intro'];
+
+	$sql = "UPDATE {$wpdb->prefix}issues
+			SET name = '$issue_name', intro = '$issue_intro'
+			WHERE id = $id";
+	//echo $sql."<br>";
+	$wpdb->query($sql);
+
+}
+
 function CNPolitics_save_post($post_id) {
 	global $wpdb;
 	//global $post;
@@ -541,6 +579,10 @@ function CNPolitics_save_post($post_id) {
 		$checked_rschs = $_POST['rsch_checkbox'];
 	else
 		$checked_rschs = NULL;
+	if ( isset($_POST['issue_checkbox']) )
+		$checked_issues = $_POST['issue_checkbox'];
+	else
+		$checked_issues = NULL;
 	//$post_id = $post->ID;
 	//wp_die( var_dump($checked_rschs ) );
 	//wp_die( var_dump($post_id) );
@@ -562,6 +604,15 @@ function CNPolitics_save_post($post_id) {
 	$old_checked_rschs = array();
 	foreach( $array_checked as $key => $value ) {
 		$old_checked_rschs[$key] = $value[0];
+	}
+	// get old checked issues
+	$sql = "SELECT info_id
+			FROM {$wpdb->prefix}post_info
+			WHERE type = '3' AND post_id = '$post_id';";
+	$array_checked = $wpdb->get_results($sql, ARRAY_N);
+	$old_checked_issues = array();
+	foreach( $array_checked as $key => $value ) {
+		$old_checked_issues[$key] = $value[0];
 	}
 	// update checked topics
 	if ( $old_checked_topics!=$checked_topics ) {
@@ -601,6 +652,41 @@ function CNPolitics_save_post($post_id) {
 			}
 		}
 	}
+	// update checked issues
+	if ( $old_checked_issues!=$checked_issues ) {
+		// delete unselected
+		//wp_die( var_dump($post_id) );
+		foreach ( $old_checked_issues as $iid) {
+			if ( !in_array($iid, $checked_issues) ) {
+				//echo "delete".$tid."\n";
+				delete_post_info($post_id, "issue", $iid);
+			}
+		}
+		// add new
+		//echo "add new selected checkbox\n";
+		foreach ( $checked_issues as $iid) {
+				//wp_die( 'add new' );
+			if ( !in_array($iid, $old_checked_issues) ) {
+				//echo "add".$iid."\n";
+				add_post_info($post_id, "issue", $iid);								
+			}
+		}
+	}
+}
+
+function get_issue_bypostid( $post_id ) {
+	global $wpdb;
+	//var_dump( $rsch_regions );
+	//$region_id = array_search( $rsch_region, $regions);
+	//var_dump($myrsch);
+/*	$sql = "SELECT info_id
+			FROM {$wpdb->prefix}post_info
+			 WHERE type = '3' AND post_id = '$post_id';";
+	$issue_id_array = $wpdb->get_results($sql);
+	//var_dump($rsch_id_array[0]);
+	$issue = get_rsch_byID( $rsch_id_array[0]->info_id );
+	return $issue;
+	*/
 }
 
 function get_rsch_bypostid( $post_id ) {
@@ -836,11 +922,12 @@ function delete_post_info($post_id, $type, $id) {
 	if ( $type=="topic" ) {
 		$type_value = 1;
 	}
-	else if ( $type="rsch" ) {
+	else if ( $type=="rsch" ) {
 		$type_value = 2;
 	}
-	else 
-		$type_vaue = 3;
+	else if ( $type=="issue" ) {
+		$type_value = 3;
+	}
 	$sql = "DELETE FROM {$wpdb->prefix}post_info
 			WHERE type = '$type_value' AND post_id = '$post_id' AND info_id = '$id';";
 	$wpdb->query($sql);
@@ -848,17 +935,20 @@ function delete_post_info($post_id, $type, $id) {
 
 function add_post_info($post_id, $type, $id) {
 	global $wpdb;
+	//var_dump($type);
 	if ( $type=="topic" ) {
 		$type_value = 1;
 	}
-	else if ( $type="rsch" ) {
+	else if ( $type=="rsch" ) {
 		$type_value = 2;
 	}
-	else 
-		$type_vaue = 3;
+	else if ( $type=="issue" ) {
+		$type_value = 3;
+	}
 	$sql = "INSERT INTO {$wpdb->prefix}post_info
 			(id, type, post_id, info_id) 
 			VALUES(NULL, '$type_value', '$post_id', '$id');";
+	//echo $sql;
 	$wpdb->query($sql);
 
 }
@@ -910,6 +1000,20 @@ function get_postid_bycatid($cat_id) {
 	}
 	//var_dump($pid_array);
 	return $pid_array;
+}
+
+function get_issueid_bypostid($pid_array) {
+	global $wpdb;
+	$issueid_array = array();
+	if ( empty($pid_array) ) 	return $issueid_array;
+	foreach ( $pid_array as $pid ) {
+		//$mypost = get_post( $pid );
+		//$issueid = get_;
+		array_push($issueid_array, $issueid);	
+	}
+	$issueid_array = array_unique($issueid_array);
+	$issueid_array = array_values($issueid_array);
+	return $issueid_array;
 }
 
 function get_authorid_bypostid($pid_array) {
@@ -1030,4 +1134,18 @@ function get_issue_table($region='', $key_word='') {
 	}
 	return $issue_array;
 }
+
+function get_edit_issue($id) {
+	global $wpdb;
+	//id, name, alias, sex, region, intro, img_pathF
+	$sql = "SELECT *
+			FROM {$wpdb->prefix}issues
+			WHERE id = $id";
+	$issue_array = $wpdb->get_results($sql);
+	if ( empty($issue_array) )
+		die("DB connection fails!");
+
+	return $issue_array[0];
+}
+
 ?>
