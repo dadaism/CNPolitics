@@ -151,25 +151,8 @@
                 'href': $form.attr("action") + "?" + $form.serialize(),
                 'type': 'iframe'
         	});
-
         	return false;
-
 		});
-		/*$("input[type=text].topsearch_input").click(function() {
-    		alert("haha");
-			$.open({
-				href : 'http://www.google.com',
-				type : 'iframe',
-				padding : 5
-			});
-		});
-
-		$("input[type=image].topsearch_img").click(function() {
-			
-    		$('<a href="http://www.google.com">Friendly description</a>').fancybox({
-    			overlayShow: true
-   			 }).click();
-		});*/
 	})
 
 </script>

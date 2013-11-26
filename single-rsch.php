@@ -94,8 +94,10 @@ if ( isset($_GET['rsch_id']) ) :
 	$authorid_array = get_authorid_bypostid($pid_array);
 	global $issue_array;
 	//$issue_array = array("次贷危机" , "中东局势", "亚洲策略");
-	$issue_array =  get_issueid_bypostid($pid_array);
-	//$issue_array = get_issue_bypostid($pid_array);
+	//$issue_array =  get_issueid_bypostid($pid_array);
+	//var_dump($pid_array);
+	$issue_array = get_issues_bypostids($pid_array);
+	var_dump($issue_array);
 	global $quarter_array;
 	$quarter_array = get_quarter_bypostid($pid_array);
 

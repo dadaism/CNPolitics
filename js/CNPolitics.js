@@ -98,11 +98,38 @@ function check_checkbox( prefixID, arrayID ) {
 	}
 }
 
-function decorate_filter_box(authorname, quarter) {
+function decorate_filter_box(issue, authorname, quarter) {
 	//alert(authorname);
 	//alert(quarter);
 	//alert( $('.filter-list li').text() );
 	//document.getElementsById("author-all-a");
+	var issues = document.getElementsByClassName("issue-all-a");
+	issues[0].style.color = '#b42800';
+	issues[0].style.fontWeight = 'bold';
+	if (issue) {
+		$(".topic-filter").slideDown();
+		$(".collapse-topic-filter").hide();
+		$(".expand-topic-filter").show();
+		
+		issues = document.getElementsByClassName("issue-all-a");
+		issues[0].style.color = '#777';
+		issues[0].style.fontWeight = '';
+		//document.getElementsById("author-all-a")[0].style.fontWeight = '';
+		var issues = document.getElementsByClassName("issue-filter-a");
+		for (var i=0; i<issues.length; ++i) {
+			//alert(authors[i].innerHTML);
+		
+			if ( issues[i].innerHTML == issue ){
+				//alert(authors[i].innerHTML);
+				issues[i].style.color = '#b42800'; 
+				issues[i].style.fontWeight = 'bold';
+			}
+			else {
+				issues[i].style.color = '#777'; 
+				issues[i].style.fontWeight = '';
+			}
+		}
+	}
 	
 	var authors = document.getElementsByClassName("author-all-a");
 	authors[0].style.color = '#b42800';

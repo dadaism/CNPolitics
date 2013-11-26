@@ -5,19 +5,19 @@
 			<img class="collapse-topic-filter" src="<?php bloginfo('template_directory'); ?>/images/arrow-collapse.png">
 			按<a href="">专题</a>筛选
 		</div>
-	<div class="issue-filter">
+	<div class="topic-filter">
 		<ul>
 <?php
 	$page_url = preg_replace('/page\/[0-9]+\//','',$_SERVER['REQUEST_URI']);
 	//echo $page_url;
 	global $issue_array;
-	foreach( $issue_array as $issue ) :
-		echo '	<li><a href="">'.$issue.'</a></li>';
+	foreach( (array)$issue_array as $key => $issue ) :
+		echo '	<li><a class="issue-filter-a" href="'.add_query_arg('issue',$issue_array[$key], $page_url).'">'.$issue.'</a></li>';
 	endforeach;
 ?>		
 		</ul>
 		<div class="clear"></div>
-		<p style="margin-bottom:35px;margin-top:5px;"><a href="" style="color:#b9b9b9;font-size:12px;float:right;">不限专题</a></p>
+		<p style="margin-bottom:35px;margin-top:5px;"><a href="<?php echo preg_replace('/(&|\?)(issue=.*)(&|$)/','$3',$page_url); ?>"  style="color:#b9b9b9;font-size:12px;float:right;"  class="issue-all-a">不限专题</a></p>
 	</div>
 	</div>
 	<div class="post-filter-box">

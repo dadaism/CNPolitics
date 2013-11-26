@@ -674,19 +674,16 @@ function CNPolitics_save_post($post_id) {
 	}
 }
 
-function get_issue_bypostid( $post_id ) {
+function get_issue_byID( $id )
+{
 	global $wpdb;
-	//var_dump( $rsch_regions );
-	//$region_id = array_search( $rsch_region, $regions);
-	//var_dump($myrsch);
-/*	$sql = "SELECT info_id
-			FROM {$wpdb->prefix}post_info
-			 WHERE type = '3' AND post_id = '$post_id';";
-	$issue_id_array = $wpdb->get_results($sql);
-	//var_dump($rsch_id_array[0]);
-	$issue = get_rsch_byID( $rsch_id_array[0]->info_id );
-	return $issue;
-	*/
+	$sql = "SELECT name, intro
+			FROM {$wpdb->prefix}issues WHERE id = $id";
+	$issue_array = $wpdb->get_results($sql);
+	if ( empty($issue_array) )
+		return NULL;
+	else
+		return $issue_array[0];
 }
 
 function get_rsch_bypostid( $post_id ) {
@@ -869,7 +866,6 @@ function is_topic_exist( $topic_name ) {
 		return true;
 }
 
-
 function is_rsch_exist( $rsch_name ) {
 	global $wpdb;
 	//echo "Search $rsch_name in rschs<br>";
@@ -950,7 +946,6 @@ function add_post_info($post_id, $type, $id) {
 			VALUES(NULL, '$type_value', '$post_id', '$id');";
 	//echo $sql;
 	$wpdb->query($sql);
-
 }
 
 function get_postid_byrschid($rsch_id) {
@@ -1002,18 +997,29 @@ function get_postid_bycatid($cat_id) {
 	return $pid_array;
 }
 
-function get_issueid_bypostid($pid_array) {
+function get_issues_bypostids($pid_array) {
 	global $wpdb;
-	$issueid_array = array();
+	$issue_array = array();
 	if ( empty($pid_array) ) 	return $issueid_array;
 	foreach ( $pid_array as $pid ) {
 		//$mypost = get_post( $pid );
-		//$issueid = get_;
-		array_push($issueid_array, $issueid);	
+		$issue = get_issue_bypostid($pid);
+		array_push($issue_array, $issue);	
 	}
-	$issueid_array = array_unique($issueid_array);
-	$issueid_array = array_values($issueid_array);
-	return $issueid_array;
+	$issue_array = array_unique($issue_array);
+	$issue_array = array_values($issue_array);
+	return $issue_array;
+}
+
+function get_issue_bypostid($pid) {
+	//$issue = "haha";
+	global $wpdb;
+	$sql = "SELECT info_id
+			FROM {$wpdb->prefix}post_info
+			 WHERE type = '3' AND post_id = '$pid' LIMIT 1;";
+	$issue_id_array = $wpdb->get_results($sql);
+	$issue = get_issue_byID( $issue_id_array[0]->info_id );
+	return $issue->name;
 }
 
 function get_authorid_bypostid($pid_array) {
