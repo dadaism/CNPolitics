@@ -368,14 +368,17 @@ function add_rsch($rsch_info) {
 	//var_dump($rsch_info);
 	global $wpdb;
 	$rsch_name = $rsch_info['name'];
+	$rsch_alias = $rsch_info['alias'];
+	$rsch_sex = $rsch_info['sex'];
+	$rsch_birth = $rsch_info['birth'];
 	$rsch_region = $rsch_info['region'];
 	$rsch_title = $rsch_info['title'];
 	$rsch_experience = $rsch_info['experience'];
 	$rsch_intro = $rsch_info['intro'];
 	$rsch_img_path = $rsch_info['img_path'];
 	$sql = "INSERT INTO {$wpdb->prefix}rschs
-			(id, name, region, title, experience, intro, img_path) 
-			VALUES(NULL, '$rsch_name', '$rsch_region', '$rsch_title', '$rsch_experience', '$rsch_intro', '$rsch_img_path');";
+			(id, name, alias, sex, birth, region, title, experience, intro, img_path) 
+			VALUES(NULL, '$rsch_name', '$rsch_alias','$rsch_sex','$rsch_birth', '$rsch_region', '$rsch_title', '$rsch_experience', '$rsch_intro', '$rsch_img_path');";
 	if ( !$wpdb->query( $sql ) ) {
 		echo __FUNCTION__;
 		die("DB connection fails!");
@@ -746,7 +749,7 @@ function get_rschs( $region_id ) {
 	//var_dump($myrsch);
 	$sql = "SELECT name, id
 			FROM {$wpdb->prefix}rschs
-			WHERE region = $region_id";// LIMIT 4";
+			WHERE region = $region_id ORDER BY ordering ASC";// LIMIT 4";
 	$rsch_array = $wpdb->get_results($sql);
 	//if ( empty($rsch_array) )
 	//	die("DB connection fails!");
@@ -839,7 +842,7 @@ function get_topics( $category ) {
 	//var_dump($toptopic_id);
 	$sql = "SELECT subject, id
 			FROM {$wpdb->prefix}topics
-			WHERE category = $category";// LIMIT 4";
+			WHERE category = $category  ORDER BY ordering ASC";// LIMIT 4";
 	$topic_array = $wpdb->get_results($sql);
 	//if ( empty($rsch_array) )
 	//	die("DB connection fails!");
@@ -1000,7 +1003,7 @@ function get_postid_bycatid($cat_id) {
 function get_issues_bypostids($pid_array) {
 	global $wpdb;
 	$issue_array = array();
-	if ( empty($pid_array) ) 	return $issueid_array;
+	if ( empty($pid_array) ) 	return $issue_array;
 	foreach ( $pid_array as $pid ) {
 		//$mypost = get_post( $pid );
 		$issue = get_issue_bypostid($pid);
@@ -1018,8 +1021,12 @@ function get_issue_bypostid($pid) {
 			FROM {$wpdb->prefix}post_info
 			 WHERE type = '3' AND post_id = '$pid' LIMIT 1;";
 	$issue_id_array = $wpdb->get_results($sql);
-	$issue = get_issue_byID( $issue_id_array[0]->info_id );
-	return $issue->name;
+	if ( !empty($issue_id_array) ) {
+		$issue = get_issue_byID( $issue_id_array[0]->info_id );
+		return $issue->name;
+	}
+	else
+		return NULL;
 }
 
 function get_authorid_bypostid($pid_array) {
@@ -1093,7 +1100,7 @@ function pid_filter($pid_array, $authorid, $quarter) {
 		//var_dump($mon_min);
 		//var_dump($mon_max);
 	}
-	foreach ( $pid_array as $key => $pid ) {
+	foreach ( (array)$pid_array as $key => $pid ) {
 		$mypost = get_post( $pid );
 		// filter according to author id
 		if ( !empty($authorid) && $authorid!=$mypost->post_author ) {
@@ -1108,7 +1115,7 @@ function pid_filter($pid_array, $authorid, $quarter) {
 				unset($pid_array[$key]);
 		}
 	}
-	$pid_array = array_values($pid_array);
+	$pid_array = array_values((array)$pid_array);
 	//var_dump($pid_array);
 	return $pid_array;
 }

@@ -95,7 +95,6 @@ if ( isset($_GET['rsch_id']) ) :
 	global $issue_array;
 	//$issue_array = array("次贷危机" , "中东局势", "亚洲策略");
 	//$issue_array =  get_issueid_bypostid($pid_array);
-	//var_dump($pid_array);
 	$issue_array = get_issues_bypostids($pid_array);
 	var_dump($issue_array);
 	global $quarter_array;

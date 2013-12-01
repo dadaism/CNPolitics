@@ -324,6 +324,9 @@ function table_body_disp($page_type, $table, $filter_cat, $paged) {
 				</tr>
 			</tfoot>
 			<tbody id="the-list">
+				<?php if ( empty($sub_array) ) 
+						echo "<tr><td colspan=5>No items found.<td></tr>";
+				?>
 				<?php foreach ( $sub_array as $s) {?>
 			<tr>
 			<th scope="row" class="check-column">

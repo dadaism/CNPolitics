@@ -11,6 +11,10 @@ require_once('backend.php');
 add_action('admin_menu', 'setup_theme_admin_menus');
 add_action('add_meta_boxes', 'cnpolitics_create_meta_box' );
 add_action('save_post', 'cnpolitics_save_meta_box');
+add_action( 'show_user_profile', 'cnpolitics_show_extra_profile_fields' );
+add_action( 'edit_user_profile', 'cnpolitics_show_extra_profile_fields' );
+add_action( 'personal_options_update', 'cnpolitics_save_extra_profile_fields' );
+add_action( 'edit_user_profile_update', 'cnpolitics_save_extra_profile_fields' );
 
 function setup_theme_admin_menus() {
 	add_theme_page("CNPolitics Options", "CNPolitics Option", 'edit_themes', basename(__FILE__),  'theme_option_admin');
@@ -51,12 +55,15 @@ function get_excerpt($charlength) {
 }
 
 function cnpolitics_list_category() {
-	global $category_display;
+	//global $category_display;
 	//$categories = get_categories('number=6');
 	$categories = get_categories('orderby=id');
 	foreach ( $categories as $key => $value ) {
-		if ( $category_display[$key] == 0 ) 
+		$cat_display = get_option("cnpolitics_cat_vis_".$value->cat_ID);
+		if ( $cat_display==0 )
 			unset($categories[$key]);
+		//if ( $category_display[$key] == 0 ) 
+		//	unset($categories[$key]);
 	}
 	$numItems = count($categories);
 	$i = 0;
@@ -214,13 +221,46 @@ register_sidebars( //register sidebar
         ));
 
 function theme_option_admin() {
-	global $category_display;
+	//global $category_display;
 	if (!current_user_can('manage_options')) {  
 	    wp_die('You do not have sufficient permissions to access this page.');  
-	}  
-
+	}
+	if ( isset($_POST['action']) ) {
+		echo $_POST['action'];
+		if ( $_POST['action']=="save" ) {
+			for ( $i=0; $i<=5; $i++) {
+				//echo $_POST["cnpolitics_recommend_title_".$i];
+				update_option("cnpolitics_recommend_title_".$i, $_POST["cnpolitics_recommend_title_".$i]);
+				update_option("cnpolitics_recommend_content_".$i, $_POST["cnpolitics_recommend_content_".$i]);
+				update_option("cnpolitics_recommend_link_".$i, $_POST["cnpolitics_recommend_link_".$i]);	
+			}
+			$categories = get_categories('orderby=id');
+			foreach ( $categories as $key => $value ) {
+   				//var_dump($_POST["cnpolitics_catbox_".$value->cat_ID]);
+				if(isset($_POST["cnpolitics_catbox_".$value->cat_ID]) && $_POST["cnpolitics_catbox_".$value->cat_ID] == 'Yes') {
+   					//echo $value->cat_ID." Yes";
+   					update_option("cnpolitics_cat_vis_".$value->cat_ID, 1);
+				}
+				else {
+    				//echo $value->cat_ID." No";
+    				update_option("cnpolitics_cat_vis_".$value->cat_ID, 0);
+				}
+			}
+		}
+		else if ( $_POST['action']=="reset" ) {
+			for ( $i=0; $i<=5; $i++) {
+				update_option("cnpolitics_recommend_title_".$i, '');
+				update_option("cnpolitics_recommend_content_".$i, '');
+				update_option("cnpolitics_recommend_link_".$i, '');
+			}
+			$categories = get_categories('orderby=id');
+			foreach ( $categories as $key => $value ) {	
+   					update_option("cnpolitics_cat_vis_".$value->cat_ID, 1);
+			}
+		}
+	}
 	echo '<div class="wrap">
-			<h2>'. $themename. 'Settings</h2>
+			<h2>'.wp_get_theme().' Settings</h2>
 		 	<form method="post">';
 	echo '<table class="widefat" width="100%" border="0" cellpadding="0" cellspacing="0">
 			<thead>
@@ -236,13 +276,15 @@ function theme_option_admin() {
 			<td width="70%" >';
 	$categories = get_categories('orderby=id');
 	foreach ( $categories as $key => $value ):
-		if ( $category_display[$key] == 1 )
+		$cat_display = get_option("cnpolitics_cat_vis_".$value->cat_ID);
+		//if ( $category_display[$key] == 1 )
+		if ( $cat_display == 1 )
 			$visibility = "checked";
 		else
 			$visibility = "";
 		echo '<label title="'.$value->name.'">
 				<div style="border:1px solid #cccccc;margin-right:4px;margin-bottom:4px;padding:4px;white-space:nowrap;float:left;">
-					<input type="checkbox" id="minism_catbox_'.$key.'"'.$visibility.'>'.$value->name.'
+					<input type="checkbox" name="cnpolitics_catbox_'.$value->cat_ID.'"'.$visibility.' value="Yes">'.$value->name.'
 				</div>
 			  </label>';
 	endforeach;
@@ -254,6 +296,35 @@ function theme_option_admin() {
 				<tr><td colspan="2" style="margin-bottom:5px;border-bottom:1px dotted #000000;">&nbsp;</td></tr>
 				<tr><td colspan="2">&nbsp;</td></tr>
 			</tbody>
+		  </table>
+		  <table class="widefat" width="100%" border="0" cellpadding="0" cellspacing="0">
+		  	<thead>
+		  		<tr>
+				<th colspan="2">Recommended reading</th>
+				</tr>
+			</thead>
+		  </table>
+		  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#f4f4f4; padding:10px">
+		  	<tbody>';
+	for ($i=0; $i<=5; $i++){
+		echo	'
+				<tr class="form-field form-required">
+					<td width="30%" valign="middle"><strong>Title '.$i.'</strong></td>
+					<td width="70%"><input style="width:400px;" name="cnpolitics_recommend_title_'.$i.'" id="cnpolitics_recommend_title_'.$i.'" type="text" value="'.get_option("cnpolitics_recommend_title_".$i).'"></td>
+				</tr>
+				<tr class="form-field form-required">
+					<td width="30%" valign="middle"><strong>Content '.$i.'</strong></td>
+					<td width="70%"><textarea name="cnpolitics_recommend_content_'.$i.'" style="width:400px; height:110px;" type="textarea" cols="" rows="">'.get_option("cnpolitics_recommend_content_".$i).'</textarea></td>
+				</tr>
+				<tr class="form-field form-required">
+					<td width="30%" valign="middle"><strong>Link '.$i.'</strong></td>
+					<td width="70%"><input style="width:400px;" name="cnpolitics_recommend_link_'.$i.'" id="cnpolitics_recommend_link_'.$i.'" type="text" value="'.get_option("cnpolitics_recommend_link_".$i).'"></td>
+				</tr>
+				<tr><td colspan="2" style="margin-bottom:5px;border-bottom:1px dotted #000000;">&nbsp;</td></tr>
+				<tr><td colspan="2">&nbsp;</td></tr>';
+	}
+	echo	'
+		  	</tbody>
 		  </table>
 		  <p class="submit" style="display:inline; float:right;">
 			<input name="save" type="submit" value="Save changes">
@@ -297,6 +368,25 @@ function wp_pagenavi() {
 	echo paginate_links($pagination);
 }
 
+function cnpolitics_show_extra_profile_fields( $user ) { ?>
+	<h3>Extra profile information</h3>
+	<table class="form-table">
+		<tr>
+			<th><label for="Title">Title</label></th>
+			<td>
+				<input type="text" name="title" id="title" value="<?php echo esc_attr( get_the_author_meta( 'title', $user->ID ) ); ?>" class="regular-text" /><br />
+				<span class="description">Please enter your Title in CNPolitics.</span>
+			</td>
+		</tr>
+	</table>
+<?php }
+
+function cnpolitics_save_extra_profile_fields( $user_id ) {
+	if ( !current_user_can( 'edit_user', $user_id ) )
+		return false;
+	/* Copy and paste this line for additional fields. Make sure to change 'twitter' to the field ID. */
+	update_usermeta( $user_id, 'title', $_POST['title'] );
+}
 
 /* ????????????? does not work
 Plugin Name: Category pagination fix

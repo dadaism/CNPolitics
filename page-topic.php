@@ -6,6 +6,7 @@ Template Name: Topic
 <?php  get_header();?>
 <?php
 	if ( isset($_GET['topic_id']) ) :
+		$issue = isset($_GET['issue']) ? $_GET['issue'] : '';
 		$authorid = isset($_GET['authorid']) ? $_GET['authorid'] : '';
 		$quarter = isset($_GET['quarter']) ? $_GET['quarter'] : '';
 		if ($authorid=='')
@@ -16,9 +17,10 @@ Template Name: Topic
 		}
 		require_once('single-topic.php');
 		echo '<script>
+				var issue = '.json_encode($issue).';
 				var authorid = '.json_encode($authorname).';
 				var quarter = '.json_encode($quarter).';
-				decorate_filter_box(authorid, quarter);
+				decorate_filter_box(issue,authorid, quarter);
 			  </script>';
 	//elseif ( isset($_GET['toptopic']) ) :
 	//	require_once('category-topic.php');

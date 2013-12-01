@@ -5,7 +5,7 @@
 			'author_name' => $post_author,
 			'post__not_in' => array($post->ID),	
 			'showposts' => 3, // 显示相关文章数量
-			'orderby' => date, // 按时间排序
+			//'orderby' => 'date', // 按时间排序
 			'caller_get_posts' => 1
 			)
 	);

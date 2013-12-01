@@ -35,5 +35,5 @@ $sns_weibo_url = "http://weibo.com/cnpolitics";
 $sns_tencent_url = "http://t.qq.com/chinapolitics";
 $sns_163_url = "http://t.163.com/cnpolitics";
 
-$category_display = array( 0,1,1,1,0,1,1,1,0);
+//$category_display = array( 0,1,1,1,0,1,1,1,0);
 ?>

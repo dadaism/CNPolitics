@@ -1,6 +1,7 @@
 <div class="column-head"><a href="#"><b>政见精选</b></a></div>
 <?php 
-/*	global $authorid_array;
+/*
+	global $authorid_array;
 	global $issue_array;
 	global $quarter_array;
 	$postslist = get_posts( 'numberposts=6&orderby=rand' );
@@ -12,6 +13,7 @@
 				</div>';
 	}
 */
+/*
 	$sticky = get_option( 'sticky_posts' );
 	//var_dump($sticky);
 	if ( !empty($sticky) ) {
@@ -23,6 +25,13 @@
 						<p class="select-abstract">'.get_excerpt('70').'</p>
 					</div>';
 		}
+	}
+*/
+	for ($i=0; $i<=5; $i++) {
+		echo '<div class="article-select-first">
+				<p class="select-head"><a href="'.get_option("cnpolitics_recommend_link_".$i).'">'.get_option("cnpolitics_recommend_title_".$i).'</a></p>
+					<p class="select-abstract">'.get_option("cnpolitics_recommend_content_".$i).'</p>
+				</div>';
 	}
 ?>
 

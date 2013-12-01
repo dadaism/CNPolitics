@@ -17,7 +17,7 @@ endif;
 	<?php echo get_avatar($curauth->user_email); ?>
 	<!--?php var_dump($curauth->user_email); ?-->
 	<p style="margin-top:15px;"><?php echo $curauth->display_name; ?></p>
-	<p style="font-weight:normal;font-size:14px;color:#b9b9b9;">观察员</p>
+	<p style="font-weight:normal;font-size:14px;color:#b9b9b9;"><?php echo get_the_author_meta('title');?></p>
 </div>
 		
 <div id="column1">
