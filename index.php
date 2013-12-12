@@ -3,7 +3,7 @@
 <div id="column1" class="grid_7">
 	<div class="column-head">
 		<a href="#"><b>最新发表</b></a> 
-		<a href="#"><span style="font-size:13px;color:#b9b9b9;">| 阅读更多 >></span></a>
+		<a href="#"><span style="font-size:13px;color:#b9b9b9;">| 阅读更多 »</span></a>
 	</div>
 
 <?php 
@@ -45,7 +45,7 @@
     			$category_id = $category_obj->term_id;
     			$category_link = get_category_link( $category_id );
 				echo '<a href="'.$category_link.'"><b>读图识政治</b></a>'; 
-				echo '<a href="'.$category_link.'"><span style="font-size:13px;color:#b9b9b9;font-weight:500;"> | 更多信息图 >></span></a>';
+				echo '<a href="'.$category_link.'"><span style="font-size:13px;color:#b9b9b9;font-weight:500;"> | 更多信息图 »</span></a>';
 			?>
 			</div>
 			<p class="additional-abstract">政见的信息可视化基于对公开资料的搜集和分析，辨识蕴藏在单纯数据背后的事实。</p>
@@ -76,7 +76,7 @@
     			$category_id = $category_obj->term_id;
     			$category_link = get_category_link( $category_id );
 				echo '<a href="'.$category_link.'"><b>政见合集</b></a>';
-				echo '<a href="'.$category_link.'"><span style="font-size:13px;color:#b9b9b9;font-weight:500;"> | 更多合集 >></span></a>';
+				echo '<a href="'.$category_link.'"><span style="font-size:13px;color:#b9b9b9;font-weight:500;"> | 更多合集 »</span></a>';
 			?>
 			</div>
 			<p class="additional-abstract">合辑是由政见网站内容重新编辑并整合而成的电子出版物。每个季度合辑都会与你见面。</p>

@@ -27,7 +27,7 @@
 				<?php endforeach; ?>
 				</ul>
 				</p>
-				<p style="margin-bottom:20px;margin-top:0px;"><a href="" style="color:#b9b9b9;font-size:12px;float:right;">浏览更多>></a></p>
+				<p style="margin-bottom:20px;margin-top:0px;"><a href="" style="color:#b9b9b9;font-size:12px;float:right;">浏览更多 »</a></p>
 			</div>
 		</div>
 <?php
@@ -55,7 +55,7 @@
 	echo '
 				</ul>
 				</p>
-				<p style="margin-bottom:20px;margin-top:0px;"><a href="" style="color:#b9b9b9;font-size:12px;float:right;">浏览更多>></a></p>
+				<p style="margin-bottom:20px;margin-top:0px;"><a href="" style="color:#b9b9b9;font-size:12px;float:right;">浏览更多 »</a></p>
 			</div>
 		</div>';
 	$t = get_topic_bypostid($post->ID);
@@ -84,7 +84,7 @@
 	echo '
 				</ul>
 				</p>
-				<p style="margin-bottom:20px;margin-top:0px;"><a href="" style="color:#b9b9b9;font-size:12px;float:right;">浏览更多>></a></p>
+				<p style="margin-bottom:20px;margin-top:0px;"><a href="" style="color:#b9b9b9;font-size:12px;float:right;">浏览更多 »</a></p>
 			</div>';
 ?>
 		</div>

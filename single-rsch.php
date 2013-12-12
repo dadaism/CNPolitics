@@ -24,7 +24,7 @@ if ( isset($_GET['rsch_id']) ) :
 		}
 		else {
 			$age = date('Y') - $year;
-			$birth = $year." 年 ($age 岁)";
+			$birth = $year." 年（$age 岁）";
 		}
 		echo '	<div id="researcher-avatar">
 					<img src="'.get_bloginfo('template_directory').$r->img_path.'">

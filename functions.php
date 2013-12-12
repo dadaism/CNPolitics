@@ -91,7 +91,7 @@ function cnpolitics_list_category() {
 	 	endforeach;
 		echo	'			</ul>
 							<div class="clear"></div>
-							<div class="more"><a href="'.get_category_link($category->cat_ID).'">阅读更多</a></div>
+							<div class="more"><a href="'.get_category_link($category->cat_ID).'">阅读更多 »</a></div>
 						</div>
 					</div>';
 	}

@@ -355,7 +355,7 @@ function table_body_disp($page_type, $table, $filter_cat, $paged) {
 				</div>
 				<div class="row-actions">
 				<?php 
-					$move_order_uri = $page_uri.'&position=move&action=filter&filter-tag='.$filter_cat.'&paged='.$paged.'&order_no='.$s->ordering;
+					$move_order_uri = $page_uri.'&position=move&action=filter&filter-tag='.$filter_cat.'&paged='.$paged.'&order_no='.$s->ordering.'&id='.$s->id;
 					if ($page_type=="topic") {
 						$move_order_uri = $move_order_uri.'&cat='.$s->category;
 					}

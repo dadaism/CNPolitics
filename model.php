@@ -6,7 +6,7 @@ $topic_checkbox_contents = get_checkbox_contents("topic");
 $rsch_checkbox_contents = get_checkbox_contents("rsch");
 $issue_checkbox_contents = get_checkbox_contents("issue");
 
-function move_position($db_table, $category, $cat_no, $cur_order, $toward) {
+function move_position($db_table, $category, $cat_no, $content_id, $curr_ordering, $toward) {
 /*
 * @para $db_table: "topic" or "researchers"
 * @para $category: "category" for topic table, "region" for researcher table  
@@ -20,160 +20,108 @@ function move_position($db_table, $category, $cat_no, $cur_order, $toward) {
 	ini_set('display_errors',1);
 	if ( $toward=="top" ) {	// bubble sort..
 		//echo "Top";
-		// Check whether the parameters are correct
-		$sql = "SELECT ordering 
-				FROM {$wpdb->prefix}$db_table 
-				WHERE $category=$cat_no AND ordering=$cur_order";
-		if ( ($moved_order = $wpdb->get_results($sql))==null) {
-			echo "Can't find matching record in table {$wpdb->prefix}$db_table";
+		$sql = "SET @temp_var := 1";	// Leave the first entry empty
+		$result = mysql_query($sql);
+		if (!$result) {
+    		echo "SQL execution error in ". __LINE__ . " in ". __FILE__; 
+    		echo "Invalid query: " . mysql_error();
 		}
-		$my_count = 1;
-		while (1) {
-			// get the id, ordering number of upper record
-  			$sql = "SELECT id, ordering 
-					FROM {$wpdb->prefix}$db_table 
-					WHERE $category=$cat_no AND ordering < $cur_order ORDER BY ordering DESC LIMIT 1";
-			if ( ($pre_order_obj = $wpdb->get_results($sql))==null ) {
-				break;
-			}
-			$my_count = $my_count + 1;
-			//var_dump($pre_order_obj);
-			$pre_order = $pre_order_obj[0]->ordering;
-			$pre_id    = $pre_order_obj[0]->id;
-			// update the order number of moved recoder
-			$sql = "UPDATE {$wpdb->prefix}$db_table 
-					SET ordering = $pre_order 
-					WHERE ordering=$cur_order";
-			if ( !$wpdb->query($sql) ) {
-				echo "fail to update\n";
-			}
-			// update the order number of previous record
- 			$sql = "UPDATE {$wpdb->prefix}$db_table 
-					SET ordering = $cur_order 
-					WHERE id= $pre_id";
-			if ( !$wpdb->query($sql) ) {
-				echo "fail to update\n";
-			}
-			$cur_order = $pre_order;
-			//if ( $my_count==8 )
-			//	break;
+		// reorder ordering when it is less than 1000, starting with 2
+		$sql = "UPDATE {$wpdb->prefix}$db_table  
+				SET ordering = (@temp_var := @temp_var+1) 
+				WHERE $category = $cat_no ORDER BY ordering";
+		$result = mysql_query($sql);
+		if (!$result) {
+    		echo "SQL execution error in ". __LINE__ . " in ". __FILE__; 
+    		echo "Invalid query: " . mysql_error();
 		}
-		//echo $my_count;
+    	// set record's ordering to 1
+    	$sql = "UPDATE {$wpdb->prefix}$db_table 
+    			SET ordering = 1 
+    			WHERE $category = $cat_no AND id = $content_id";
+     	if ( !$wpdb->query($sql) ) {
+			echo "SQL execution error in ". __LINE__ . " in ". __FILE__;
+		}
 	}
 	else if ( $toward=="bottom" ){	// bubble sort..
 		//echo "Bottom";
-		// Check whether the parameters are correct
-		$sql = "SELECT ordering 
-				FROM {$wpdb->prefix}$db_table 
-				WHERE $category=$cat_no AND ordering=$cur_order";
-		if ( ($moved_order = $wpdb->get_results($sql))==null) {
-			echo "Can't find matching record in table {$wpdb->prefix}$db_table";
+		$sql = "SET @temp_var := 0";	// Don't leave the first entry empty
+		$result = mysql_query($sql);
+		if (!$result) {
+    		echo "SQL execution error in ". __LINE__ . " in ". __FILE__; 
+    		echo "Invalid query: " . mysql_error();
 		}
-		$my_count = 1;
-		while (1) {
-			// get the id, ordering number of next record
-  			$sql = "SELECT id, ordering 
-					FROM {$wpdb->prefix}$db_table 
-					WHERE $category=$cat_no AND ordering > $cur_order ORDER BY ordering ASC LIMIT 1";
-			if ( ($next_order_obj = $wpdb->get_results($sql))==null ) {
-				break;
-			}
-			$my_count = $my_count + 1;
-			//var_dump($pre_order_obj);
-			$next_order = $next_order_obj[0]->ordering;
-			$next_id    = $next_order_obj[0]->id;
-			// update the order number of moved recoder
-			$sql = "UPDATE {$wpdb->prefix}$db_table 
-					SET ordering = $next_order 
-					WHERE ordering=$cur_order";
-			if ( !$wpdb->query($sql) ) {
-				echo "fail to update\n";
-			}
-			// update the order number of previous record
- 			$sql = "UPDATE {$wpdb->prefix}$db_table 
-					SET ordering = $cur_order 
-					WHERE id= $next_id";
-			if ( !$wpdb->query($sql) ) {
-				echo "fail to update\n";
-			}
-			$cur_order = $next_order;
-			//if ( $my_count==8 )
-			//	break;
+		$sql = "UPDATE {$wpdb->prefix}$db_table  
+				SET ordering = (@temp_var := @temp_var+1) 
+				WHERE $category = $cat_no ORDER BY ordering";
+		$result = mysql_query($sql);
+		if (!$result) {
+    		echo "SQL execution error in ". __LINE__ . " in ". __FILE__; 
+    		echo "Invalid query: " . mysql_error();
 		}
-		//echo $my_count;
+		// get last
+  	    $sql = "SELECT ordering FROM {$wpdb->prefix}$db_table 
+  	    		WHERE $category = $cat_no AND  id != $content_id";
+  	    if ( ($order_obj = $wpdb->get_results($sql))==null ) {
+			echo "SQL execution error in ". __LINE__ . " in ". __FILE__;
+		}
+		$bottom = 0;
+		foreach( (array)$order_obj as $obj ) {
+			if ( $bottom<$obj->ordering )	$bottom = $obj->ordering;
+		}
+  	    $bottom = 1 + (int) $bottom;
+  	    // set record's ordering to last
+    	$sql = "UPDATE {$wpdb->prefix}$db_table 
+    			SET ordering = $bottom
+    			WHERE $category=$cat_no AND id = $content_id";
+     	if ( !$wpdb->query($sql) ) {
+			echo "SQL execution error in ". __LINE__ . " in ". __FILE__;
+		}
 	}
 	else if ( $toward=="up" ) {
-		//echo $cat_no;
-		// Check whether the parameters are correct
-		$sql = "SELECT ordering 
-				FROM {$wpdb->prefix}$db_table 
-				WHERE $category=$cat_no AND ordering=$cur_order";
-		if ( ($moved_order = $wpdb->get_results($sql))==null) {
-			echo "Can't find matching record in table {$wpdb->prefix}$db_table";
+  	    $sql = "SELECT ordering FROM {$wpdb->prefix}$db_table
+  	    		WHERE $category=$cat_no AND  ordering < $curr_ordering ORDER BY ordering DESC LIMIT 1";
+  	    if ( ($order_obj = $wpdb->get_results($sql))==null ) {
+			//echo "Fail to get ordering of previous record. Error in ". __LINE__ . " in ". __FILE__;
+			return;
 		}
-		// get the id, ordering number of upper record
-  		$sql = "SELECT id, ordering 
-				FROM {$wpdb->prefix}$db_table 
-				WHERE $category=$cat_no AND ordering < $cur_order ORDER BY ordering DESC LIMIT 1";
-		if ( ($pre_order_obj = $wpdb->get_results($sql))==null ) {
-			echo "Already the first one";
+		$prev_ordering = $order_obj[0]->ordering;
+
+  	    // Set above record to current ordering
+  	  	$sql = "UPDATE {$wpdb->prefix}$db_table
+  	  			SET ordering = $curr_ordering 
+  	  			WHERE $category=$cat_no AND ordering < $curr_ordering ORDER BY ordering DESC LIMIT 1";
+  	    if ( !$wpdb->query($sql) ) {
+			echo "Exchanging ordering fails. SQL execution error in ". __LINE__ . " in ". __FILE__;
 		}
-		else {
-			
-			$pre_order = $pre_order_obj[0]->ordering;
-			$pre_id    = $pre_order_obj[0]->id;
-			// update the order number of moved recoder
-			$sql = "UPDATE {$wpdb->prefix}$db_table 
-					SET ordering = $pre_order 
-					WHERE ordering=$cur_order";
-			if ( !$wpdb->query($sql) ) {
-				echo "fail to update\n";
-			}
-			// update the order number of previous record
- 			$sql = "UPDATE {$wpdb->prefix}$db_table 
-					SET ordering = $cur_order 
-					WHERE id= $pre_id";
-			if ( !$wpdb->query($sql) ) {
-				echo "fail to update\n";
-			}
+
+		// Set moving recorder to previous ordering
+  	  	$sql = "UPDATE {$wpdb->prefix}$db_table 
+  	  			SET ordering = $prev_ordering 
+  	  			WHERE $category=$cat_no AND id = $content_id";
+  	    if ( !$wpdb->query($sql) ) {
+			echo "Exchanging ordering fails. SQL execution error in ". __LINE__ . " in ". __FILE__;
 		}
 	}
 	else if ( $toward=="down" ) {
-		//echo $cat_no;
-		// Check whether the parameters are correct
-		$sql = "SELECT ordering 
-				FROM {$wpdb->prefix}$db_table 
-				WHERE $category=$cat_no AND ordering=$cur_order";
-		if ( ($moved_order = $wpdb->get_results($sql))==null) {
-			//echo $sql;
-			echo "Can't find matching record in table {$wpdb->prefix}$db_table";
-			echo "category number: $cat_no ";
-			echo "Order number: $cur_order ";
+	    $sql = "SELECT ordering FROM {$wpdb->prefix}$db_table 
+	    		WHERE $category=$cat_no AND ordering > $curr_ordering ORDER BY ordering ASC LIMIT 1";
+	    if ( ($order_obj = $wpdb->get_results($sql))==null ) {
+			//echo "Fail to get ordering of previous record. Error in ". __LINE__ . " in ". __FILE__;
+			return;
 		}
-		// get the id, ordering number of next record
-  		$sql = "SELECT id, ordering 
-				FROM {$wpdb->prefix}$db_table 
-				WHERE $category=$cat_no AND ordering > $cur_order ORDER BY ordering ASC LIMIT 1";
-		if ( ($next_order_obj = $wpdb->get_results($sql))==null ) {
-			echo "Already the last one";
+		$next_ordering = $order_obj[0]->ordering;
+        
+        $sql = "UPDATE {$wpdb->prefix}$db_table SET ordering = $curr_ordering 
+        		WHERE $category=$cat_no AND ordering > $curr_ordering ORDER BY ordering ASC LIMIT 1";
+  	    if ( !$wpdb->query($sql) ) {
+			echo "Exchanging ordering fails. SQL execution error in ". __LINE__ . " in ". __FILE__;
 		}
-		else {
-			$next_order = $next_order_obj[0]->ordering;
-			$next_id    = $next_order_obj[0]->id;
-			// update the order number of moved recoder
-			$sql = "UPDATE {$wpdb->prefix}$db_table 
-					SET ordering = $next_order 
-					WHERE ordering=$cur_order";
-			if ( !$wpdb->query($sql) ) {
-				echo "fail to update\n";
-			}
-			// update the order number of previous record
- 			$sql = "UPDATE {$wpdb->prefix}$db_table 
-					SET ordering = $cur_order 
-					WHERE id= $next_id";
-			if ( !$wpdb->query($sql) ) {
-				echo "fail to update\n";
-			}
+  	    
+  	  	$sql = "UPDATE {$wpdb->prefix}$db_table SET ordering = $next_ordering 
+  	  			WHERE $category = $cat_no AND id = $content_id";
+		if ( !$wpdb->query($sql) ) {
+			echo "Exchanging ordering fails. SQL execution error in ". __LINE__ . " in ". __FILE__;
 		}
 	}
 }
@@ -285,7 +233,7 @@ function get_checkbox_contents($type)
 			//echo $key."\n";
 			$sql = "SELECT id, subject
 					FROM {$wpdb->prefix}topics
-					WHERE category = '$key'";
+					WHERE category = '$key' ORDER BY ordering";
 			$content = $wpdb->get_results($sql);
 			$checkbox_contents[$key] = $content;
 		}
@@ -295,14 +243,15 @@ function get_checkbox_contents($type)
 			//echo $key."\n";
 			$sql = "SELECT id, name
 					FROM {$wpdb->prefix}rschs
-					WHERE region = '$key'";
+					WHERE region = '$key' ORDER BY ordering";
 			$content = $wpdb->get_results($sql);
 			$checkbox_contents[$key] = $content;
 		}
 	}
 	else if ( $type=="issue" ) {
 		$sql = "SELECT id, name
-				FROM {$wpdb->prefix}issues";	
+				FROM {$wpdb->prefix}issues 
+				ORDER BY ordering";	
 		$content = $wpdb->get_results($sql);
 		$checkbox_contents[1] = $content;
 	}

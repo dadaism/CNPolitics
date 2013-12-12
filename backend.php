@@ -39,7 +39,8 @@ function CNPolitics_topics_setting() {
 		$toward = $_GET['toward'];
 		$order_no  = $_GET['order_no'];
 		$cat = $_GET['cat'];
-		move_position("topics", "category", $cat, $order_no, $toward);
+		$content_id = $_GET['id'];
+		move_position("topics", "category", $cat, $content_id, $order_no, $toward);
 	}
 	if ( isset($_GET['action']) ) {
 		
@@ -176,7 +177,8 @@ function CNPolitics_researchers_setting() {
 		$toward = $_GET['toward'];
 		$order_no  = $_GET['order_no'];
 		$cat = $_GET['cat'];
-		move_position("rschs", "region", $cat, $order_no, $toward);
+		$content_id = $_GET['id'];
+		move_position("rschs", "region", $cat, $content_id, $order_no, $toward);
 	}
 	if ( isset($_GET['action']) ) {
 		if ( $_GET['action']=='edit' ) {
@@ -313,7 +315,8 @@ function CNPolitics_issues_setting() {
 	if ( isset($_GET['position']) ) {
 		$toward = $_GET['toward'];
 		$order_no  = $_GET['order_no'];
-		move_position("issues", "category", 1, $order_no, $toward);
+		$content_id = $_GET['id'];
+		move_position("issues", "category", 1, $content_id, $order_no, $toward);
 	}
 	if ( isset($_GET['action']) ) {
 		if ( $_GET['action']=='edit' ) {
