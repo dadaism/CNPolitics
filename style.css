@@ -76,6 +76,21 @@ body, button, input, textarea {
 
 /*reset ends*/
 
+
+
+
+@font-face {
+    font-family: "CNPzh";
+    src: local("Hiragino Sans GB"), local("Microsoft YaHei"), local("WenQuanYi Micro Hei");
+    unicode-range: U+00B7;
+}
+ 
+@font-face {
+    font-family: "CNPla";
+    src: local(Arial);
+    unicode-range: U+2014;
+}
+
 body
 {
 min-width: 960px;
@@ -84,7 +99,7 @@ width:expression(document.body.clientWidth < 960? "960px": "auto" );
 	padding:0px;
 	margin:0 auto;
 	font-size:15px;
-	font-family: "Helvetica Neue", Arial, "DejaVu Sans", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+	font-family: "CNPzh", "CNPla", "Helvetica Neue", Arial, "DejaVu Sans", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
 	background-color:#5e5e5e;
 	background-image:url(images/background_pattern.png);
 }
