@@ -3,7 +3,7 @@
 <div id="column1" class="grid_7">
 	<div class="column-head">
 		<a href="#"><b>最新发表</b></a> 
-		<a href="#"><span style="font-size:13px;color:#b9b9b9;">| 阅读更多 »</span></a>
+		<a href="#"><span style="font-size:13px;color:#b9b9b9;">｜阅读更多 »</span></a>
 	</div>
 
 <?php 
@@ -15,7 +15,7 @@
 				<img class="latest-img" width="150" height="150" src="'.wp_get_attachment_thumb_url( $post_thumbnail_id ).'">
 				<div class="latest-text">';
 		echo '		<p class="latest-head"><a href="'.get_permalink().'">'.get_the_title().'</a></p>
-					<p class="latest-author"><a href="'.get_author_posts_url(get_the_author_meta('ID')).'">'.get_the_author().'</a><span style="font-size:13px;color:#b9b9b9;"> | '.get_the_date('Y-m-d').'</span></p>
+					<p class="latest-author"><a href="'.get_author_posts_url(get_the_author_meta('ID')).'">'.get_the_author().'</a><span style="font-size:13px;color:#b9b9b9;">｜'.get_the_date('Y-m-d').'</span></p>
 					<div class="box-abstract">
 						<p class="latest-abstract">'.get_excerpt('96').'</p>
 					</div>			
@@ -45,7 +45,7 @@
     			$category_id = $category_obj->term_id;
     			$category_link = get_category_link( $category_id );
 				echo '<a href="'.$category_link.'"><b>读图识政治</b></a>'; 
-				echo '<a href="'.$category_link.'"><span style="font-size:13px;color:#b9b9b9;font-weight:500;"> | 更多信息图 »</span></a>';
+				echo '<a href="'.$category_link.'"><span style="font-size:13px;color:#b9b9b9;font-weight:500;">｜更多信息图 »</span></a>';
 			?>
 			</div>
 			<p class="additional-abstract">政见的信息可视化基于对公开资料的搜集和分析，辨识蕴藏在单纯数据背后的事实。</p>
@@ -76,7 +76,7 @@
     			$category_id = $category_obj->term_id;
     			$category_link = get_category_link( $category_id );
 				echo '<a href="'.$category_link.'"><b>政见合集</b></a>';
-				echo '<a href="'.$category_link.'"><span style="font-size:13px;color:#b9b9b9;font-weight:500;"> | 更多合集 »</span></a>';
+				echo '<a href="'.$category_link.'"><span style="font-size:13px;color:#b9b9b9;font-weight:500;">｜更多合集 »</span></a>';
 			?>
 			</div>
 			<p class="additional-abstract">合辑是由政见网站内容重新编辑并整合而成的电子出版物。每个季度合辑都会与你见面。</p>

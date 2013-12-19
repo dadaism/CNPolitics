@@ -30,7 +30,7 @@
 			<!--?php cnpolitics_list_page(); ?-->
 			<?php cnpolitics_list_static(); ?>
 		</ul>
-		<p style="font-size:13px;margin-top:7px;">&copy; 2011 - 2013 政见 CNPolitics.org</p>
+		<p style="font-size:13px;margin-top:7px;">&copy; 2011－2013 政见 CNPolitics.org</p>
 		</div>
 
 		<div class="grid_5">
