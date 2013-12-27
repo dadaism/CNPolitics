@@ -1,6 +1,6 @@
 <?php get_header();?>
 <div id="column1" class="grid_7">
-	<div><a href="#" style="font-size:13px;color:#b9b9b9;font-weight:300;"><b>全部政见/</b></a> 
+	<div><a href="#" style="font-size:13px;color:#b9b9b9;font-weight:300;">全部政见 / </a> 
 		<span style="font-size:15px;color:#000;font-weight:bold;"><?php single_cat_title();?></span>
 	</div>
 	

@@ -198,7 +198,7 @@ function cnpolitics_list_static() {
 	echo '<li><a href="'.get_bloginfo('url').'/static/?static_page=about.php">关于政见｜</a></li>';
 	echo '<li><a href="'.get_bloginfo('url').'/static/?static_page=copyright.php">版权声明｜</a></li>';
 	echo '<li><a href="'.get_bloginfo('url').'/static/?static_page=coop.php">交流合作｜</a></li>';
-	echo '<li><a href="'.get_bloginfo('url').'/static/?static_page=join-us.php">加入我们</a></li>';
+	echo '<li><a href="'.get_bloginfo('url').'/static/?static_page=join-us.php">加入我们	</a></li>';
 }
 
 register_sidebars( //register sidebar
