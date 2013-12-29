@@ -1,8 +1,11 @@
-<div id="header">
-	<div id="logo" style="cursor:pointer;" onclick="location.href='<?php bloginfo('siteurl'); ?>';"></div><!--/logo-->
-	<div class="shadow"></div>
+<div id="header" class="fixed-atop">
+	<!--div id="logo" style="cursor:pointer;" onclick="location.href='<?php bloginfo('siteurl'); ?>';"></div--><!--/logo-->
+	<div id="logo">
+		<a href="<?php bloginfo('siteurl'); ?>">政见 CNPolitics.org</a>
+	</div>
+	<!--div class="shadow"></div-->
 	<div id="slidecontent">
-		<? require_once( get_template_directory().'/inc/search_box.php' ); ?>
+		<?php require_once( get_template_directory().'/inc/search_box.php' ); ?>
 		<div id="nav">
 			<div class="grid_5"><a href="#"><b>文章分类</b></a><br><br>
 				<?php cnpolitics_list_category(); ?>

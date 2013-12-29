@@ -205,4 +205,4 @@ function add_favorite(){
 
 </head>
 <body>
-<div id="container">
+<div id="container" style="margin-bottom:70px;">

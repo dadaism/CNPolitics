@@ -1,25 +1,25 @@
-<div class="clear"></div>
-<div id="join-nav" align="center">
-	<p>加入我们</p>
-	<ul>
-		<li class="join-nav-obs"> 观察中心 |</li>
-		<li class="join-nav-gra"> 图解中心 |</li>
-		<li class="join-nav-ops"> 运营中心 |</li>
-		<li class="join-nav-des"> 设计组 |</li>
-		<li class="join-nav-eng"> 工作组</li>
-	</ul>
-</div>
-<div id="display_bar">
-	<img src="<?php bloginfo('template_directory'); ?>/images/shadow_middle.png">
-</div>
-<div class="grid_2"><br></div>
-<div class="grid_8 topx">
-	<div id="join-head">
-		<p><a href="#">政见</a>是一个完全由志愿者组成的团队，我们期待并随时欢迎你的加入。这是一个开方的平台，我们相信：志同道合者在一起工作，协力实现资记得系昂奋啊，是一件快乐而又令人获益良多的事情。</p>
-				<br>
-		<p>在这里，你可以与一群优秀的朋友共事，施展自己的才华。<a href="#">政见</a>自身拥有多种新媒体平台，并和国内外多家媒体建立了合作关系，可以让你的作品获得广泛的传播。</p>
+<div id='scroller-anchor'></div>
+<div id='fixed-top'>
+	<div id="join-nav">
+		<p>加入我们</p>
+		<ul>
+			<li class="join-nav-obs"> 观察中心 |</li>
+			<li class="join-nav-gra"> 图解中心 |</li>
+			<li class="join-nav-ops"> 运营中心 |</li>
+			<li class="join-nav-des"> 设计组 |</li>
+			<li class="join-nav-eng"> 工作组</li>
+		</ul>
 	</div>
+	<div id="display_bar">
+		<img src="<?php bloginfo('template_directory'); ?>/images/shadow_middle.png">
+	</div>
+</div><!--fixed-top end-->
 
+<div id="join-main">
+	<p><a href="#">政见</a>是一个完全由志愿者组成的团队，我们期待并随时欢迎你的加入。这是一个开方的平台，我们相信：志同道合者在一起工作，协力实现资记得系昂奋啊，是一件快乐而又令人获益良多的事情。</p>
+	<br>
+	<p>在这里，你可以与一群优秀的朋友共事，施展自己的才华。<a href="#">政见</a>自身拥有多种新媒体平台，并和国内外多家媒体建立了合作关系，可以让你的作品获得广泛的传播。</p>
+	
 	<div id="join-observer">
 		<div class="join-position">
 			<p>成为政见观察员</p>
@@ -105,22 +105,23 @@
 <div class="clear"></div>
 
 <script>
-	$(document).ready(function(){
-		$(".join-nav-obs").click(function() {
-			window.scrollTo(0,208);		
-		})
-
-		$(".join-nav-gra").click(function() {
-			window.scrollTo(0,780);		
-		})
-		$(".join-nav-ops").click(function() {
-			window.scrollTo(0,1157);		
-		})
-		$(".join-nav-des").click(function() {
-			window.scrollTo(0,1534);		
-		})
-		$(".join-nav-eng").click(function() {
-			window.scrollTo(0,1910);		
-		})
-	})
+	$(function() {
+		var move = function() {
+			var screenTop = $(window).scrollTop();
+			var objectTop = $('#scroller-anchor').offset().top;
+			var object = $('#fixed-top');
+			if (screenTop > objectTop) {
+				object.css({position:'fixed',top:"0px"});
+				var h = $("#fixed-top").height();
+				$('#join-main').css({"padding-top":h});
+			} else {
+				if (screenTop <= objectTop) {
+					object.css({position:"relative",top:""});
+					$('#join-main').css({"padding-top":'0px'});
+				}
+			}
+		}; //move end
+		$(window).scroll(move);
+		move();
+	});
 </script>

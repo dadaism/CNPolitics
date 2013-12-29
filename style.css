@@ -112,8 +112,24 @@ p {margin:0;padding:0;}
 /* Header elements styles
 ----------------------------------------------------------------------------------------------------*/
 
-#logo{background:url(images/logo.png) no-repeat center;height:76px;margin-top:17px;margin-bottom:0px;text-align:center;}
+#logo {
+	background: url(images/shadow_header.png) bottom no-repeat;
+	height: 100px;
+	margin: 0px auto;
+}
+#logo a {
+	display: block;
+	width: 768px;
+	height: 92px;
+	margin: 0px auto;
+	background: url(images/logo.png) center 17px no-repeat;
+	font-size: 0px;
+}
+/* old */
+/*
+#logo{background:url(images/logo.png) no-repeat center;height:76px;margin-top:17px;margin-bottom:0px;text-align:center;position:relative;}
 .shadow{background: url(images/shadow_header.png) no-repeat center;height: 43px;text-align: center;margin-top: -30px;}
+*/
 #search	{
 	text-align: center;
 	margin-top: 12px;
@@ -578,8 +594,11 @@ span.inline-note {color: #b42800;}
 .clear1	{clear: both;height:0;} 
 
 
-
-
+.fixed-atop {
+	background-image:url(images/background_pattern.png);
+	padding-top: 10px;
+	margin-top: -10px;
+}
 
 /* pagination 
 ---------------------------------------------------------------------*/

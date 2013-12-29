@@ -2,8 +2,7 @@
 
 <div id="column1" class="grid_7">
 	<div class="column-head">
-		<a href="#"><b>最新发表</b></a> 
-		<a href="#"><span style="font-size:13px;color:#b9b9b9;">｜阅读更多 »</span></a>
+		<b>最新发表</b><span style="font-size:13px;color:#b9b9b9;">｜</span><a href="#"><span style="font-size:13px;color:#b9b9b9;">阅读更多 »</span></a>
 	</div>
 
 <?php 
