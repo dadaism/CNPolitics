@@ -55,8 +55,17 @@
 	<div id="display_bar">
 		<img src="<?php bloginfo('template_directory'); ?>/images/shadow-post-end.png">
 	</div>
-
-	<?php comments_template();?>
+	<div class="comment-head">
+		<img style="float:right;padding:8px 0px 8px 10px;" class="expand-comments" src="<?php bloginfo('template_directory'); ?>/images/arrow-expand.png">
+		<img style="float:right;padding:8px 0px 8px 10px;" class="collapse-comments" src="<?php bloginfo('template_directory'); ?>/images/arrow-collapse.png">
+		<!--p style="font-size:14px;float:right;"><a href="#">发表评论</a> | 阅读<a href=""><?php echo count($comments); ?></a>条评论</p-->
+		<p style="font-size:14px;float:right;"><a href="#">发表评论</a> | 阅读<a href="<?php echo get_settings('home')."/?p=".get_the_ID();?>" id="uyan_count_unit">0</a>条评论</p>
+		<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=0"></script>
+		<p style="font-size:16px;"><b>欢迎真知灼见！</b></p>
+	</div>
+	<div class="comment-body">
+		<?php comments_template();?>
+	</div>
 	</div> <!-- post-block end -->
 </div> <!-- column 1 end -->
 <?php

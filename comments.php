@@ -12,12 +12,7 @@ $comments = get_comments($args);
 //var_dump($comments);
 
 ?>
-<div class="comment-head">
-	<img style="float:right;padding:8px 0px 8px 10px;" class="expand-comments" src="<?php bloginfo('template_directory'); ?>/images/arrow-expand.png">
-	<img style="float:right;padding:8px 0px 8px 10px;" class="collapse-comments" src="<?php bloginfo('template_directory'); ?>/images/arrow-collapse.png">
-	<p style="font-size:14px;float:right;"><a href="#">发表评论</a> | 阅读<a href=""><?php echo count($comments); ?></a>条评论</p>
-	<p style="font-size:16px;"><b>欢迎真知灼见！</b></p>
-</div>
+
 <?php
 	foreach($comments as $comment) :
 ?>

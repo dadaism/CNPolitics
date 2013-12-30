@@ -423,7 +423,9 @@ span.inline-note {color: #b42800;}
 .post-end-button:hover {background:url(images/when_shown_hover.png) no-repeat center;}
 .comment-head {width:576px;color:#848484;margin: 0px auto;padding:15px 20px;background-color:rgba(95,60,0,0.05);border: #b9b9b9 dashed 1px;}
 .comment-head a {color:#b42800;}
-.comment-box	{display:none;color:#777;font-size:14px;line-height:28px;width: 576px;margin:-1px auto;padding: 20px;border: #b9b9b9 dashed 1px;}
+.comment-body {display:none;color:#777;font-size:14px;line-height:28px;width: 576px;margin:-1px auto;padding: 20px;border: #b9b9b9 dashed 1px;}
+.comment-body a {color:#b42800;}
+.comment-box	{color:#777;font-size:14px;line-height:28px;width: 576px;margin:-1px auto;border: #b9b9b9 dashed 1px;}
 .comment-box a {color:#b42800;}
 .comment-avatar {float: left;border: 1px solid #777;margin-right:20px;margin-bottom: 40px;border-radius:75px;}
 .comment-input	{
