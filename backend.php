@@ -13,7 +13,9 @@ if (!isset($_SESSION)){
 }
 
 function CNPolitics_add_submenu() {
-	//create custom top-level menu
+/**
+* Add submenu to post
+*/
 	add_submenu_page( 'edit.php', 'CNPolitics', 'Topics', 'edit_pages', 
 						'CNPolitcs_topics_settings_page', 'CNPolitics_topics_setting' );
 	add_submenu_page( 'edit.php', 'CNPolitics', 'Researchers', 'edit_pages', 
@@ -23,17 +25,28 @@ function CNPolitics_add_submenu() {
 }
 
 function CNPolitics_add_script() {
-	wp_enqueue_script( 'showtab', get_option('siteurl').'/wp-content/themes/CNPolitics/js/CNPolitics.js');
+/**
+* Add JavaScript to show tabs
+*/
+	//wp_register_script('CNPolitics-script', plugins_url('/CNPolitics.js', __FILE__));
+	wp_register_script('CNPolitics-script', get_option('siteurl').'/wp-content/themes/CNPolitics/js/CNPolitics.js');
+	wp_enqueue_script( 'CNPolitics-script');
 }
 
 function CNPolitics_add_box () {
+/**
+* Add select box to post edit page
+*/
 	add_meta_box('choose-topic', 'Topics', 'topics_box', 'post', 'side', 'default');
 	add_meta_box('choose-researcher', 'Researchers', 'researchers_box', 'post', 'side', 'default');
 	add_meta_box('choose-issue', 'Special Issues', 'issues_box', 'post', 'side', 'default');
-	add_meta_box('choose-test', 'Test', 'test_box', 'post', 'side', 'default');
+	//add_meta_box('choose-test', 'Test', 'test_box', 'post', 'side', 'default');
 }
 
 function CNPolitics_topics_setting() {
+/**
+* state machine to control topics setting
+*/
 	global $wpdb;
 	if ( isset($_GET['position']) ) {
 		$toward = $_GET['toward'];
@@ -172,6 +185,9 @@ function CNPolitics_topics_setting() {
 }	
 
 function CNPolitics_researchers_setting() {
+/**
+* state machine to control researchers setting
+*/
 	global $wpdb;
 	if ( isset($_GET['position']) ) {
 		$toward = $_GET['toward'];
@@ -311,6 +327,9 @@ function CNPolitics_researchers_setting() {
 }
 
 function CNPolitics_issues_setting() {
+/**
+* state machine to control issues setting
+*/
 	global $wpdb;
 	if ( isset($_GET['position']) ) {
 		$toward = $_GET['toward'];

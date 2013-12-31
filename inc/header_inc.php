@@ -162,7 +162,7 @@
     		$.fancybox({
                 'title': "form submission",
                 'href': $form.attr("action") + "?" + $form.serialize(),
-                'type': 'iframe'
+                'type': 'iframe',
         	});
         	return false;
 		});
@@ -171,15 +171,18 @@
 </script>
 
 <script type="text/javascript">
-function add_favorite(){
-	if (document.all){
-		window.external.AddFavorite("http://cnpolitics.org/","政见CNpolitics");
-	}
-	else if (window.sidebar){
-		window.sidebar.addPanel("政见CNpolitics","http://cnpolitics.org/", "");
-	}
+function add_favorite() {
+	if (window.sidebar && window.sidebar.addPanel) { // Mozilla Firefox Bookmark
+        window.sidebar.addPanel(document.title,window.location.href,'');
+    } else if(window.external && ('AddFavorite' in window.external)) { // IE Favorite
+    	window.external.AddFavorite(location.href,document.title); 
+    } else if(window.opera && window.print) { // Opera Hotlist
+    	this.title=document.title;
+        return true;
+    } else { // webkit - safari/chrome ＋ Firefox >=23.0
+    	alert('Press ' + (navigator.userAgent.toLowerCase().indexOf('mac') != - 1 ? 'Command/Cmd' : 'CTRL') + ' + D to bookmark this page.');
+    }
 }
-
 </script>
 <!-- SlidesJS Required: Initialize SlidesJS with a jQuery doc ready -->
 <script>

@@ -7,14 +7,14 @@ $rsch_checkbox_contents = get_checkbox_contents("rsch");
 $issue_checkbox_contents = get_checkbox_contents("issue");
 
 function move_position($db_table, $category, $cat_no, $content_id, $curr_ordering, $toward) {
-/*
-* @para $db_table: "topic" or "researchers"
-* @para $category: "category" for topic table, "region" for researcher table  
-* @para $cat_id:   category id or region id
-* @para $cur_order: order number
-* @para $toward:   top | bottom | up | down
+/**
+* Move position of item
+* @param string $db_table database table prefix: "topic" or "researchers"
+* @param string $category "category" for topic table, "region" for researcher table  
+* @param int $cat_id   category id or region id
+* @param int $cur_order current item's order number
+* @param string $toward direction: top | bottom | up | down
 */
-	//echo $page_setting_uri;
 	global $wpdb;
 	error_reporting(E_ALL);
 	ini_set('display_errors',1);
@@ -127,9 +127,10 @@ function move_position($db_table, $category, $cat_no, $content_id, $curr_orderin
 }
 
 function get_topic_table($category='', $key_word='') {
-/*
-* @para $category: "topic" or "researchers"
-* @para $key_word: "topic" name  
+/**
+* Get topic table
+* @para string $category "topic" or "researchers"
+* @para string $key_word "topic" name  
 */
 	global $wpdb;
 	error_reporting(E_ALL);
@@ -160,8 +161,9 @@ function get_topic_table($category='', $key_word='') {
 }
 
 function get_edit_topic($id) {
-/*
-* @para $id: "id" of topicearchers"  
+/**
+* Get editting topic from topic id
+* @param int $id "id" of topic"  
 */
 	global $wpdb;
 	global $regions;
@@ -192,9 +194,10 @@ function get_edit_topic($id) {
 }
 
 function get_rsch_table($region='', $key_word='') {
-/*
-* @para $region: "region" of researchers
-* @para $key_word: researcher's name
+/**
+* Get editting topic from topic id
+* @param string $region "region" of researchers
+* @param string $key_word researcher's name
 */
 	global $wpdb;
 	error_reporting(E_ALL);
@@ -222,8 +225,11 @@ function get_rsch_table($region='', $key_word='') {
 	return $rsch_array;
 }
 
-function get_checkbox_contents($type)
-{
+function get_checkbox_contents($type) {
+/**
+* Get check box contents
+* @param string $type "topic" | "rsch" | "issue"
+*/
 	global $wpdb;
 	global $toptopics;
 	global $regions;
@@ -260,6 +266,10 @@ function get_checkbox_contents($type)
 }
 
 function get_edit_rsch($id) {
+/**
+* Get editting rsch from rsch id
+* @param int $id "id" of "rsch"  
+*/
 	global $wpdb;
 	global $toptopics;
 	global $topic_checkbox_contents;
@@ -283,7 +293,10 @@ function get_edit_rsch($id) {
 }
 
 function add_topic($topic_info) {
-	//var_dump($topic_info);
+/**
+* Add topic to database
+* @param structure $topic_info 1-D array
+*/
 	global $wpdb;
 	$topic_name = $topic_info['name'];
 	$top_topic = $topic_info['cat'];
@@ -314,7 +327,10 @@ function add_topic($topic_info) {
 }
 
 function add_rsch($rsch_info) {
-	//var_dump($rsch_info);
+/**
+* Add rsch to database
+* @param structure $rsch_info 1-D array
+*/
 	global $wpdb;
 	$rsch_name = $rsch_info['name'];
 	$rsch_alias = $rsch_info['alias'];
@@ -335,7 +351,10 @@ function add_rsch($rsch_info) {
 }
 
 function add_issue($issue_info) {
-	//var_dump($issue_info);
+/**
+* Add issue to database
+* @param structure $issue_info 1-D array
+*/
 	global $wpdb;
 	$issue_name = $issue_info['name'];
 	$issue_intro = $issue_info['intro'];
@@ -349,6 +368,10 @@ function add_issue($issue_info) {
 }
 
 function delete_topic($id) {
+/**
+* Delete topic with id
+* @param int $id id of topic
+*/
 	global $wpdb;
 	$sql = "DELETE FROM {$wpdb->prefix}topics
 			WHERE id = $id";
@@ -365,6 +388,10 @@ function delete_topic($id) {
 }
 
 function delete_rsch($id) {
+/**
+* Delete rsch with id
+* @param int $id id of rsch
+*/
 	global $wpdb;
 	$sql = "DELETE FROM {$wpdb->prefix}rschs
 			WHERE id = $id";
@@ -380,6 +407,10 @@ function delete_rsch($id) {
 }
 
 function delete_issue($id) {
+/**
+* Delete issue with id
+* @param int $id id of issue
+*/
 	global $wpdb;
 	$sql = "DELETE FROM {$wpdb->prefix}issues
 			WHERE id = $id";
@@ -392,8 +423,9 @@ function delete_issue($id) {
 }
 
 function update_topic($t) {
-/*
-* @para $t: "topic" information
+/**
+* Update topic information
+* @param sturcture $t "topic" information, 1-D array
 */
 	global $wpdb;
 	$id = $t['id'];
@@ -422,16 +454,16 @@ function update_topic($t) {
 	if ( $old_checked!=$new_checked ) {
 		// delete unselected
 		foreach ( $old_checked as $rid) {
-			if ( !in_array($rid, $new_checked) ) {
-				echo "delete".$rid."\n";
+			if ( !in_array($rid, (array)$new_checked) ) {
+				//echo "delete".$rid."\n";
 				delete_topic_rsch($id, $rid);
 			}
 		}
 		// add new
 		//echo "add new selected checkbox\n";
-		foreach ( $new_checked as $rid) {
+		foreach ( (array)$new_checked as $rid) {
 			if ( !in_array($rid, $old_checked) ) {
-				echo "add".$rid."\n";
+				//echo "add".$rid."\n";
 				add_topic_rsch($id, $rid);								
 			}
 		}
@@ -442,10 +474,10 @@ function update_topic($t) {
 }
 
 function update_rsch($r) {
-/*
-* @para $r: "rsch" information
+/**
+* Update rsch information
+* @param sturcture $r "rsch" information, 1-D array
 */
-	//var_dump($rsch_info);
 	global $wpdb;
 	$id = $r['id'];
 	$rsch_name = $r['name'];
@@ -483,14 +515,14 @@ function update_rsch($r) {
 	if ( $old_checked!=$new_checked ) {
 		// delete unselected
 		foreach ( $old_checked as $tid) {
-			if ( !in_array($tid, $new_checked) ) {
-				echo "delete".$tid."\n";
+			if ( !in_array($tid, (array)$new_checked) ) {
+				//echo "delete".$tid."\n";
 				delete_topic_rsch($tid, $id);
 			}
 		}
 		// add new
-		echo "add new selected checkbox\n";
-		foreach ( $new_checked as $tid) {
+		//echo "add new selected checkbox\n";
+		foreach ( (array)$new_checked as $tid) {
 			if ( !in_array($tid, $old_checked) ) {
 				//echo "add".$tid."\n";
 				add_topic_rsch($tid, $id);								
@@ -500,12 +532,11 @@ function update_rsch($r) {
 	//	die("Editing topic fails!");
 }
 
-
 function update_issue($i) {
-/*
-* @para $i: "issue" information
+/**
+* Update issue information
+* @param sturcture $i "issue" information, 1-D array
 */
-	//var_dump($rsch_info);
 	global $wpdb;
 	$id = $i['id'];
 	$issue_name = $i['name'];
@@ -520,6 +551,10 @@ function update_issue($i) {
 }
 
 function CNPolitics_save_post($post_id) {
+/**
+* Save check box information to database
+* @param int $post_id "post" id
+*/
 	global $wpdb;
 	//global $post;
 	//wp_die( 'hey' );

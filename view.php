@@ -5,11 +5,11 @@ function pagenav() {
 }
 
 function option_select($tag_name, $selected, $opt_array) {
-/*
-* @para $tag_id: name of select
-* @para $selected: selected option
-* @para $opt_array: option array
-*
+/**
+* HTML, display the options to be selected (region, toptopic)
+* @para  $tag_name name of select
+* @para int $selected selected option
+* @para int $opt_array options array
 */
 	echo '<select name="'.$tag_name.'" id="'. $tag_name.'" class="postform">';
 	if ( $selected=="" )
@@ -25,11 +25,10 @@ function option_select($tag_name, $selected, $opt_array) {
 }
 
 function filter_option_select($tag_name, $selected, $opt_array) {
-/*
+/**
 * @para $tag_id: name of select
 * @para $selected: selected option
 * @para $opt_array: option array
-*
 */
 	echo '<select name="'.$tag_name.'" id="'. $tag_name.'" class="postform">
 			<option class="level-0" value="" selected>All</option>';
@@ -45,10 +44,9 @@ function filter_option_select($tag_name, $selected, $opt_array) {
 
 function edit_topic_disp($t) {
 /*
-* display topic editing page
-* @para $t: topic information
+* Display topic editing page
+* @param object $t: topic information
 */
-	//var_dump($topic_info);
 	global $page_setting_uri;
 ?>
 <div class="wrap">
@@ -100,6 +98,10 @@ function edit_topic_disp($t) {
 }
 
 function topic_setting_disp($topic_table, $filter_cat='') {
+/**
+* Display topic setting page
+* @param table $topic_table
+*/
 	global $page_setting_uri;
 	$tmp = explode('=', $page_setting_uri);
 	$page_type = $tmp[1];
@@ -142,6 +144,9 @@ function topic_setting_disp($topic_table, $filter_cat='') {
 
 
 function topic_col_left_disp() {
+/*
+* Display left column of topic setting
+*/
 	global $page_setting_uri;
 	global $regions;
 	global $rsch_checkbox_contents;
@@ -180,11 +185,11 @@ function topic_col_left_disp() {
 }
 
 function right_col_disp($type, $table, $filter_cat='') {
-/*
-* @para $type: "topic" or "rsch" or "issue"
-* @para $table: information to display
-* @para $filter_cat: selected category to filter
-*
+/**
+* Display right column 
+* @param string $type "topic" or "rsch" or "issue"
+* @param structure $table information to display
+* @param int $filter_cat selected category to filter
 */
 	global $wpdb;
 	global $page_setting_uri;
@@ -251,16 +256,9 @@ function right_col_disp($type, $table, $filter_cat='') {
 }
 
 function table_body_disp($page_type, $table, $filter_cat, $paged) {
-/*
-<<<<<<< HEAD
-* @para $page_type: "topic" or "researchers" or "issue"
-=======
-* @para $page_type: "topic" or "researcher" or "issue"
->>>>>>> 3efaa8ed828ecebd29013bae3d0760869867846c
-* @para $category: "category" for topic table, "region" for researcher table  
-* @para $cat_id:   category id or region id
-* @para $cur_order: order number
-* @para $toward:   top | bottom | up | down
+/**
+* @param string $page_type "topic" or "researcher" or "issue"
+* @param structure $table table information
 */
 	global $wpdb;
 	global $show_cat;
@@ -395,6 +393,10 @@ function table_body_disp($page_type, $table, $filter_cat, $paged) {
 }	// end of function
 
 function rsch_setting_disp($rsch_table, $filter_cat='') {
+/**
+* Display research setting page
+* @param structure $rsch_table table information
+*/
 	global $page_setting_uri;
 	$tmp = explode('=', $page_setting_uri);
 	$page_type = $tmp[1];
@@ -431,105 +433,10 @@ function rsch_setting_disp($rsch_table, $filter_cat='') {
 <?php
 }
 
-function issue_setting_disp($issue_table, $filter_cat='') {
-	global $page_setting_uri;
-	$tmp = explode('=', $page_setting_uri);
-	$page_type = $tmp[1];
-?>
-	<div class="wrap nosubsub">
-		<div id="icon-edit" class=icon32><br></div>
-		<h2>Special Issues</h2>
-		<form class="search-form" action="<?php echo $_SERVER['REQUEST_URI'];?>" method="get">
-			<input type="hidden" name="page" value="<?php echo $page_type;?>">
-			<input type="hidden" name="action" value="search">
-			<p class="search-box"><label class="screen-reader-text" for="tag-search-input">Search Issues:</label>
-			<input type="search" id="tag-search-input" name="s" value="">
-			<input type="submit" name="" id="search-submit" class="button" value="Search Researchers"></p>
-		</form>
-		<br class="clear">
-		<div id="col-container">
-			<div id="col-right">
-			<div class="col-wrap">
-			<div class="form-wrap">
-				<?php right_col_disp("issue", $issue_table, $filter_cat);?>
-			</div>
-			</div>
-			</div>
-			<div id="col-left">
-			<div class="col-wrap">
-			<div class="form-wrap">
-				<h3>Add New Issue</h3>
-				<?php issue_col_left_disp();?>
-			</div>
-			</div>
-			</div>
-		</div>
-	</div>
-<?php
-}
-
-function issue_col_left_disp() {
-	global $toptopics;
-	global $page_setting_uri;
-	global $topic_checkbox_contents;
-?>
-	<form id="addissue" enctype="multipart/form-data" method="post" action="<?php echo $page_setting_uri;?>" class="validate">
-	<input type="hidden" name="action" value="add">
-	<div class="form-field form-required">
-		<label for="issue-name">Name</label>
-		<input name="issue-name" id="issue-name" type="text" value="" size="40" aria-required="true">
-		<p>The name is how it appears on your site.</p>
-	</div>
-	<div class="form-field">
-		<label for="issue-intro">Introduction</label>
-		<!--input name="slug" id="topic-slug" type="text" value="" size="40"-->
-		<textarea name="issue-intro" id="issue-intro" rows="5" cols="40"></textarea>
-		<p>The description should be related to the issue.</p>
-	</div>
-	<p class="submit">
-		<input type="submit" name="submit" id="submit" class="button button-primary" value="Add New Issue">
-	</p>
-	</form>
-<?php
-}
-
-function edit_issue_disp($i) {
-/*
-* display issue editing page
-* @para $t: topic information
-*/
-	//var_dump($topic_info);
-	global $page_setting_uri;
-?>
-<div class="wrap">
-	<div id="icon-edit" class=icon32><br></div>
-	<h2>Issue</h2>
-	<form name="editissue" id="editissue" enctype="multipart/form-data" method="post" action="<?php echo $page_setting_uri;?>" class="validate">
-		<input type="hidden" name="action" value="update">
-		<input type="hidden" name="id", value="<?php echo $i->id;?>">
-		<table class="form-table">
-		<tbody>
-			<tr class="form-field form-required">
-				<th scope="row" valign="top"><label for="rsch-name">Name</label></th>
-				<td><input name="issue-name" id="issue-name" type="text" value="<?php echo $i->name; ?>" size="40" aria-required="true">
-				<p class="description">The name is how it appears on your site.</p></td>
-			</tr>
-			<tr class="form-field">
-				<th scope="row" valign="top"><label for="issue-intro">Introduction</label></th>
-				<td><textarea name="issue-intro" id="issue-intro" rows="5" cols="50" class="large-text"><?php echo $i->intro;?></textarea><br>
-				<span class="description">The description is not prominent by default; however, some themes may show it.</span></td>
-			</tr>
-		</tbody>
-		</table>
-			<p class="submit">
-				<input type="submit" name="submit" id="submit" class="button button-primary" value="Update">
-			</p>
-	</form>
-</div>
-<?php
-}
-
 function rsch_col_left_disp() {
+/**
+* Display left column of research setting page
+*/
 	global $toptopics;
 	global $page_setting_uri;
 	global $topic_checkbox_contents;
@@ -605,11 +512,10 @@ function rsch_col_left_disp() {
 }
 
 function edit_rsch_disp($r) {
-/*
-* display topic editing page
-* @para $t: topic information
+/**
+* Display rsch editing page
+* @para structure $r rsch information
 */
-	//var_dump($topic_info);
 	global $page_setting_uri;
 	global $regions;
 ?>
@@ -692,11 +598,118 @@ function edit_rsch_disp($r) {
 <?php
 }
 
+
+function issue_setting_disp($issue_table, $filter_cat='') {
+/**
+* Display issue setting page
+* @param structure $issue_table issue information
+*/
+	global $page_setting_uri;
+	$tmp = explode('=', $page_setting_uri);
+	$page_type = $tmp[1];
+?>
+	<div class="wrap nosubsub">
+		<div id="icon-edit" class=icon32><br></div>
+		<h2>Special Issues</h2>
+		<form class="search-form" action="<?php echo $_SERVER['REQUEST_URI'];?>" method="get">
+			<input type="hidden" name="page" value="<?php echo $page_type;?>">
+			<input type="hidden" name="action" value="search">
+			<p class="search-box"><label class="screen-reader-text" for="tag-search-input">Search Issues:</label>
+			<input type="search" id="tag-search-input" name="s" value="">
+			<input type="submit" name="" id="search-submit" class="button" value="Search Researchers"></p>
+		</form>
+		<br class="clear">
+		<div id="col-container">
+			<div id="col-right">
+			<div class="col-wrap">
+			<div class="form-wrap">
+				<?php right_col_disp("issue", $issue_table, $filter_cat);?>
+			</div>
+			</div>
+			</div>
+			<div id="col-left">
+			<div class="col-wrap">
+			<div class="form-wrap">
+				<h3>Add New Issue</h3>
+				<?php issue_col_left_disp();?>
+			</div>
+			</div>
+			</div>
+		</div>
+	</div>
+<?php
+}
+
+function issue_col_left_disp() {
+/**
+* Display issue left column
+*/
+	global $toptopics;
+	global $page_setting_uri;
+	global $topic_checkbox_contents;
+?>
+	<form id="addissue" enctype="multipart/form-data" method="post" action="<?php echo $page_setting_uri;?>" class="validate">
+	<input type="hidden" name="action" value="add">
+	<div class="form-field form-required">
+		<label for="issue-name">Name</label>
+		<input name="issue-name" id="issue-name" type="text" value="" size="40" aria-required="true">
+		<p>The name is how it appears on your site.</p>
+	</div>
+	<div class="form-field">
+		<label for="issue-intro">Introduction</label>
+		<!--input name="slug" id="topic-slug" type="text" value="" size="40"-->
+		<textarea name="issue-intro" id="issue-intro" rows="5" cols="40"></textarea>
+		<p>The description should be related to the issue.</p>
+	</div>
+	<p class="submit">
+		<input type="submit" name="submit" id="submit" class="button button-primary" value="Add New Issue">
+	</p>
+	</form>
+<?php
+}
+
+function edit_issue_disp($i) {
+/**
+* Display issue editing page
+* @para structure $i issue information
+*/
+	//var_dump($topic_info);
+	global $page_setting_uri;
+?>
+<div class="wrap">
+	<div id="icon-edit" class=icon32><br></div>
+	<h2>Issue</h2>
+	<form name="editissue" id="editissue" enctype="multipart/form-data" method="post" action="<?php echo $page_setting_uri;?>" class="validate">
+		<input type="hidden" name="action" value="update">
+		<input type="hidden" name="id", value="<?php echo $i->id;?>">
+		<table class="form-table">
+		<tbody>
+			<tr class="form-field form-required">
+				<th scope="row" valign="top"><label for="rsch-name">Name</label></th>
+				<td><input name="issue-name" id="issue-name" type="text" value="<?php echo $i->name; ?>" size="40" aria-required="true">
+				<p class="description">The name is how it appears on your site.</p></td>
+			</tr>
+			<tr class="form-field">
+				<th scope="row" valign="top"><label for="issue-intro">Introduction</label></th>
+				<td><textarea name="issue-intro" id="issue-intro" rows="5" cols="50" class="large-text"><?php echo $i->intro;?></textarea><br>
+				<span class="description">The description is not prominent by default; however, some themes may show it.</span></td>
+			</tr>
+		</tbody>
+		</table>
+			<p class="submit">
+				<input type="submit" name="submit" id="submit" class="button button-primary" value="Update">
+			</p>
+	</form>
+</div>
+<?php
+}
+
 function check_box($type, $tabs, $contents ) {
-/*
-* @para $type: "topic" or "rsch"
-* @para $tabs: "toptopics" in topics, "regions" in rschs, 1-D array
-* @para $contents: 2-D array, 
+/**
+* Display check box in post editting
+* @param string $type "topic" or "rsch"
+* @param string $tabs "toptopics" in topics, "regions" in rschs, 1-D array
+* @param string $contents 2-D array 
 */
 	global $wpdb;
 	//var_dump($contents);
@@ -755,8 +768,10 @@ $s->$name.'</label>';
 	echo '</div>';
 } 
 
-
 function topics_box() {
+/**
+* Select checked topic boxes
+*/
 	global $post;
 	global $toptopics;
 	global $topic_checkbox_contents;
@@ -770,6 +785,9 @@ function topics_box() {
 } 
 
 function researchers_box() {
+/**
+* Select checked rsch boxes
+*/
 	global $post;
 	global $regions;
 	global $rsch_checkbox_contents;
@@ -781,6 +799,9 @@ function researchers_box() {
 }
 
 function issues_box() {
+/**
+* Select checked issue boxes
+*/
 	global $post;
 	global $issue_checkbox_contents;
 	//var_dump($issue_checkbox_contents);
@@ -820,6 +841,11 @@ function test_box() {
 }
 
 function check_checkbox_php($prefixID, $checked){
+/**
+* PHP interface to envoke JavaScript
+* @param string $prefixID 
+* @param 
+*/
 	echo '<script type="text/javascript">
 			var arrayID='.json_encode($checked).';					
 			check_checkbox("'.$prefixID.'",arrayID);

@@ -7,14 +7,15 @@ require_once('config.php');
 require_once('backend.php');
 
 
-/* For wordpress theme */
+/* For wordpress theme admin page */
 add_action('admin_menu', 'setup_theme_admin_menus');
-add_action('add_meta_boxes', 'cnpolitics_create_meta_box' );
+
+add_action('add_meta_boxes', 'cnpolitics_create_meta_box');
 add_action('save_post', 'cnpolitics_save_meta_box');
-add_action( 'show_user_profile', 'cnpolitics_show_extra_profile_fields' );
-add_action( 'edit_user_profile', 'cnpolitics_show_extra_profile_fields' );
-add_action( 'personal_options_update', 'cnpolitics_save_extra_profile_fields' );
-add_action( 'edit_user_profile_update', 'cnpolitics_save_extra_profile_fields' );
+add_action('show_user_profile', 'cnpolitics_show_extra_profile_fields');
+add_action('edit_user_profile', 'cnpolitics_show_extra_profile_fields');
+add_action('personal_options_update', 'cnpolitics_save_extra_profile_fields');
+add_action('edit_user_profile_update', 'cnpolitics_save_extra_profile_fields');
 
 function setup_theme_admin_menus() {
 	add_theme_page("CNPolitics Options", "CNPolitics Option", 'edit_themes', basename(__FILE__),  'theme_option_admin');
@@ -22,24 +23,35 @@ function setup_theme_admin_menus() {
 
 
 function cnpolitics_create_meta_box() {
+/**
+* Create meta box for subtitle
+*/
 	add_meta_box( 'post-subtitle', 'Subtitle', 'subtitle_box', 'post', 'normal', 'high' );
 }
 
 function subtitle_box( $post ) {
+/**
+* HTML for subtitle box
+*/
 	$subtitle = get_post_meta( $post->ID, 'cnpolitics_subtitle', true );
 	echo '	<input style="width:100%;" type="text" name="post-subtitle" value="'.esc_attr($subtitle).'">';
 }
 
 function cnpolitics_save_meta_box( $post_id ) {
-	//verify the metadata is set
+/**
+* Save subtitle
+*/
 	if ( isset( $_POST['post-subtitle'] ) ) {
-		//save the metadata
 		update_post_meta( $post_id, 'cnpolitics_subtitle', strip_tags( $_POST['post-subtitle'] ) );
 	}
 }
 
 
 function get_excerpt($charlength) {
+/**
+* Return chopped excerpt
+* @param int $charlength length of chopped excerpt
+*/
 	$excerpt = get_the_excerpt();
 	//return mb_strlen( $excerpt );
 	if ( mb_strlen( $excerpt ) > $charlength ) {
@@ -55,8 +67,9 @@ function get_excerpt($charlength) {
 }
 
 function cnpolitics_list_category() {
-	//global $category_display;
-	//$categories = get_categories('number=6');
+/**
+* List categories in navigation ( homepage )
+*/
 	$categories = get_categories('orderby=id');
 	foreach ( $categories as $key => $value ) {
 		$cat_display = get_option("cnpolitics_cat_vis_".$value->cat_ID);
@@ -98,6 +111,9 @@ function cnpolitics_list_category() {
 }
 
 function cnpolitics_list_region() {
+/**
+* List researchers according to regions in navigation ( homepage )
+*/
 	global $regions;
 	$numItems = count($regions);
 	$i = 0;
@@ -136,6 +152,9 @@ function cnpolitics_list_region() {
 }
 
 function cnpolitics_list_toptopic() {
+/**
+* List research topics in navigation ( homepage )
+*/
 	global $toptopics;
 	$numItems = count($toptopics);
 	$i = 0;
@@ -195,6 +214,9 @@ function cnpolitics_list_page() {
 }
 
 function cnpolitics_list_static() {
+/**
+* List static pages in homepage
+*/
 	echo '<li><a href="'.get_bloginfo('url').'/static/?static_page=about.php">关于政见｜</a></li>';
 	echo '<li><a href="'.get_bloginfo('url').'/static/?static_page=copyright.php">版权声明｜</a></li>';
 	echo '<li><a href="'.get_bloginfo('url').'/static/?static_page=coop.php">交流合作｜</a></li>';
@@ -346,6 +368,9 @@ echo '	</div>';
 }
 
 function wp_pagenavi() {
+/**
+* Page navigation
+*/
 	global $wp_query;
 	global $wp_rewrite;
 	$wp_query->query_vars['paged'] > 1 ? $current = $wp_query->query_vars['paged'] : $current = 1;
@@ -362,14 +387,15 @@ function wp_pagenavi() {
 		'mid_size'  => '4',
 		'prev_text' => __(' << '),
 		'next_text' => __(' >> ')
-		//'prev_text' => __(' <li>囧</li> '),
-		//'next_text' => __(' 下一页>> ')
 	);
 	//echo $wp_query->max_num_pages;
 	echo paginate_links($pagination);
 }
 
 function cnpolitics_show_extra_profile_fields( $user ) { ?>
+/**
+* HTML, display the extra_profile_fields
+*/
 	<h3>Extra profile information</h3>
 	<table class="form-table">
 		<tr>
@@ -383,9 +409,12 @@ function cnpolitics_show_extra_profile_fields( $user ) { ?>
 <?php }
 
 function cnpolitics_save_extra_profile_fields( $user_id ) {
+/**
+* Save extra profile fields when update user information
+* @param int $user_id user id
+*/
 	if ( !current_user_can( 'edit_user', $user_id ) )
 		return false;
-	/* Copy and paste this line for additional fields. Make sure to change 'twitter' to the field ID. */
 	update_usermeta( $user_id, 'title', $_POST['title'] );
 }
 

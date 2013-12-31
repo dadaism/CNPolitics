@@ -1,6 +1,10 @@
 <!--?php get_header(); ?-->
 <? require_once( get_template_directory().'/inc/header_inc.php' ); ?>
-
+<!-- rewrite css for popup search frame -->
+<style type="text/css">
+body {min-width: 0px;}
+#container{width: auto;}
+</style>
 <div id="search">
 	<form style="display:inline" method="get" action="<?php bloginfo('siteurl'); ?>/">
 		<input type="text" name="s" value="搜索" onblur="if (this.value==''){this.value='搜索'}" onfocus="if (this.value=='搜索') {this.value=''}" class="topsearch_input"/>
