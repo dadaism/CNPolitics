@@ -54,38 +54,28 @@ if ( isset($_GET['topic_id']) ) :
 
 	// get post id via topic_id
 	$pid_array = get_postid_bytopicid($tid);
-	global $authorid_array;
-	$authorid_array = get_authorid_bypostid($pid_array);
 	global $issue_array;	
-	//$issue_array = array("次贷危机" , "中东局势", "亚洲策略");
-	//$issue_array = get_issue_bypostid($pid_array);
-	$issue_array = get_issues_bypostids($pid_array);
+	global $authorid_array;
 	global $quarter_array;
-	$quarter_array = get_quarter_bypostid($pid_array);
 
-	$pid_array = pid_filter($pid_array, $authorid, $quarter);
+	$issue_array = get_issues_bypostids($pid_array);
+	$authorid_array = get_authorids_bypostids($pid_array);
+	$quarter_array = get_quarters_bypostids($pid_array);
+
+	$pid_array = pid_filter($pid_array, $issue, $authorid, $quarter);
 	if ( !empty($pid_array) ) {
 		// The Loop
 		$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-		$args = array('posts_per_page' =>5, 'paged' => $paged, 'post__in' => $pid_array );
+		$args = array('paged' => $paged, 'post__in' => $pid_array );
 		query_posts($args);
 
 		/* the loop */
-		if ( have_posts() ) : 
-			while (have_posts()) : the_post();
-				$post_thumbnail_id = get_post_thumbnail_id();
-				echo '<div class="article-latest">
-						<img class="latest-img" width="150" height="150" src="'.wp_get_attachment_thumb_url( $post_thumbnail_id ).'">
-						<div class="latest-text">';
-				echo '		<p class="latest-head"><a href="'.get_permalink().'">'.get_the_title().'</a></p>
-							<p class="latest-author"><a href="#">'.get_the_author().'</a><span style="font-size:13px;color:#b9b9b9;"> | '.get_the_date('Y-m-d').'</span></p>
-							<div class="box-abstract"><p class="latest-abstract">'.get_excerpt('96').'</p></div>		
-					  	</div>
-					  </div>
-					  <div class="clear"></div>';
-				endwhile;
-		else :
-			// No posts found
+		if (have_posts()) :
+			// put the theme options here
+			global $cnpolitics_theme_dir;
+			require_once( $cnpolitics_dir.'/inc/article_inc.php' );
+		else:
+		// No posts found
 		endif;
 	}
 ?>

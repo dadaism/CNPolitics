@@ -1,5 +1,5 @@
 <?php
-require_once('config.php');
+
 
 /* For wordpress backend admin */
 //error_reporting(E_ALL);
@@ -10,42 +10,10 @@ require_once('backend.php');
 /* For wordpress theme admin page */
 add_action('admin_menu', 'setup_theme_admin_menus');
 
-add_action('add_meta_boxes', 'cnpolitics_create_meta_box');
-add_action('save_post', 'cnpolitics_save_meta_box');
-add_action('show_user_profile', 'cnpolitics_show_extra_profile_fields');
-add_action('edit_user_profile', 'cnpolitics_show_extra_profile_fields');
-add_action('personal_options_update', 'cnpolitics_save_extra_profile_fields');
-add_action('edit_user_profile_update', 'cnpolitics_save_extra_profile_fields');
 
 function setup_theme_admin_menus() {
 	add_theme_page("CNPolitics Options", "CNPolitics Option", 'edit_themes', basename(__FILE__),  'theme_option_admin');
 }
-
-
-function cnpolitics_create_meta_box() {
-/**
-* Create meta box for subtitle
-*/
-	add_meta_box( 'post-subtitle', 'Subtitle', 'subtitle_box', 'post', 'normal', 'high' );
-}
-
-function subtitle_box( $post ) {
-/**
-* HTML for subtitle box
-*/
-	$subtitle = get_post_meta( $post->ID, 'cnpolitics_subtitle', true );
-	echo '	<input style="width:100%;" type="text" name="post-subtitle" value="'.esc_attr($subtitle).'">';
-}
-
-function cnpolitics_save_meta_box( $post_id ) {
-/**
-* Save subtitle
-*/
-	if ( isset( $_POST['post-subtitle'] ) ) {
-		update_post_meta( $post_id, 'cnpolitics_subtitle', strip_tags( $_POST['post-subtitle'] ) );
-	}
-}
-
 
 function get_excerpt($charlength) {
 /**
@@ -53,10 +21,9 @@ function get_excerpt($charlength) {
 * @param int $charlength length of chopped excerpt
 */
 	$excerpt = get_the_excerpt();
-	//return mb_strlen( $excerpt );
 	if ( mb_strlen( $excerpt ) > $charlength ) {
 		$subex = mb_substr( $excerpt, 0, $charlength-3 );
-		return $subex."...";
+		return $subex."...... | 完整摘要";
 	}
 	else {
 		return $excerpt;
@@ -391,77 +358,5 @@ function wp_pagenavi() {
 	//echo $wp_query->max_num_pages;
 	echo paginate_links($pagination);
 }
-
-function cnpolitics_show_extra_profile_fields( $user ) { ?>
-/**
-* HTML, display the extra_profile_fields
-*/
-	<h3>Extra profile information</h3>
-	<table class="form-table">
-		<tr>
-			<th><label for="Title">Title</label></th>
-			<td>
-				<input type="text" name="title" id="title" value="<?php echo esc_attr( get_the_author_meta( 'title', $user->ID ) ); ?>" class="regular-text" /><br />
-				<span class="description">Please enter your Title in CNPolitics.</span>
-			</td>
-		</tr>
-	</table>
-<?php }
-
-function cnpolitics_save_extra_profile_fields( $user_id ) {
-/**
-* Save extra profile fields when update user information
-* @param int $user_id user id
-*/
-	if ( !current_user_can( 'edit_user', $user_id ) )
-		return false;
-	update_usermeta( $user_id, 'title', $_POST['title'] );
-}
-
-/* ????????????? does not work
-Plugin Name: Category pagination fix
-Plugin URI: http://www.htmlremix.com/projects/category-pagination-wordpress-plugin
-Description: Fixes 404 page error in pagination of category page while using custom permalink
-Version: 2.0
-Author: Remiz Rahnas
-Author URI: http://www.htmlremix.com
-
-Copyright 2009 Creative common (email: mail@htmlremix.com)
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You are allowed to use, change and redistibute without any legal issues. I am not responsible for any damage caused by this program. Use at your own risk
-Tested with WordPress 2.7, 2.8.4 only. Works with wp-pagenavi
-*/
-
-/**
-* This plugin will fix the problem where next/previous of page number buttons are broken on list
-* of posts in a category when the custom permalink string is:
-* /%category%/%postname%/
-* The problem is that with a url like this:
-* /categoryname/page/2
-* the 'page' looks like a post name, not the keyword "page"
-*/
-function remove_page_from_query_string($query_string)
-{
-	/*if ($query_string['name'] == 'page' && isset($query_string['page'])) {
-		unset($query_string['name']);
-		// 'page' in the query_string looks like '/2', so i'm spliting it out
-		list($delim, $page_index) = split('/', $query_string['page']);
-		$query_string['paged'] = $page_index;
-	}*/
-	return $query_string;
-}
-
-// I will kill you if you remove this. I died two days for this line
-add_filter('request', 'remove_page_from_query_string');
 
 ?>

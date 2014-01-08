@@ -33,8 +33,8 @@ Template Name: Researcher
 <?php
 	global $wpdb;
 	global $regions;
-	error_reporting(E_ALL);
-	ini_set('display_errors',1);
+	//error_reporting(E_ALL);
+	//ini_set('display_errors',1);
 	$reg = 1;	// region id
 	foreach ($regions as $value) {
 		$sql = "SELECT id, name

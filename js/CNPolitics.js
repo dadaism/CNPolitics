@@ -1,5 +1,5 @@
 jQuery(document).ready( function($) {
-	//   var newCat, noSyncChecks = false, syncChecks, catAddAfter;
+	// var newCat, noSyncChecks = false, syncChecks, catAddAfter;
 	// $('#link_name').focus();
     // postboxes
 	// postboxes.add_postbox_toggles('link');
@@ -9,10 +9,10 @@ jQuery(document).ready( function($) {
         $(this).parent().addClass('tabs').siblings('li').removeClass('tabs');
         $('#taxonomy-topic').children('.tabs-panel').hide();
         $(t).show();
-       // if ( '#categories-all' == t )
-         //   deleteUserSetting('cats');
-       // else
-         //   setUserSetting('cats','pop');
+       	// if ( '#categories-all' == t )
+        //   deleteUserSetting('cats');
+       	// else
+        //   setUserSetting('cats','pop');
         return false;
     });
     $('#rsch-tabs a').click(function(){
@@ -20,10 +20,10 @@ jQuery(document).ready( function($) {
         $(this).parent().addClass('tabs').siblings('li').removeClass('tabs');
         $('#taxonomy-rsch').children('.tabs-panel').hide();
         $(t).show();
-       // if ( '#categories-all' == t )
-         //   deleteUserSetting('cats');
-       // else
-         //   setUserSetting('cats','pop');
+       	// if ( '#categories-all' == t )
+        //   deleteUserSetting('cats');
+       	// else
+        //   setUserSetting('cats','pop');
         return false;
     });
     $('#test-tabs a').click(function(){
@@ -32,16 +32,15 @@ jQuery(document).ready( function($) {
         //$('.tabs-panel').hide();
         $('#taxonomy-test').children('.tabs-panel').hide();
         $(t).show();
-       // if ( '#categories-all' == t )
-         //   deleteUserSetting('cats');
-       // else
-         //   setUserSetting('cats','pop');
+       	// if ( '#categories-all' == t )
+        //   deleteUserSetting('cats');
+       	// else
+        //   setUserSetting('cats','pop');
         return false;
     });
 });
 
 function showtab(tabAreaId, tabId, taxonomyId, divId) {
-
 /*
 * @para tabAreaId: tab area
 * @para tabId: tab list
@@ -99,6 +98,11 @@ function check_checkbox( prefixID, arrayID ) {
 }
 
 function decorate_filter_box(issue, authorname, quarter) {
+/**
+* @para issue tab area
+* @para authorname
+* @para quarter
+*/
 	//alert(authorname);
 	//alert(quarter);
 	//alert( $('.filter-list li').text() );

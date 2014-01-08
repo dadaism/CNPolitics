@@ -295,16 +295,6 @@
 			<p>个人简介，可使用<a href="#">文字链接</a>。观察员和制图师的姓名或头像链至本站个人页面，其他可自选链接地址。</p>
 		</div>
 	</div>
-
-				<div class="team-unit">
-					<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-					<div class="team-name"><a href="">郁陶</a></div>
-					<div class="team-intro">
-						<p>字号 14 px，行高 26 px，栏宽 14 em，色彩 #777777。文字链接色彩#b42800。</p>
-					</div>
-				</div>
-
-			</div>
 	<div class="clear"></div>
 
 	<div id='team-more'>
@@ -346,18 +336,16 @@
 		var move = function() {
 			var screenTop = $(window).scrollTop();
 			var objectTop = $('#scroller-anchor').offset().top;
+			var scrollEnd = $('#join-engineer').offset().top;
 			var object = $('#fixed-top');
-			if (screenTop > objectTop) {
+			if (screenTop > objectTop && screenTop < scrollEnd-100) {
 				object.css({position:'fixed',top:"0px"});
 				var h = $("#fixed-top").height();
 				$('#team-main').css({"padding-top":h});
-			}
-			else {
-				if (screenTop <= objectTop) {
-					object.css({position:"relative",top:""});
-					$('#team-main').css({"padding-top":'0px'});
+			} else {
+				object.css({position:"relative",top:""});
+				$('#team-main').css({"padding-top":'0px'});
 				}
-			}
 		}; //move end
 		$(window).scroll(move);
 		move();

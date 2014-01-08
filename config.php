@@ -25,6 +25,7 @@ $sexes = array(
 	);
 
 $cnpolitics_dir =  get_template_directory();
+$cnpolitics_theme_dir =  get_template_directory();
 
 $topic_image_dir = "/upload/topics/";
 $rsch_image_dir = "/upload/researchers/";

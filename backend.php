@@ -1,5 +1,6 @@
 <?php
 
+require_once('config.php');
 require_once('view.php');
 require_once('model.php');
 
@@ -7,6 +8,13 @@ add_action( 'admin_menu', 'CNPolitics_add_submenu' );
 add_action( 'submitpost_box', 'CNPolitics_add_box');
 add_action( 'post_updated', 'CNPolitics_save_post');
 add_action( 'init', 'CNPolitics_add_script');
+
+add_action('add_meta_boxes', 'cnpolitics_create_meta_box');
+add_action('save_post', 'cnpolitics_save_meta_box');
+add_action('show_user_profile', 'cnpolitics_show_extra_profile_fields');
+add_action('edit_user_profile', 'cnpolitics_show_extra_profile_fields');
+add_action('personal_options_update', 'cnpolitics_save_extra_profile_fields');
+add_action('edit_user_profile_update', 'cnpolitics_save_extra_profile_fields');
 
 if (!isset($_SESSION)){
 	session_start();
@@ -404,4 +412,39 @@ function CNPolitics_issues_setting() {
 		issue_setting_disp($issue_table);
 	}
 }
+
+function cnpolitics_create_meta_box() {
+/**
+* Create meta box for subtitle
+*/
+	add_meta_box( 'post-subtitle', 'Subtitle', 'subtitle_box', 'post', 'normal', 'high' );
+}
+
+function subtitle_box( $post ) {
+/**
+* HTML for subtitle box
+*/
+	$subtitle = get_post_meta( $post->ID, 'cnpolitics_subtitle', true );
+	echo '	<input style="width:100%;" type="text" name="post-subtitle" value="'.esc_attr($subtitle).'">';
+}
+
+function cnpolitics_save_meta_box( $post_id ) {
+/**
+* Save subtitle
+*/
+	if ( isset( $_POST['post-subtitle'] ) ) {
+		update_post_meta( $post_id, 'cnpolitics_subtitle', strip_tags( $_POST['post-subtitle'] ) );
+	}
+}
+
+function cnpolitics_save_extra_profile_fields( $user_id ) {
+/**
+* Save extra profile fields when update user information
+* @param int $user_id user id
+*/
+	if ( !current_user_can( 'edit_user', $user_id ) )
+		return false;
+	update_usermeta( $user_id, 'title', $_POST['title'] );
+}
+
 ?>

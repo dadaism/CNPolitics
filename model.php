@@ -963,6 +963,26 @@ function get_postid_bytopicid($topic_id) {
 	return $pid_array;
 }
 
+function get_postid_all() {
+	global $wpdb;
+	$sql = "SELECT ID
+			FROM $wpdb->posts
+			LEFT JOIN $wpdb->term_relationships ON
+			($wpdb->posts.ID = $wpdb->term_relationships.object_id)
+			LEFT JOIN $wpdb->term_taxonomy ON
+			($wpdb->term_relationships.term_taxonomy_id = $wpdb->term_taxonomy.term_taxonomy_id)
+			WHERE $wpdb->posts.post_status = 'publish'
+			AND $wpdb->term_taxonomy.taxonomy = 'category'
+			ORDER BY post_date DESC";
+	$pid_obj_array = $wpdb->get_results($sql);
+	$pid_array = NULL;
+	foreach ( $pid_obj_array as $key => $pid ) {
+		$pid_array[$key] = $pid->ID;
+	}
+	//var_dump($pid_array);
+	return $pid_array;
+}
+
 function get_postid_bycatid($cat_id) {
 	global $wpdb;
 	$sql = "SELECT ID
@@ -999,6 +1019,9 @@ function get_issues_bypostids($pid_array) {
 }
 
 function get_issue_bypostid($pid) {
+/**
+* @param pid post id
+*/
 	//$issue = "haha";
 	global $wpdb;
 	$sql = "SELECT info_id
@@ -1013,7 +1036,7 @@ function get_issue_bypostid($pid) {
 		return NULL;
 }
 
-function get_authorid_bypostid($pid_array) {
+function get_authorids_bypostids($pid_array) {
 	global $wpdb;
 	$authorid_array = array();
 	if ( empty($pid_array) ) 	return $authorid_array;
@@ -1026,7 +1049,7 @@ function get_authorid_bypostid($pid_array) {
 	return $authorid_array;
 }
 
-function get_quarter_bypostid($pid_array) {
+function get_quarters_bypostids($pid_array) {
 	global $wpdb;
 	$quarter_array = array();
 	if ( empty($pid_array) ) 	return $quarter_array;
@@ -1057,7 +1080,14 @@ function get_quarter_bypostid($pid_array) {
 	return $quarter_array;
 }
 
-function pid_filter($pid_array, $authorid, $quarter) {
+function pid_filter($pid_array, $issue, $authorid, $quarter) {
+/**
+* @param pid_array
+* @param issue
+* @param authorid
+* @param quarter
+*/
+	//var_dump($issue);
 	//var_dump($authorid);
 	//var_dump($quarter);
 	//echo strlen($quarter);
@@ -1086,17 +1116,27 @@ function pid_filter($pid_array, $authorid, $quarter) {
 	}
 	foreach ( (array)$pid_array as $key => $pid ) {
 		$mypost = get_post( $pid );
+		// filter accordomg to issue
+		//echo $issue;
+		//echo get_issue_bypostid($pid);
+		if ( !empty($issue) && $issue!=get_issue_bypostid($pid) ) {
+			unset($pid_array[$key]);
+			continue;
+		}
 		// filter according to author id
 		if ( !empty($authorid) && $authorid!=$mypost->post_author ) {
 			unset($pid_array[$key]);
+			continue;
 		}
 		// filter according to quarter
 		if ( !empty($quarter) ) {
 			//echo $mypost->post_date."<br>";
 			$date = substr($mypost->post_date,0,7);
 			$mon = substr($date, 5, 6);
-			if ( $mon<$mon_min || $mon>$mon_max )
+			if ( $mon<$mon_min || $mon>$mon_max ) {
 				unset($pid_array[$key]);
+				continue;
+			}
 		}
 	}
 	$pid_array = array_values((array)$pid_array);

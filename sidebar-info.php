@@ -27,7 +27,9 @@
 				<?php endforeach; ?>
 				</ul>
 				</p>
-				<p style="margin-bottom:20px;margin-top:0px;"><a href="" style="color:#b9b9b9;font-size:12px;float:right;">浏览更多 »</a></p>
+				<p style="margin-bottom:20px;margin-top:0px;">
+					<a href="<?php echo get_author_posts_url(get_the_author_meta('ID'));?>" style="color:#b9b9b9;font-size:12px;float:right;">浏览更多 »</a>
+				</p>
 			</div>
 		</div>
 <?php
@@ -55,7 +57,9 @@
 	echo '
 				</ul>
 				</p>
-				<p style="margin-bottom:20px;margin-top:0px;"><a href="" style="color:#b9b9b9;font-size:12px;float:right;">浏览更多 »</a></p>
+				<p style="margin-bottom:20px;margin-top:0px;">
+					<a href="'.get_bloginfo('url')."/researcher/?rsch_id=".$r->id.'" style="color:#b9b9b9;font-size:12px;float:right;">浏览更多 »</a>
+				</p>
 			</div>
 		</div>';
 	$t = get_topic_bypostid($post->ID);
@@ -84,11 +88,13 @@
 	echo '
 				</ul>
 				</p>
-				<p style="margin-bottom:20px;margin-top:0px;"><a href="" style="color:#b9b9b9;font-size:12px;float:right;">浏览更多 »</a></p>
+				<p style="margin-bottom:20px;margin-top:0px;">
+					<a href="'.get_bloginfo('url')."/topic/?topic_id=".$t->id.'" style="color:#b9b9b9;font-size:12px;float:right;">浏览更多 »</a>
+				</p>
 			</div>';
 ?>
 		</div>
-		<p><a href=""><b>政见 CNPolitics.org</b></a> 是一个独立团队，向你介绍世界上最聪明的脑袋是怎样分析中国的。我们致力于发掘海内外学者和智库的智慧成果，引进思想资源。｜更多关于我们 »</p>
+		<p><a href="<?php echo get_site_url();?>"><b>政见 CNPolitics.org</b></a> 是一个独立团队，向你介绍世界上最聪明的脑袋是怎样分析中国的。我们致力于发掘海内外学者和智库的智慧成果，引进思想资源。｜更多关于我们 »</p>
 		<p style="color:#777777;margin-bottom:10px;">关注政见动向：</p>
 		<div class="post-sidebar-social">
 			<ul>
@@ -112,3 +118,4 @@
 			<img style="margin-left:-15px;" class="emailbox_shadow" src="<?php bloginfo('template_directory'); ?>/images/shadow_emailbox.png">
 		</form>
 </div>
+<script type="text/javascript" src="<?php bloginfo('template_directory');?>/js/info_box.js"></script>

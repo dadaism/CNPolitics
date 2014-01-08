@@ -2,27 +2,22 @@
 
 <div id="column1" class="grid_7">
 	<div class="column-head">
-		<b>最新发表</b><span style="font-size:13px;color:#b9b9b9;">｜</span><a href="#"><span style="font-size:13px;color:#b9b9b9;">阅读更多 »</span></a>
+		<b>最新发表</b><span style="font-size:13px;color:#b9b9b9;">｜</span><a href="/archive/"><span style="font-size:13px;color:#b9b9b9;">阅读更多 »</span></a>
 	</div>
 
 <?php 
-	$postslist = get_posts( 'numberposts=8' );
-	foreach ($postslist as $post) {
-		setup_postdata($post);
-		$post_thumbnail_id = get_post_thumbnail_id();
-		echo '<div class="article-latest">
-				<img class="latest-img" width="150" height="150" src="'.wp_get_attachment_thumb_url( $post_thumbnail_id ).'">
-				<div class="latest-text">';
-		echo '		<p class="latest-head"><a href="'.get_permalink().'">'.get_the_title().'</a></p>
-					<p class="latest-author"><a href="'.get_author_posts_url(get_the_author_meta('ID')).'">'.get_the_author().'</a><span style="font-size:13px;color:#b9b9b9;">｜'.get_the_date('Y-m-d').'</span></p>
-					<div class="box-abstract">
-						<p class="latest-abstract">'.get_excerpt('96').'</p>
-					</div>			
-				</div>
-			</div>
-			<div class="clear"></div>';
-	}
+	query_posts('numberposts=8' );
+		
+	/* the loop */
+	if (have_posts()) :
+		// put the theme options here
+		global $cnpolitics_theme_dir;
+		require_once( $cnpolitics_dir.'/inc/article_inc.php' );
+	else:
+		// No posts found
+	endif;
 ?>
+
 </div>
 
 <div id="column2" class="prefix_8 grid_4.1">
@@ -43,7 +38,7 @@
 				$category_obj = get_category_by_slug('infographic'); 
     			$category_id = $category_obj->term_id;
     			$category_link = get_category_link( $category_id );
-				echo '<a href="'.$category_link.'"><b>读图识政治</b></a>'; 
+				echo '<b>读图识政治</b>'; 
 				echo '<a href="'.$category_link.'"><span style="font-size:13px;color:#b9b9b9;font-weight:500;">｜更多信息图 »</span></a>';
 			?>
 			</div>
@@ -60,11 +55,11 @@
 			}
 		?>		
 		</div>
-<!--	<div class="dots">
+		<!--div class="dots">
 			<a href="#" data-slidejs-item="0"><div class="circle1-1"></div></a>
 			<a href="#" data-slidejs-item="1"><div class="circle1-2"></div></a>
 			<a href="#" data-slidejs-item="1"><div class="circle1-3"></div></a>
-		</div>-->
+		</div-->
 	</div>
 
 	<div id="collections" class="grid_5_1 prefix_1">
@@ -74,7 +69,7 @@
 				$category_obj = get_category_by_slug('publish'); 
     			$category_id = $category_obj->term_id;
     			$category_link = get_category_link( $category_id );
-				echo '<a href="'.$category_link.'"><b>政见合集</b></a>';
+				echo '<b>政见合集</b>';
 				echo '<a href="'.$category_link.'"><span style="font-size:13px;color:#b9b9b9;font-weight:500;">｜更多合集 »</span></a>';
 			?>
 			</div>
@@ -98,5 +93,5 @@
 		</div>-->
 	</div>
 </div>
-
 <?php get_footer(); ?>
+<script type="text/javascript" src="<?php bloginfo('template_directory');?>/js/abstract.js"></script>

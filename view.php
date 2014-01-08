@@ -7,9 +7,9 @@ function pagenav() {
 function option_select($tag_name, $selected, $opt_array) {
 /**
 * HTML, display the options to be selected (region, toptopic)
-* @para  $tag_name name of select
-* @para int $selected selected option
-* @para int $opt_array options array
+* @param  $tag_name name of select
+* @param int $selected selected option
+* @param int $opt_array options array
 */
 	echo '<select name="'.$tag_name.'" id="'. $tag_name.'" class="postform">';
 	if ( $selected=="" )
@@ -26,9 +26,9 @@ function option_select($tag_name, $selected, $opt_array) {
 
 function filter_option_select($tag_name, $selected, $opt_array) {
 /**
-* @para $tag_id: name of select
-* @para $selected: selected option
-* @para $opt_array: option array
+* @param $tag_id: name of select
+* @param $selected: selected option
+* @param $opt_array: option array
 */
 	echo '<select name="'.$tag_name.'" id="'. $tag_name.'" class="postform">
 			<option class="level-0" value="" selected>All</option>';
@@ -43,7 +43,7 @@ function filter_option_select($tag_name, $selected, $opt_array) {
 }
 
 function edit_topic_disp($t) {
-/*
+/**
 * Display topic editing page
 * @param object $t: topic information
 */
@@ -851,4 +851,19 @@ function check_checkbox_php($prefixID, $checked){
 			check_checkbox("'.$prefixID.'",arrayID);
 		  </script>';
 }
-?>
+
+function cnpolitics_show_extra_profile_fields( $user ) { ?>
+/**
+* HTML, display the extra_profile_fields
+*/
+	<h3>Extra profile information</h3>
+	<table class="form-table">
+		<tr>
+			<th><label for="Title">Title</label></th>
+			<td>
+				<input type="text" name="title" id="title" value="<?php echo esc_attr( get_the_author_meta( 'title', $user->ID ) ); ?>" class="regular-text" /><br />
+				<span class="description">Please enter your Title in CNPolitics.</span>
+			</td>
+		</tr>
+	</table>
+<?php } ?>

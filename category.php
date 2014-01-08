@@ -1,10 +1,14 @@
 <?php get_header();?>
+<?php 
+	$cat =  get_the_category() ; 
+?>
 <div id="column1" class="grid_7">
-	<div><a href="#" style="font-size:13px;color:#b9b9b9;font-weight:300;">全部政见 / </a> 
+	<div><a href="" style="font-size:13px;color:#b9b9b9;font-weight:300;">全部政见 / </a> 
 		<span style="font-size:15px;color:#000;font-weight:bold;"><?php single_cat_title();?></span>
 	</div>
 	
 <?php
+	$issue = isset($_GET['issue']) ? $_GET['issue'] : '';
 	$authorid = isset($_GET['authorid']) ? $_GET['authorid'] : '';
 	$quarter = isset($_GET['quarter']) ? $_GET['quarter'] : '';
 	if ($authorid=='')
@@ -13,68 +17,37 @@
 			$user_info = get_userdata($authorid);
 			$authorname = $user_info->display_name;
 	}
+	
 	$cat_id = get_queried_object_id();
 	//echo $cat_id."<br>";
 	$pid_array = get_postid_bycatid($cat_id);
-	
-	//$args = array( 'category' => 1 );
-
-	//$myposts = get_posts( array( 'category' => $cat_id ) );
-	/*foreach ( $myposts as $post ) : setup_postdata( $post ); 
-		array_push( $pid_array, get_the_ID());
-	endforeach; */
-	/*$the_query = new WP_Query( array( 'category' => $cat_id ) );
-	echo $the_query->found_posts."<br>";
-	if ( $the_query->have_posts() ) {
-		while ( $the_query->have_posts() ) {
-			$the_query->the_post();
-			//array_push( $pid_array, get_the_ID());
-			echo get_the_ID()." ";
-		}
-	}
-	wp_reset_postdata();*/
-	/*if (have_posts()) :
-		// put the theme options here
-		while (have_posts()) : the_post();
-			
-			//echo get_the_ID()."<br>";
-		endwhile;
-		wp_reset_postdata(); 
-	endif;*/
 	//echo count($pid_array);
 	//var_dump($pid_array);
-	global $authorid_array;
-	$authorid_array = get_authorid_bypostid($pid_array);
 	global $issue_array;
-	$issue_array = array("次贷危机" , "中东局势", "亚洲策略");
-	//$issue_array = get_issue_bypostid($pid_array);
+	global $authorid_array;
 	global $quarter_array;
-	$quarter_array = get_quarter_bypostid($pid_array);
-	$pid_array = pid_filter($pid_array, $authorid, $quarter);
+	
+	//$issue_array = array("次贷危机" , "中东局势", "亚洲策略");
+	$issue_array = get_issues_bypostids($pid_array);
+	$authorid_array = get_authorids_bypostids($pid_array);
+	$quarter_array = get_quarters_bypostids($pid_array);
+	$pid_array = pid_filter($pid_array, $issue, $authorid, $quarter);
 	if ( !empty($pid_array) ) {
 		// The Loop
 		$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-		$args = array('posts_per_page' =>5, 'paged' => $paged, 'post__in' => $pid_array, 'post__not_in' => get_option( 'sticky_posts' ) );
+		// The following configuration of args would cause problem for page navigation
+		//$args = array('posts_per_page' =>5, 'paged' => $paged, 'post__in' => $pid_array, 'post__not_in' => get_option( 'sticky_posts' ) );
+		// In the admin panel, if you set the "posts_per_page" bigger than queried value here (e.g. 5)
+		// Error message would be "Page not found"
+		// To read the default configuration, use get_option('posts_per_page')
+		$args = array('paged' => $paged, 'post__in' => $pid_array, 'post__not_in' => get_option( 'sticky_posts' ) );
 		query_posts($args);
 		
 		/* the loop */
 		if (have_posts()) :
 			// put the theme options here
-			while (have_posts()) : the_post();
-				$post_thumbnail_id = get_post_thumbnail_id();
-				echo	'<div class="article-latest">
-							<img class="latest-img" width="150" height="150" src="'.wp_get_attachment_thumb_url( $post_thumbnail_id ).'">
-							<div class="latest-text">';
-				echo	'		<p class="latest-head"><a href="'.get_permalink().'">'.get_the_title().'</a></p>
-								<p class="latest-author">
-								<a href="'.get_author_posts_url(get_the_author_meta('ID')).'">'.get_the_author().'</a>
-								<span style="font-size:13px;color:#b9b9b9;"> | '.get_the_date('Y-m-d').'</span>
-								</p>
-								<p class="latest-abstract">'.get_excerpt('96').'</p>
-							</div>
-						</div>
-						<div class="clear"></div>';
-			endwhile;
+			global $cnpolitics_dir;
+			require_once( $cnpolitics_dir.'/inc/article_inc.php' );
 		else:
 			// No posts found
 		endif;
@@ -91,16 +64,19 @@
 </div>
 </div> <!-- End column1 -->
 
-<div id="column2" class="prefix_1 grid_4">	
+<div id="column2" class="prefix_1 grid_4">
 	<div style="margin-bottom:40px;">
-		<a href="" style="float:right;position:relative;color:#b9b9b9;font-size:13px;">« 全部<?php single_cat_title();?></a>
+		<a href="<?php echo get_category_link($cat[0]->cat_ID); ?>" style="float:right;position:relative;color:#b9b9b9;font-size:13px;">« 全部<?php echo $cat[0]->name;?></a>
 	</div>
 	<?php get_sidebar('filter'); ?>
 </div><!-- End column2 -->
-<?php 
+<?php get_footer();?>
+<?php
 	echo '<script>
+			var issue = '.json_encode($issue).';
 			var authorid = '.json_encode($authorname).';
 			var quarter = '.json_encode($quarter).';
-			decorate_filter_box(authorid, quarter);
-		  </script>';
+			decorate_filter_box(issue, authorid, quarter);
+		 </script>';
 ?>
+<script type="text/javascript" src="<?php bloginfo('template_directory');?>/js/abstract.js"></script>

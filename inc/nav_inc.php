@@ -7,13 +7,13 @@
 	<div id="slidecontent">
 		<?php require_once( get_template_directory().'/inc/search_box.php' ); ?>
 		<div id="nav">
-			<div class="grid_5"><a href="#"><b>文章分类</b></a><br><br>
+			<div class="grid_5"><b>文章分类</b><br><br>
 				<?php cnpolitics_list_category(); ?>
 			</div>
-			<div class="grid_4"><a href="<?php bloginfo('wpurl'); ?>/researcher/"><b>谁在研究中国</b></a><br><br>
+			<div class="grid_4"><b>谁在研究中国</b><br><br>
 				<?php cnpolitics_list_region();?>
 			</div>
-			<div class="grid_3"><a href="<?php bloginfo('wpurl'); ?>/topic/"><b>研究主题</b></a><br><br>
+			<div class="grid_3"><b>研究主题</b><br><br>
 				<?php cnpolitics_list_toptopic();?>
 			</div>
 		</div><!--Nav-->

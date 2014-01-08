@@ -519,18 +519,21 @@ span.inline-note {color: #b42800;}
 .topic-filter ul li {width:130px; float:left; padding-left:10px; line-height: 28px;}
 .topic-filter ul li a {color: #777;}
 
+.topic-filter ul {min-height: 1px;} /* avoid collapse */
 .topic-filter ul {margin-left:0px; padding:0px; display:block; list-style-type:disc; }
 
 .author-filter p {margin-top:5px;margin-left: 0px;}
 .author-filter ul li {width:85px;float:left; padding-left:10px;line-height: 28px;}
 .author-filter ul li a {color: #777;}
 
+.author-filter ul {min-height: 1px;} /* avoid collapse */
 .author-filter ul {margin-left:0px; padding:0px; list-style-type:disc;}
 
 .quarter-filter p {margin-top:5px;margin-left: 0px;}
 .quarter-filter ul li {width:85px;float:left; padding-left:10px; line-height: 28px;}
 .quarter-filter ul li a {color: #777;}
 
+.quarter-filter ul {min-height: 1px;} /* avoid collapse */
 .quarter-filter ul {margin-left:0px; padding:0px; list-style-type:disc;}
 
 
@@ -634,7 +637,6 @@ li.last-arrow {
 	border-top: 7px solid transparent;
 	border-bottom: 7px solid transparent;
 	border-left: 7px solid #b9b9b9;
-
 }
 
 

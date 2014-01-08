@@ -73,8 +73,6 @@ endwhile;
 ?>
 
 
-
-
 <?php
 else :
 ?>
@@ -95,3 +93,4 @@ endif;
 </div>
 <div class="clear"></div>
 <?php get_footer(); ?>
+<script type="text/javascript" src="<?php bloginfo('template_directory');?>/js/comments.js"></script>

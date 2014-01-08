@@ -42,106 +42,6 @@
 			}, 400);
 		})
 
-		$(".expand-comments").click(function(){
-			$(".comment-body").slideDown();
-			$(this).hide();
-			$(".collapse-comments").show();
-			$( "#uyan_cmt_tit" ).text("选择评分");
-		})
-
-		$(".collapse-comments").click(function(){
-			$(".comment-body").slideUp();
-			$(this).hide();
-			$(".expand-comments").show();
-		})
-
-/*
-		$(".expand-comments").click(function(){
-			$(".comment-box").slideDown();
-			$(this).hide();
-			$(".collapse-comments").show();
-		})
-
-		$(".collapse-comments").click(function(){
-			$(".comment-box").slideUp();
-			$(this).hide();
-			$(".expand-comments").show();
-		})
-*/
-
-		$(".expand-observer-info").click(function(){
-			$(".observer-info").slideDown();
-			$(this).hide();
-			$(".collapse-observer-info").show();
-		})
-
-		$(".collapse-observer-info").click(function(){
-			$(".observer-info").slideUp();
-			$(this).hide();
-			$(".expand-observer-info").show();
-		})
-
-		$(".expand-researcher-info").click(function(){
-			$(".researcher-info").slideDown();
-			$(this).hide();
-			$(".collapse-researcher-info").show();
-		})
-
-		$(".collapse-researcher-info").click(function(){
-			$(".researcher-info").slideUp();
-			$(this).hide();
-			$(".expand-researcher-info").show();
-		})
-
-		$(".expand-theme-info").click(function(){
-			$(".theme-info").slideDown();
-			$(this).hide();
-			$(".collapse-theme-info").show();
-		})
-
-		$(".collapse-theme-info").click(function(){
-			$(".theme-info").slideUp();
-			$(this).hide();
-			$(".expand-theme-info").show();
-		})
-
-
-		$(".expand-topic-filter").click(function(){
-			$(".topic-filter").slideDown();
-			$(this).hide();
-			$(".collapse-topic-filter").show();
-		})
-
-		$(".collapse-topic-filter").click(function(){
-			$(".topic-filter").slideUp();
-			$(this).hide();
-			$(".expand-topic-filter").show();
-		})
-
-		$(".expand-author-filter").click(function(){
-			$(".author-filter").slideDown();
-			$(this).hide();
-			$(".collapse-author-filter").show();
-		})
-
-		$(".collapse-author-filter").click(function(){
-			$(".author-filter").slideUp();
-			$(this).hide();
-			$(".expand-author-filter").show();
-		})
-
-		$(".expand-quarter-filter").click(function(){
-			$(".quarter-filter").slideDown();
-			$(this).hide();
-			$(".collapse-quarter-filter").show();
-		})
-
-		$(".collapse-quarter-filter").click(function(){
-			$(".quarter-filter").slideUp();
-			$(this).hide();
-			$(".expand-quarter-filter").show();
-		})
-		
 		$(".expand-nav").click(function(){
 			$(this).parents(".nav-box").find(".nav-collapse-content").slideDown();
 			$(this).hide();
@@ -169,7 +69,7 @@
 	})
 
 </script>
-
+<!-- Add favorite -->
 <script type="text/javascript">
 function add_favorite() {
 	if (window.sidebar && window.sidebar.addPanel) { // Mozilla Firefox Bookmark
@@ -184,6 +84,7 @@ function add_favorite() {
     }
 }
 </script>
+<!-- End add favorite -->
 <!-- SlidesJS Required: Initialize SlidesJS with a jQuery doc ready -->
 <script>
     $(function() {
@@ -201,6 +102,7 @@ function add_favorite() {
 </script>
 <!-- End SlidesJS Required -->
 
+<!-- Set up fancybox -->
 <script>
 	$(document).ready(function() {
 		$("a[href$='.jpg'],a[href$='.jpeg'],a[href$='.png'],a[href$='.gif']").attr('rel', 'gallery').fancybox({
@@ -218,7 +120,7 @@ function add_favorite() {
 		});
 	});
 </script>
-
+<!-- End fancybox -->
 </head>
 <body>
 <div id="container" style="margin-bottom:70px;">

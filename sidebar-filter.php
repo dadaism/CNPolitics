@@ -27,6 +27,7 @@
 			按<a href="">作者</a>筛选
 		</div>
 		<div class="author-filter">
+			<ul>
 <?php
 	global $authorid_array;
 	$author_array = array();
@@ -34,15 +35,11 @@
 		$user_info = get_userdata($authorid);
 		array_push( $author_array, $user_info->display_name);
 	}
-	if ( !empty($author_array) ) {
-		echo '<ul>';
-		foreach( $author_array as $key => $author ) :
-			
-			echo '	<li><a class="author-filter-a" href="'.add_query_arg('authorid',$authorid_array[$key], $page_url).'">'.$author.'</a></li>';
-		endforeach;
-		echo '</ul>';
-	}
-?>
+	foreach( (array)$author_array as $key => $author ) :
+		echo '	<li><a class="author-filter-a" href="'.add_query_arg('authorid',$authorid_array[$key], $page_url).'">'.$author.'</a></li>';
+	endforeach;
+?>			
+			</ul>
 			<div class="clear"></div>
 			<p style="margin-bottom:35px;margin-top:5px;"><a href="<?php echo preg_replace('/(&|\?)authorid=[0-9]+/','',$page_url); ?>" style="color:#B9B9B9;font-size:12px;float:right;" class="author-all-a">所有作者</a></p>
 		</div>
@@ -67,3 +64,4 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript" src="<?php bloginfo('template_directory');?>/js/filter_box.js"></script>
