@@ -74,10 +74,11 @@
 		<div class="team-unit">
 			<div class="team-logo">'.get_avatar($email, 80).'</div>
 			<div class="team-name"><a href="'.$url.'">'.$name.'</a></div>
-			<div class="team-intro">'.$intro.'</div>
+			<div class="team-intro"><p>'.$intro.'</p></div>
 		</div>';
 	endforeach;
 ?>
+	</div>
 	<div class="clear"></div>
 
 	<div id="join-graphic">
@@ -94,10 +95,11 @@
 		<div class="team-unit">
 			<div class="team-logo">'.get_avatar($email).'</div>
 			<div class="team-name"><a href="'.$url.'">'.$name.'</a></div>
-			<div class="team-intro">'.$intro.'</div>
+			<div class="team-intro"><p>'.$intro.'</p></div>
 		</div>';
 	endforeach;
 ?>	
+	</div>
 	<div class="clear"></div>
 
 	<div id="join-operation">
@@ -114,10 +116,11 @@
 		<div class="team-unit">
 			<div class="team-logo">'.get_avatar($email).'</div>
 			<div class="team-name"><a href="'.$url.'">'.$name.'</a></div>
-			<div class="team-intro">'.$intro.'</div>
+			<div class="team-intro"><p>'.$intro.'</p></div>
 		</div>';
 	endforeach;
 ?>	
+	</div>
 	<div class="clear"></div>
 
 	<div id="join-design">		
@@ -134,10 +137,11 @@
 		<div class="team-unit">
 			<div class="team-logo">'.get_avatar($email).'</div>
 			<div class="team-name"><a href="'.$url.'">'.$name.'</a></div>
-			<div class="team-intro">'.$intro.'</div>
+			<div class="team-intro"><p>'.$intro.'</p></div>
 		</div>';
 	endforeach;
-?>					
+?>	
+	</div>				
 	<div class="clear"></div>
 
 	<div id="join-engineer">
@@ -154,10 +158,11 @@
 		<div class="team-unit">
 			<div class="team-logo">'.get_avatar($email).'</div>
 			<div class="team-name"><a href="'.$url.'">'.$name.'</a></div>
-			<div class="team-intro">'.$intro.'</div>
+			<div class="team-intro"><p>'.$intro.'</p></div>
 		</div>';
 	endforeach;
 ?>
+	</div>
 	<div class="clear"></div>
 
 	<div id='team-more'>
@@ -190,7 +195,7 @@
 	</div> <!-- team- more end-->
 
 </div><!--/join-main end-->
-</div>
+
 <div class="grid_2"><br></div>
 <div class="clear"></div>
 
