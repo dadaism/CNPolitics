@@ -2,8 +2,8 @@
 
 
 /* For wordpress backend admin */
-//error_reporting(E_ALL);
-//ini_set('display_errors',1);
+error_reporting(E_ALL);
+ini_set('display_errors',1);
 require_once('backend.php');
 
 
@@ -32,6 +32,43 @@ function get_excerpt($charlength) {
 	$subex = preg_split("/。/", $excerpt);
 	return $subex[0]."。";*/
 }
+
+function get_display_name($name, $length) {
+/**
+* Return display name
+* @param int $length length of chopped name
+*/
+	if ( ord($name[0])>127 )
+		$display = $name;
+	else {
+		//$display = "哈哈";
+		$names_array = explode(" ", $name);
+		$size = count($names_array);
+		if ( $size == 1 ) {
+			$display = $names_array[0];
+		}
+		else {
+			$display = $names_array[0][0].". ".$names_array[$size-1];
+		}
+		$display = substr($display, 0, $length);
+	}
+	return $display;
+}
+
+function multiple_explode($delimiters = array(), $string = ''){
+
+    $main_delim = $delimiters[count($delimiters)-1]; // dernier
+
+    array_pop($delimiters);
+
+    foreach($delimiters as $delimiter){
+        $string= str_replace($delimiter, $main_delim, $string);
+    }
+
+    $result= explode($main_delim, $string);
+    return $result;
+}
+
 
 function cnpolitics_list_category() {
 /**
@@ -100,17 +137,8 @@ function cnpolitics_list_region() {
 							<ul>';
 		$myrschs = get_rschs( $key );			
 		foreach( $myrschs as $rsch ) :
-			if ( ord($rsch->name[0])>127 )			
-				echo	'			<li><a href="'.get_bloginfo('url')."/researcher/?rsch_id=".$rsch->id.'">' . $rsch->name. '</a></li>';
-			else {
-				$names = explode(" ", $rsch->name);
-				$size = count($names);
-				if ( $size == 1 )
-					$display = $names[0];
-				else
-					$display = $names[0][0].". ".$names[$size-1];
-				echo	'			<li><a href="'.get_bloginfo('url')."/researcher/?rsch_id=".$rsch->id.'">'.$display.'</a></li>';
-			}
+			$display = get_display_name($rsch->name, 10);
+			echo	'			<li><a href="'.get_bloginfo('url')."/researcher/?rsch_id=".$rsch->id.'">'.$display.'</a></li>';
 		endforeach;
 		echo	'			</ul>
 						</div>
@@ -184,11 +212,12 @@ function cnpolitics_list_static() {
 /**
 * List static pages in homepage
 */
-	echo '<li><a href="'.get_bloginfo('url').'/static/?static_page=about.php">关于政见｜</a></li>';
-	echo '<li><a href="'.get_bloginfo('url').'/static/?static_page=copyright.php">版权声明｜</a></li>';
-	echo '<li><a href="'.get_bloginfo('url').'/static/?static_page=coop.php">交流合作｜</a></li>';
-	echo '<li><a href="'.get_bloginfo('url').'/static/?static_page=join-us.php">加入我们｜</a></li>';
-	echo '<li><a href="'.get_bloginfo('url').'/static/?static_page=team.php">团队成员</a></li>';
+	global $cnpolitics_url;
+	echo '<li><a href="'.$cnpolitics_url.'/static/?static_page=about.php">关于政见｜</a></li>';
+	echo '<li><a href="'.$cnpolitics_url.'/static/?static_page=copyright.php">版权声明｜</a></li>';
+	echo '<li><a href="'.$cnpolitics_url.'/static/?static_page=coop.php">交流合作｜</a></li>';
+	echo '<li><a href="'.$cnpolitics_url.'/static/?static_page=join_us.php">加入我们｜</a></li>';
+	echo '<li><a href="'.$cnpolitics_url.'/static/?static_page=team.php">团队成员</a></li>';
 }
 
 register_sidebars( //register sidebar

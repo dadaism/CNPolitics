@@ -24,6 +24,8 @@ $sexes = array(
 	'2' => '女'
 	);
 
+$cnpolitics_url = get_site_url();
+//$cnpolitics_url = get_bloginfo('url');
 $cnpolitics_dir =  get_template_directory();
 $cnpolitics_theme_dir =  get_template_directory();
 

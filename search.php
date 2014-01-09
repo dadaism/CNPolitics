@@ -1,46 +1,77 @@
 <!--?php get_header(); ?-->
-<? require_once( get_template_directory().'/inc/header_inc.php' ); ?>
+<?php require_once( $cnpolitics_theme_dir.'/inc/header_inc.php' ); ?>
 <!-- rewrite css for popup search frame -->
 <style type="text/css">
-body {min-width: 0px;}
-#container{width: auto;}
+@import url("<?php bloginfo('template_directory');?>/css/search.css");
 </style>
-<div id="search">
-	<form style="display:inline" method="get" action="<?php bloginfo('siteurl'); ?>/">
-		<input type="text" name="s" value="搜索" onblur="if (this.value==''){this.value='搜索'}" onfocus="if (this.value=='搜索') {this.value=''}" class="topsearch_input"/>
-		<input type="image" class="topsearch_img" src="<?php bloginfo('template_directory'); ?>/images/search.png"/>
-	</form>
-</div>
-
+	<div class="search-box">
+	<!--div id="search-box"-->
+		<form id="search-form" method="get" action="<?php bloginfo('siteurl'); ?>/">
+			<input type="text" name="s" value="<?php echo $s;?>" onblur="if (this.value==''){this.value='搜索'}" onfocus="if (this.value=='搜索') {this.value=''}" class="topsearch_input"/>
+			<input type="image" class="topsearch_img" src="<?php bloginfo('template_directory'); ?>/images/search.png"/>
+		</form>
+		<div class='search-box-shadow'></div>
+<?php
+	$mySearch = new WP_Query("s=$s  & showposts=-1 & post_type=post ");
+	$num = $mySearch->post_count;
+	wp_reset_query();
+	echo '<p>'.$num.'条结果</p>';
+?>
+	</div> <!-- search-box -->
+	<div class='search-results'>
 <?php
 	$key_word = get_search_query();
-	echo $key_word;
+	//echo $key_word;
 	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-	$args = array('posts_per_page' =>8, 'paged' => $paged, 's' => $key_word );
+	$args = array('posts_per_page' =>8, 'paged' => $paged, 's' => $key_word, 'post_type' => 'post' );
 	query_posts($args);
  	if ( have_posts() ):
-		while ( have_posts() ) : the_post();?>
-		<div><a href="<?php  echo get_permalink($post->ID); ?>"><?php the_title(); ?> | 政见 CNPolitics.org </a></div>
-		<div class="box-abstract">
-			<p class="latest-abstract"><?php echo get_excerpt('96'); ?></p>
-		</div>
+		while ( have_posts() ) : the_post();
+			$title = get_the_title();
+    		$content = strip_tags(get_the_content());
+    		$keys = explode(" ",$s);
+    		$title = preg_replace('/('.implode('|', $keys) .')/iu','<span class="search-key">\0</span>',$title);
+    		$content = preg_replace('/('.implode('|', $keys) .')/iu','<span class="search-key">\0</span>',$content);
+    		$pos = mb_strpos($content,$keys[0],1);
+    		//var_dump( $pos );
+    		if($pos&&$pos>70){//如果搜索关键字位置有了返回值，且大于70
+        		$content = mb_substr($content,$pos-70,200);//substr会出现乱码，
+    		}else{
+        		$content = mb_substr($content,0,200);
+    		}
+    		$link = get_permalink($post->ID);
+?>
+			<div class='search-results-item'>
+				<div class='result-head'>
+					<a href="<?php  echo $link;?>"><?php echo $title; ?> | 政见 CNPolitics.org </a>
+				</div>
+				<div class="box-abstract">
+					<p class="latest-abstract"><?php echo "...".$content."..."; ?></p>
+				</div>
+				<div class='result-link'>
+					<a href='<?php  echo $link;?>'><?php  echo $link;?></a>
+				</div>
+    		</div>
 <?php 
-		endwhile;?>
-<?php	else : ?>
-<article>
-	<header class="entry-header">
-		<h1 class="entry-title"><?php _e( '没有找到该文章', 'leizi' ); ?></h1>
-	</header>
-	<div class="entry-content">
-		<p><?php _e( '抱歉没有找到该文章', 'leizi' ); ?></p>
+		endwhile;
+	else : 
+?>
+	<article>
+		<header class="entry-header">
+			<h1 class="entry-title"><?php _e( '没有找到该文章', 'leizi' ); ?></h1>
+		</header>
+		<div class="entry-content">
+			<p><?php _e( '抱歉没有找到该文章', 'leizi' ); ?></p>
+		</div>
+	</article>
+<?php 
+	endif; 
+?>
 	</div>
-</article>
-<?php endif; ?>
-
 <div class="pagination"><?php wp_pagenavi(); ?></div>
 <script>
 	$(document).ready(function() {
 		$("a:not(.page-numbers)").attr("target", "_parent");
 	});
 </script>
-<? require_once( get_template_directory().'/inc/footer_inc.php' ); ?>
+<?php require_once( get_template_directory().'/inc/footer_inc.php' ); ?>

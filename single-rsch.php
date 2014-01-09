@@ -47,7 +47,9 @@ if ( isset($_GET['rsch_id']) ) :
 		echo '				<p><span style="font-weight:bolder;color:#000;line-height:50px;">个人简介</b></p>
 						<p>'.$r->intro.'</p>
 						<ul><span style="font-weight:bolder;color:#000;line-height:50px;">代表作品</span>';
-						$reps = explode("，", $r->rep); //var_dump($rep);
+						$delimiters = array( ',' , '，' , ';' , '、', '；');
+						$reps = multiple_explode($delimiters,$r->rep);
+						//$reps = explode("，", $r->rep); //var_dump($rep);
 						foreach ( $reps as $rep ) {
 							echo '<li><a href="">'.$rep.'</a></li>';
 						}
@@ -125,7 +127,7 @@ if ( isset($_GET['rsch_id']) ) :
 
 <div id="column2" class="prefix_1 grid_4">	
 	<div style="margin-bottom:40px;">
-		<a href="#" style="float:right;position:relative;color:#b9b9b9;font-size:13px;">« 全部关于<?php echo $r->name;?></a>
+		<a href="<?php echo $cnpolitics_url.'/researcher/?rsch_id='.$r->id;?>" style="float:right;position:relative;color:#b9b9b9;font-size:13px;">« 全部关于<?php echo $r->name;?></a>
 	</div>
 	<?php get_sidebar('filter'); ?>
 </div><!--column2-->
@@ -133,6 +135,5 @@ if ( isset($_GET['rsch_id']) ) :
 <?php
 	endif;
 endif;
-
 ?>
-
+<script type="text/javascript" src="<?php bloginfo('template_directory');?>/js/abstract.js"></script>

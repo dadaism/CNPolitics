@@ -32,8 +32,8 @@ if ( isset($_GET['topic_id']) ) :
 						if ( !empty($rschs) ) {
 							$count = 0;
 							foreach ( $rschs as $r ) {
-								//$rsch = explode("（",$rscher);
-								echo '<li><a href="'.get_bloginfo('url')."/researcher/?rsch_id=".$r->id.'">'.$r->name. '</a> </li>';
+								$display = get_display_name($r->name, 10);
+								echo '<li><a href="'.get_bloginfo('url')."/researcher/?rsch_id=".$r->id.'">'.$display. '</a> </li>';
 								$count = $count + 1;
 								//if ( $count == 4 )	break;
 							}
@@ -92,7 +92,7 @@ if ( isset($_GET['topic_id']) ) :
 
 <div id="column2" class="prefix_1 grid_4">	
 	<div style="margin-bottom:40px;">
-		<a href="" style="float:right;position:relative;color:#b9b9b9;font-size:13px;">« 全部<?php echo $t->subject;?></a>
+		<a href="<?php echo $cnpolitics_url.'/topic/?topic_id='.$t->id;?>" style="float:right;position:relative;color:#b9b9b9;font-size:13px;">« 全部<?php echo $t->subject;?></a>
 	</div>
 	<?php get_sidebar('filter'); ?>
 </div><!-- End column2 -->
@@ -100,3 +100,4 @@ if ( isset($_GET['topic_id']) ) :
 		endif;
 	endif;
 ?>
+<script type="text/javascript" src="<?php bloginfo('template_directory');?>/js/abstract.js"></script>

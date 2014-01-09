@@ -34,20 +34,29 @@
 		</div>
 <?php
 		$r = get_rsch_bypostid($post->ID);
+		if ( !empty($r) ) {
+			$rid = $r->id;
+			$rname = $r->name;
+			$rintro = $r->intro;
+		}
+		else {
+			$rid = $rname = $rintro = "";
+		}
+
 ?>
 		<div class="post-info-box">
 			<img class="expand-researcher-info" src="<?php bloginfo('template_directory'); ?>/images/arrow-expand.png">
 			<img class="collapse-researcher-info" src="<?php bloginfo('template_directory'); ?>/images/arrow-collapse.png">
 <?php
-	echo '	研究者：	<a href="'.get_bloginfo('url')."/researcher/?rsch_id=".$r->id.'">'.$r->name. '</a>
+	echo '	研究者：	<a href="'.get_bloginfo('url')."/researcher/?rsch_id=".$rid.'">'.$rname. '</a>
 			<div class="researcher-info">
 				<p style="margin-top:20px;">个人简介：</p> 
-				<p style="color:#777;">'.$r->intro.'</p>
+				<p style="color:#777;">'.$rintro.'</p>
 				<p style="margin-top:20px;">相关文章：</p>
 				<p>
 				<ul>';
-	$post_id_array = get_postid_byrschid($r->id);
-	foreach ( $post_id_array as $post_id ) :
+	$post_id_array = get_postid_byrschid($rid);
+	foreach ( (array)$post_id_array as $post_id ) :
 		//if ( $post_id!=$post->ID ) {
 			$related_post = get_post($post_id);
 			//var_dump($related_post);
@@ -58,27 +67,34 @@
 				</ul>
 				</p>
 				<p style="margin-bottom:20px;margin-top:0px;">
-					<a href="'.get_bloginfo('url')."/researcher/?rsch_id=".$r->id.'" style="color:#b9b9b9;font-size:12px;float:right;">浏览更多 »</a>
+					<a href="'.get_bloginfo('url')."/researcher/?rsch_id=".$rid.'" style="color:#b9b9b9;font-size:12px;float:right;">浏览更多 »</a>
 				</p>
 			</div>
 		</div>';
-	$t = get_topic_bypostid($post->ID);
-	//var_dump($t);
+		$t = get_topic_bypostid($post->ID);
+		if ( !empty($t) ) {
+			$tid = $t->id;
+			$tsubject = $t->subject;
+			$tintro = $t->intro;
+		}
+		else {
+			$tid = $tsubject = $tintro = "";
+		}
 ?>
 		<div class="post-info-box">
 			<img class="expand-theme-info" src="<?php bloginfo('template_directory'); ?>/images/arrow-expand.png">
 			<img class="collapse-theme-info" src="<?php bloginfo('template_directory'); ?>/images/arrow-collapse.png">
 <?php
-	echo '	主题名：<a href="'.get_bloginfo('url')."/topic/?topic_id=".$t->id.'">'.$t->subject.'</a>
+	echo '	主题名：<a href="'.get_bloginfo('url')."/topic/?topic_id=".$tid.'">'.$tsubject.'</a>
 			<div class="theme-info">
 				<p style="margin-top:20px;">主题简介：</p>
-				<p style="color:#777;">'.$t->intro.'</p>
+				<p style="color:#777;">'.$tintro.'</p>
 				<p style="margin-top:20px;">相关文章：</p>
 				<p>
 				<ul>';
-	$post_id_array = get_postid_bytopicid($t->id);
+	$post_id_array = get_postid_bytopicid($tid);
 	$count = 0;
-	foreach ( $post_id_array as $post_id ) :
+	foreach ( (array)$post_id_array as $post_id ) :
 		if ( $post_id!=$post->ID ) {
 			$related_post = get_post($post_id); $count = $count+1;
 			echo '<li><a href="'.$related_post->guid.'">'.$related_post->post_title.'</a></li>';
@@ -89,7 +105,7 @@
 				</ul>
 				</p>
 				<p style="margin-bottom:20px;margin-top:0px;">
-					<a href="'.get_bloginfo('url')."/topic/?topic_id=".$t->id.'" style="color:#b9b9b9;font-size:12px;float:right;">浏览更多 »</a>
+					<a href="'.get_bloginfo('url')."/topic/?topic_id=".$tid.'" style="color:#b9b9b9;font-size:12px;float:right;">浏览更多 »</a>
 				</p>
 			</div>';
 ?>

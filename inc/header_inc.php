@@ -60,9 +60,10 @@
 			$form = $(this);
 
     		$.fancybox({
-                'title': "form submission",
+                'title': "search results",
                 'href': $form.attr("action") + "?" + $form.serialize(),
                 'type': 'iframe',
+                'padding':0,
         	});
         	return false;
 		});
@@ -113,7 +114,7 @@ function add_favorite() {
 			helpers : {
         		overlay : {
             		css : {
-            	    	'background' : 'rgba(58, 42, 45, 0.95)'
+            	    	'background' : 'rgba(58, 42, 45, 0.95)',
             		}
         		}
     		}

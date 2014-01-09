@@ -12,7 +12,7 @@
 		</div>
 
 				<div class="copyright-content">
-					<p><a href="#" style="font-weight:bold;">政见</a>欢迎读者以个人方式分享本网站的内容片段，但不赞成全文转载或全文翻译。</p><p>同时，提请读者务必遵守下列条件：</p>
+					<p><a href="<?php echo $cnpolitics_url;?>" style="font-weight:bold;">政见</a>欢迎读者以个人方式分享本网站的内容片段，但不赞成全文转载或全文翻译。</p><p>同时，提请读者务必遵守下列条件：</p>
 				</div>
 
 				<div class="copyright-item">
@@ -46,7 +46,7 @@
 				<div class="clear"></div>
 
 				<div class="copyright-contact" >
-					<p>更多信息，请参考政见的<a href="#">服务条款</a>。如有疑问，或咨询授权以及商业合作等事宜，请致信：
+					<p>更多信息，请参考政见的<a href="<?php echo $cnpolitics_url.'/static/?static_page=service_term.php';?>">服务条款</a>。如有疑问，或咨询授权以及商业合作等事宜，请致信：
 						<a href="mailto:webmaster@cnpolitics.org">Webmaster@CNPolitics.org</a>
 					</p>
 				</div>
@@ -101,7 +101,7 @@
 				<div class="clear"></div>
 
 				<div class="copyright-contact" >
-					<p>For more information, please check the <a href="#">Terms of Service</a> between you and CNPolitics.org. If you have any further questions or seek business cooperation, please send an e-mail to <a href="mailto:webmaster@cnpolitics.org">Webmaster@CNPolitics.org</a>.</p>
+					<p>For more information, please check the <a href="<?php echo $cnpolitics_url.'/static/?static_page=service_term.php';?>">Terms of Service</a> between you and CNPolitics.org. If you have any further questions or seek business cooperation, please send an e-mail to <a href="mailto:webmaster@cnpolitics.org">Webmaster@CNPolitics.org</a>.</p>
 				</div>
 
 			</div> <!-- copyright-en end -->

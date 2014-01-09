@@ -1,3 +1,46 @@
+<?php
+
+	$cnpoliticsers = get_users();
+
+	/* Observer */
+	$obs = array();
+	/* graphics */
+	$gra = array();
+	/* new media operation */
+	$ops = array();
+	/* designer */
+	$des = array();
+	/* engineer */
+	$eng = array();
+
+	foreach ($cnpoliticsers as $key => $user) {
+		$titles = get_the_author_meta( 'cnpolitics_title', $user->ID );
+		$delimiters = array(',','，');
+		$result = multiple_explode($delimiters,$titles);
+		//var_dump($result);
+		//if ( !empty($result[0]) ) 
+		//	echo "<div>".$user->display_name." : ".$result[0]. "</div>";
+	
+		foreach ($result as $key => $title) {
+		 	if ( $title === "观察员") {
+		 		array_push($obs, $user->ID);
+			}
+			else if ( $title === "制图师") {
+		 		array_push($gra, $user->ID);
+			}
+			else if ( $title === "新媒体运营") {
+		 		array_push($ops, $user->ID);
+			}
+			else if ( $title === "设计师") {
+	 			array_push($des, $user->ID);
+			}
+			else if ( $title === "工程师") {
+	 			array_push($eng, $user->ID);
+			}
+	 	} 
+	}
+?>
+
 <div class="clear"></div>
 <div id='scroller-anchor'></div>
 <div id='fixed-top'>
@@ -21,280 +64,100 @@
 		<div class="team-first-group">
 			<p>观察员</p>
 		</div>
-
+<?php
+	foreach ($obs as $key => $uid) :
+		$intro = get_the_author_meta('description', $uid);
+		$name = get_the_author_meta('display_name', $uid);
+		$email = get_the_author_meta('user_email', $uid);
+		$url = get_author_posts_url($uid);
+		echo '
 		<div class="team-unit">
-			<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-			<div class="team-name"><a href="">陈磊</a></div>
-			<div class="team-intro">
-				<p>个人简介，可使用<a href="#">文字链接</a>。观察员和制图师的姓名或头像链至本站个人页面，其他可自选链接地址。</p>
-			</div>
-		</div>
-
-				<div class="team-unit">
-					<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-					<div class="team-name"><a href="">陈仲伟</a></div>
-					<div class="team-intro">
-						<p>字号 14 px，行高 26 px，栏宽 14 em，色彩 #777777。文字链接色彩#b42800。</p>
-					</div>
-				</div>
-
-				<div class="team-unit">
-					<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-					<div class="team-name"><a href="">方可成</a></div>
-					<div class="team-intro">
-						<p>观察员和制图师的姓名或头像链至本站个人页面，其他可自选链接地址。</p>
-						<p>个人简介可分段。</p>
-					</div>
-				</div>
-
-				<div class="team-unit">
-					<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-					<div class="team-name"><a href="">傅若兰</a></div>
-					<div class="team-intro">
-						<p>个人简介，可使用<a href="#">文字链接</a>。观察员和制图师的姓名或头像链至本站个人页面，其他可自选链接地址。
-						</p>
-					</div>
-				</div>
-
-				<div class="team-unit">
-					<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-					<div class="team-name"><a href="">归宿</a></div>
-					<div class="team-intro">
-						<p>字号 14 px，行高 26 px，栏宽 14 em，色彩 #777777。文字链接色彩#b42800。</p>
-					</div>
-				</div>
-
-				<div class="team-unit">
-					<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-					<div class="team-name"><a href="">励轩</a></div>
-					<div class="team-intro">
-						<p>观察员和制图师的姓名或头像链至本站个人页面，其他可自选链接地址。</p>
-						<p>个人简介可分段。</p>
-					</div>
-				</div>
-
-				<div class="team-unit">
-					<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-					<div class="team-name"><a href="">刘含章</a></div>
-					<div class="team-intro">
-						<p>个人简介，可使用<a href="#">文字链接</a>。观察员和制图师的姓名或头像链至本站个人页面，其他可自选链接地址。
-						</p>
-					</div>
-				</div>
-
-				<div class="team-unit">
-					<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-					<div class="team-name"><a href="">刘冉</a></div>
-					<div class="team-intro">
-						<p>字号 14 px，行高 26 px，栏宽 14 em，色彩 #777777。文字链接色彩#b42800。</p>
-					</div>
-				</div>
-
-				<div class="team-unit">
-					<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-					<div class="team-name"><a href="">刘岩川</a></div>
-					<div class="team-intro">
-						<p>观察员和制图师的姓名或头像链至本站个人页面，其他可自选链接地址。</p>
-						<p>个人简介可分段。</p>
-					</div>
-				</div>
-
-				<div class="team-unit">
-					<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-					<div class="team-name"><a href="">马军</a></div>
-					<div class="team-intro">
-						<p>个人简介，可使用<a href="#">文字链接</a>。观察员和制图师的姓名或头像链至本站个人页面，其他可自选链接地址。
-						</p>
-					</div>
-				</div>
-
-				<div class="team-unit">
-					<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-					<div class="team-name"><a href="">缪莹</a></div>
-					<div class="team-intro">
-						<p>字号 14 px，行高 26 px，栏宽 14 em，色彩 #777777。文字链接色彩#b42800。</p>
-					</div>
-				</div>
-
-				<div class="team-unit">
-					<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-					<div class="team-name"><a href="">邵立</a></div>
-					<div class="team-intro">
-						<p>观察员和制图师的姓名或头像链至本站个人页面，其他可自选链接地址。</p>
-						<p>个人简介可分段。</p>
-					</div>
-				</div>
-
-				<div class="team-unit">
-					<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-					<div class="team-name"><a href="">宿亮</a></div>
-					<div class="team-intro">
-						<p>个人简介，可使用<a href="#">文字链接</a>。观察员和制图师的姓名或头像链至本站个人页面，其他可自选链接地址。
-						</p>
-					</div>
-				</div>
-
-				<div class="team-unit">
-					<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-					<div class="team-name"><a href="">郁陶</a></div>
-					<div class="team-intro">
-						<p>字号 14 px，行高 26 px，栏宽 14 em，色彩 #777777。文字链接色彩#b42800。</p>
-					</div>
-				</div>
-
-			</div>
+			<div class="team-logo">'.get_avatar($email, 80).'</div>
+			<div class="team-name"><a href="'.$url.'">'.$name.'</a></div>
+			<div class="team-intro">'.$intro.'</div>
+		</div>';
+	endforeach;
+?>
 	<div class="clear"></div>
 
 	<div id="join-graphic">
 		<div class="team-group">
 			<p>制图师</p>
 		</div>
-				
+<?php
+	foreach ($gra as $key => $uid) :
+		$intro = get_the_author_meta('description', $uid);
+		$name = get_the_author_meta('display_name', $uid);
+		$email = get_the_author_meta('user_email', $uid);
+		$url = get_author_posts_url($uid);
+		echo '
 		<div class="team-unit">
-			<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-			<div class="team-name"><a href="">刘冉</a></div>
-					<div class="team-intro">
-						<p>字号 14 px，行高 26 px，栏宽 14 em，色彩 #777777。文字链接色彩#b42800。</p>
-					</div>
-				</div>
-
-				<div class="team-unit">
-					<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-					<div class="team-name"><a href="">刘岩川</a></div>
-					<div class="team-intro">
-						<p>观察员和制图师的姓名或头像链至本站个人页面，其他可自选链接地址。</p>
-						<p>个人简介可分段。</p>
-					</div>
-				</div>
-
-				<div class="team-unit">
-					<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-					<div class="team-name"><a href="">马军</a></div>
-					<div class="team-intro">
-						<p>个人简介，可使用<a href="#">文字链接</a>。观察员和制图师的姓名或头像链至本站个人页面，其他可自选链接地址。
-						</p>
-					</div>
-				</div>
-
-				<div class="team-unit">
-					<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-					<div class="team-name"><a href="">缪莹</a></div>
-					<div class="team-intro">
-						<p>字号 14 px，行高 26 px，栏宽 14 em，色彩 #777777。文字链接色彩#b42800。</p>
-					</div>
-				</div>
-
-				<div class="team-unit">
-					<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-					<div class="team-name"><a href="">邵立</a></div>
-					<div class="team-intro">
-						<p>观察员和制图师的姓名或头像链至本站个人页面，其他可自选链接地址。</p>
-						<p>个人简介可分段。</p>
-					</div>
-				</div>
-
-				<div class="team-unit">
-					<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-					<div class="team-name"><a href="">宿亮</a></div>
-					<div class="team-intro">
-						<p>个人简介，可使用<a href="#">文字链接</a>。观察员和制图师的姓名或头像链至本站个人页面，其他可自选链接地址。
-						</p>
-					</div>
-				</div>
-
-				<div class="team-unit">
-					<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-					<div class="team-name"><a href="">郁陶</a></div>
-					<div class="team-intro">
-						<p>字号 14 px，行高 26 px，栏宽 14 em，色彩 #777777。文字链接色彩#b42800。</p>
-					</div>
-				</div>
-
-
-			</div>
+			<div class="team-logo">'.get_avatar($email).'</div>
+			<div class="team-name"><a href="'.$url.'">'.$name.'</a></div>
+			<div class="team-intro">'.$intro.'</div>
+		</div>';
+	endforeach;
+?>	
 	<div class="clear"></div>
 
 	<div id="join-operation">
 		<div class="team-group">
 			<p>新媒体运营</p>
 		</div>
-
-				<div class="team-unit">
-					<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-					<div class="team-name"><a href="">缪莹</a></div>
-					<div class="team-intro">
-						<p>字号 14 px，行高 26 px，栏宽 14 em，色彩 #777777。文字链接色彩#b42800。</p>
-					</div>
-				</div>
-
-				<div class="team-unit">
-					<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-					<div class="team-name"><a href="">邵立</a></div>
-					<div class="team-intro">
-						<p>观察员和制图师的姓名或头像链至本站个人页面，其他可自选链接地址。</p>
-						<p>个人简介可分段。</p>
-					</div>
-				</div>
-
-				<div class="team-unit">
-					<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-					<div class="team-name"><a href="">宿亮</a></div>
-					<div class="team-intro">
-						<p>个人简介，可使用<a href="#">文字链接</a>。观察员和制图师的姓名或头像链至本站个人页面，其他可自选链接地址。
-						</p>
-					</div>
-				</div>
-
-				<div class="team-unit">
-					<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-					<div class="team-name"><a href="">郁陶</a></div>
-					<div class="team-intro">
-						<p>字号 14 px，行高 26 px，栏宽 14 em，色彩 #777777。文字链接色彩#b42800。</p>
-					</div>
-				</div>
-
-			</div>
+<?php
+	foreach ($ops as $key => $uid) :
+		$intro = get_the_author_meta('description', $uid);
+		$name = get_the_author_meta('display_name', $uid);
+		$email = get_the_author_meta('user_email', $uid);
+		$url = get_author_posts_url($uid);
+		echo '
+		<div class="team-unit">
+			<div class="team-logo">'.get_avatar($email).'</div>
+			<div class="team-name"><a href="'.$url.'">'.$name.'</a></div>
+			<div class="team-intro">'.$intro.'</div>
+		</div>';
+	endforeach;
+?>	
 	<div class="clear"></div>
 
-	<div id="join-design">
-				
-				<div class="team-group">
-					<p>设计师</p>
-				</div>
-				
-				<div class="team-unit">
-					<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-					<div class="team-name"><a href="">钱争予</a></div>
-					<div class="team-intro">
-						<p>个人简介，可使用<a href="#">文字链接</a>。观察员和制图师的姓名或头像链至本站个人页面，其他可自选链接地址。
-						</p>
-					</div>
-				</div>
-
-			</div>
+	<div id="join-design">		
+		<div class="team-group">
+			<p>设计师</p>
+		</div>
+<?php
+	foreach ($des as $key => $uid) :
+		$intro = get_the_author_meta('description', $uid);
+		$name = get_the_author_meta('display_name', $uid);
+		$email = get_the_author_meta('user_email', $uid);
+		$url = get_author_posts_url($uid);
+		echo '
+		<div class="team-unit">
+			<div class="team-logo">'.get_avatar($email).'</div>
+			<div class="team-name"><a href="'.$url.'">'.$name.'</a></div>
+			<div class="team-intro">'.$intro.'</div>
+		</div>';
+	endforeach;
+?>					
 	<div class="clear"></div>
 
 	<div id="join-engineer">
 		<div class="team-group">
 			<p>工程师</p>
 		</div>
-				
+<?php
+	foreach ($eng as $key => $uid) :
+		$intro = get_the_author_meta('description', $uid);
+		$name = get_the_author_meta('display_name', $uid);
+		$email = get_the_author_meta('user_email', $uid);
+		$url = get_author_posts_url($uid);
+		echo '
 		<div class="team-unit">
-			<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-				<div class="team-name"><a href="">邵立</a></div>
-				<div class="team-intro">
-				<p>观察员和制图师的姓名或头像链至本站个人页面，其他可自选链接地址。</p>
-				<p>个人简介可分段。</p>
-			</div>
-		</div>
-
-		<div class="team-unit">
-			<div class="team-logo"><img src="<?php bloginfo('template_directory'); ?>/images/team-member.png"></div>
-			<div class="team-name"><a href="">宿亮</a></div>
-			<div class="team-intro">
-			<p>个人简介，可使用<a href="#">文字链接</a>。观察员和制图师的姓名或头像链至本站个人页面，其他可自选链接地址。</p>
-		</div>
-	</div>
+			<div class="team-logo">'.get_avatar($email).'</div>
+			<div class="team-name"><a href="'.$url.'">'.$name.'</a></div>
+			<div class="team-intro">'.$intro.'</div>
+		</div>';
+	endforeach;
+?>
 	<div class="clear"></div>
 
 	<div id='team-more'>

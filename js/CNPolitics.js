@@ -192,3 +192,7 @@ function decorate_filter_box(issue, authorname, quarter) {
 	
 	//alert( $('.filter-list li a'):contains("guisu").text() );
 }
+
+function copyToClipboard(text) {
+	window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
+}

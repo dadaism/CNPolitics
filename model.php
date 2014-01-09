@@ -683,7 +683,9 @@ function get_rsch_bypostid( $post_id ) {
 			 WHERE type = '2' AND post_id = '$post_id';";
 	$rsch_id_array = $wpdb->get_results($sql);
 	//var_dump($rsch_id_array[0]);
-	$rsch = get_rsch_byID( $rsch_id_array[0]->info_id );
+	$rsch = "";
+	if ( !empty($rsch_id_array) )
+		$rsch = get_rsch_byID( $rsch_id_array[0]->info_id );
 	return $rsch;
 }
 
@@ -774,7 +776,9 @@ function get_topic_bypostid( $post_id ) {
 			 WHERE type = '1' AND post_id = '$post_id';";
 	$topic_id_array = $wpdb->get_results($sql);
 	//var_dump($rsch_id_array[0]);
-	$topic = get_topic_byID( $topic_id_array[0]->info_id );
+	$topic = "";
+	if ( !empty($topic_id_array) )
+		$topic = get_topic_byID( $topic_id_array[0]->info_id );
 	return $topic;
 }
 

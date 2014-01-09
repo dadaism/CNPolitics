@@ -221,6 +221,9 @@ li.language-toggle.inactive {
 
 .team-intro {
 	padding:0;
+	max-height: 160px;
+	/*overflow: scroll;*/
+	overflow: hidden;
 }
 .team-intro p {
 	text-align: left;
