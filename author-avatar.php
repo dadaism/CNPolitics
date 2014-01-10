@@ -223,7 +223,7 @@ class Simple_Local_Avatars {
     public function set_upload_dir($upload) {
         global $cnpolitics_theme_dir;
         global $cnpolitics_theme_uri;
-        $upload['subdir'] = '/cnpoliticser';
+        $upload['subdir'] = '/cnpoliticsers';
         $upload['basedir'] = $cnpolitics_theme_dir .'/upload';
         $upload['path']   = $upload['basedir'] . $upload['subdir'];
         $upload['baseurl'] = $cnpolitics_theme_uri . '/upload';

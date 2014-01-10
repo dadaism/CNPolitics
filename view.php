@@ -813,33 +813,6 @@ function issues_box() {
 	check_checkbox_php("issueid-", $checked);
 }
 
-
-function test_box() {
-	global $post;
-	global $regions;
-	global $rsch_checkbox_contents;
-	echo '<div id="taxonomy-test" class="categorydiv">
-			<ul id="test-tabs" class="category-tabs">
-				<li id="test1" class="tabs">
-					<a href=#test-list1 >Test1</a>
-				</li>
-				<li id="test2" class="">
-					<a href=#test-list2 >Test2</a>
-				</li>
-			</ul>
-			<div id="test-list1"  class="tabs-panel" style="display:block">
-				<ul id="test-list-content1" class="categorychecklist form-no-clear">
-					<li><label><input style="width:auto;" type="checkbox" name="test_checkbox[]" id="testid-1" value="1">hah</label></li>
-				</ul>
-			</div>
-			<div id="test-list2"  class="tabs-panel" style="display:none">
-				<ul id="test-list-content2" class="categorychecklist form-no-clear">
-					<li><label><input style="width:auto;" type="checkbox" name="test_checkbox[]" id="testid-2" value="2">yun</label></li>
-				</ul>
-			</div>
-		</div>';
-}
-
 function check_checkbox_php($prefixID, $checked){
 /**
 * PHP interface to envoke JavaScript

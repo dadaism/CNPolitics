@@ -50,7 +50,6 @@ function CNPolitics_add_box () {
 	add_meta_box('choose-topic', 'Topics', 'topics_box', 'post', 'side', 'default');
 	add_meta_box('choose-researcher', 'Researchers', 'researchers_box', 'post', 'side', 'default');
 	add_meta_box('choose-issue', 'Special Issues', 'issues_box', 'post', 'side', 'default');
-	//add_meta_box('choose-test', 'Test', 'test_box', 'post', 'side', 'default');
 }
 
 function CNPolitics_topics_setting() {
