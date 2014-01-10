@@ -857,7 +857,6 @@ function cnpolitics_show_extra_profile_fields( $user ) {
 * HTML, display the extra_profile_fields
 */
 ?>
-	<h3>Extra profile information</h3>
 	<table class="form-table">
 		<tr>
 			<th><label for="Title">Title</label></th>

@@ -4,6 +4,8 @@ require_once('config.php');
 require_once('view.php');
 require_once('model.php');
 
+require_once('author-avatar.php');
+
 add_action( 'admin_menu', 'CNPolitics_add_submenu' );
 add_action( 'submitpost_box', 'CNPolitics_add_box');
 add_action( 'post_updated', 'CNPolitics_save_post');
