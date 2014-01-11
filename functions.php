@@ -2,8 +2,6 @@
 
 
 /* For wordpress backend admin */
-error_reporting(E_ALL);
-ini_set('display_errors',1);
 require_once('backend.php');
 
 
@@ -15,11 +13,11 @@ function setup_theme_admin_menus() {
 	add_theme_page("CNPolitics Options", "CNPolitics Option", 'edit_themes', basename(__FILE__),  'theme_option_admin');
 }
 
-function get_excerpt($charlength) {
 /**
 * Return chopped excerpt
 * @param int $charlength length of chopped excerpt
 */
+function get_excerpt($charlength) {
 	$excerpt = get_the_excerpt();
 	if ( mb_strlen( $excerpt ) > $charlength ) {
 		$subex = mb_substr( $excerpt, 0, $charlength-3 );
@@ -33,11 +31,11 @@ function get_excerpt($charlength) {
 	return $subex[0]."。";*/
 }
 
-function get_display_name($name, $length) {
 /**
 * Return display name
 * @param int $length length of chopped name
 */
+function get_display_name($name, $length) {
 	if ( ord($name[0])>127 )
 		$display = $name;
 	else {
@@ -55,6 +53,9 @@ function get_display_name($name, $length) {
 	return $display;
 }
 
+/**
+* Explode string with multiple delimiters
+*/
 function multiple_explode($delimiters = array(), $string = ''){
 
     $main_delim = $delimiters[count($delimiters)-1]; // dernier
@@ -69,11 +70,11 @@ function multiple_explode($delimiters = array(), $string = ''){
     return $result;
 }
 
-
-function cnpolitics_list_category() {
 /**
 * List categories in navigation ( homepage )
 */
+function cnpolitics_list_category() {
+
 	$categories = get_categories('orderby=id');
 	foreach ( $categories as $key => $value ) {
 		$cat_display = get_option("cnpolitics_cat_vis_".$value->cat_ID);
@@ -114,10 +115,10 @@ function cnpolitics_list_category() {
 	}
 }
 
-function cnpolitics_list_region() {
 /**
 * List researchers according to regions in navigation ( homepage )
 */
+function cnpolitics_list_region() {
 	global $regions;
 	$numItems = count($regions);
 	$i = 0;
@@ -146,10 +147,10 @@ function cnpolitics_list_region() {
 	}
 }
 
-function cnpolitics_list_toptopic() {
 /**
 * List research topics in navigation ( homepage )
 */
+function cnpolitics_list_toptopic() {
 	global $toptopics;
 	$numItems = count($toptopics);
 	$i = 0;
@@ -208,10 +209,10 @@ function cnpolitics_list_page() {
 	}
 }
 
-function cnpolitics_list_static() {
 /**
 * List static pages in homepage
 */
+function cnpolitics_list_static() {
 	global $cnpolitics_url;
 	echo '<li><a href="'.$cnpolitics_url.'/static/?static_page=about.php">关于政见｜</a></li>';
 	echo '<li><a href="'.$cnpolitics_url.'/static/?static_page=copyright.php">版权声明｜</a></li>';
@@ -363,10 +364,10 @@ function theme_option_admin() {
 echo '	</div>';
 }
 
-function wp_pagenavi() {
 /**
 * Page navigation
 */
+function wp_pagenavi() {
 	global $wp_query;
 	global $wp_rewrite;
 	$wp_query->query_vars['paged'] > 1 ? $current = $wp_query->query_vars['paged'] : $current = 1;

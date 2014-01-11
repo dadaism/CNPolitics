@@ -1,16 +1,12 @@
 <?php
 
-function pagenav() {
-	echo "1,2,3...4";
-}
-
-function option_select($tag_name, $selected, $opt_array) {
 /**
 * HTML, display the options to be selected (region, toptopic)
 * @param  $tag_name name of select
 * @param int $selected selected option
 * @param int $opt_array options array
 */
+function option_select($tag_name, $selected, $opt_array) {
 	echo '<select name="'.$tag_name.'" id="'. $tag_name.'" class="postform">';
 	if ( $selected=="" )
 		echo '<option class="level-0" value="" selected>All</option>';
@@ -24,12 +20,12 @@ function option_select($tag_name, $selected, $opt_array) {
 	echo '</select>';
 }
 
-function filter_option_select($tag_name, $selected, $opt_array) {
 /**
 * @param $tag_id: name of select
 * @param $selected: selected option
 * @param $opt_array: option array
 */
+function filter_option_select($tag_name, $selected, $opt_array) {
 	echo '<select name="'.$tag_name.'" id="'. $tag_name.'" class="postform">
 			<option class="level-0" value="" selected>All</option>';
 	foreach ( $opt_array as $key => $value ) {
@@ -42,11 +38,11 @@ function filter_option_select($tag_name, $selected, $opt_array) {
 	echo '</select>';
 }
 
-function edit_topic_disp($t) {
 /**
 * Display topic editing page
 * @param object $t: topic information
 */
+function edit_topic_disp($t) {
 	global $page_setting_uri;
 ?>
 <div class="wrap">
@@ -97,11 +93,11 @@ function edit_topic_disp($t) {
 <?php
 }
 
-function topic_setting_disp($topic_table, $filter_cat='') {
 /**
 * Display topic setting page
 * @param table $topic_table
 */
+function topic_setting_disp($topic_table, $filter_cat='') {
 	global $page_setting_uri;
 	$tmp = explode('=', $page_setting_uri);
 	$page_type = $tmp[1];
@@ -142,11 +138,10 @@ function topic_setting_disp($topic_table, $filter_cat='') {
 <?php
 }
 
-
-function topic_col_left_disp() {
 /*
 * Display left column of topic setting
 */
+function topic_col_left_disp() {
 	global $page_setting_uri;
 	global $regions;
 	global $rsch_checkbox_contents;
@@ -184,13 +179,13 @@ function topic_col_left_disp() {
 <?php
 }
 
-function right_col_disp($type, $table, $filter_cat='') {
 /**
 * Display right column 
 * @param string $type "topic" or "rsch" or "issue"
 * @param structure $table information to display
 * @param int $filter_cat selected category to filter
 */
+function right_col_disp($type, $table, $filter_cat='') {
 	global $wpdb;
 	global $page_setting_uri;
 
@@ -255,11 +250,12 @@ function right_col_disp($type, $table, $filter_cat='') {
 		  </div>';
 }
 
-function table_body_disp($page_type, $table, $filter_cat, $paged) {
 /**
+* Display information in the table
 * @param string $page_type "topic" or "researcher" or "issue"
 * @param structure $table table information
 */
+function table_body_disp($page_type, $table, $filter_cat, $paged) {
 	global $wpdb;
 	global $show_cat;
 	global $page_setting_uri;
@@ -392,11 +388,11 @@ function table_body_disp($page_type, $table, $filter_cat, $paged) {
 	echo '</table>';
 }	// end of function
 
-function rsch_setting_disp($rsch_table, $filter_cat='') {
 /**
 * Display research setting page
 * @param structure $rsch_table table information
 */
+function rsch_setting_disp($rsch_table, $filter_cat='') {
 	global $page_setting_uri;
 	$tmp = explode('=', $page_setting_uri);
 	$page_type = $tmp[1];
@@ -433,10 +429,10 @@ function rsch_setting_disp($rsch_table, $filter_cat='') {
 <?php
 }
 
-function rsch_col_left_disp() {
 /**
 * Display left column of research setting page
 */
+function rsch_col_left_disp() {
 	global $toptopics;
 	global $page_setting_uri;
 	global $topic_checkbox_contents;
@@ -511,11 +507,11 @@ function rsch_col_left_disp() {
 <?php
 }
 
-function edit_rsch_disp($r) {
 /**
 * Display rsch editing page
-* @para structure $r rsch information
+* @param structure $r rsch information
 */
+function edit_rsch_disp($r) {
 	global $page_setting_uri;
 	global $regions;
 ?>
@@ -598,12 +594,11 @@ function edit_rsch_disp($r) {
 <?php
 }
 
-
-function issue_setting_disp($issue_table, $filter_cat='') {
 /**
 * Display issue setting page
 * @param structure $issue_table issue information
 */
+function issue_setting_disp($issue_table, $filter_cat='') {
 	global $page_setting_uri;
 	$tmp = explode('=', $page_setting_uri);
 	$page_type = $tmp[1];
@@ -640,10 +635,10 @@ function issue_setting_disp($issue_table, $filter_cat='') {
 <?php
 }
 
-function issue_col_left_disp() {
 /**
 * Display issue left column
 */
+function issue_col_left_disp() {
 	global $toptopics;
 	global $page_setting_uri;
 	global $topic_checkbox_contents;
@@ -668,12 +663,11 @@ function issue_col_left_disp() {
 <?php
 }
 
-function edit_issue_disp($i) {
 /**
 * Display issue editing page
-* @para structure $i issue information
+* @param structure $i issue information
 */
-	//var_dump($topic_info);
+function edit_issue_disp($i) {
 	global $page_setting_uri;
 ?>
 <div class="wrap">
@@ -704,13 +698,13 @@ function edit_issue_disp($i) {
 <?php
 }
 
-function check_box($type, $tabs, $contents ) {
 /**
 * Display check box in post editting
 * @param string $type "topic" or "rsch"
 * @param string $tabs "toptopics" in topics, "regions" in rschs, 1-D array
 * @param string $contents 2-D array 
 */
+function check_box($type, $tabs, $contents ) {
 	global $wpdb;
 	//var_dump($contents);
 	
@@ -768,10 +762,10 @@ $s->$name.'</label>';
 	echo '</div>';
 } 
 
-function topics_box() {
 /**
 * Select checked topic boxes
 */
+function topics_box() {
 	global $post;
 	global $toptopics;
 	global $topic_checkbox_contents;
@@ -784,10 +778,10 @@ function topics_box() {
 	check_checkbox_php("topicid-", $checked);
 } 
 
-function researchers_box() {
 /**
 * Select checked rsch boxes
 */
+function researchers_box() {
 	global $post;
 	global $regions;
 	global $rsch_checkbox_contents;
@@ -798,10 +792,10 @@ function researchers_box() {
 	check_checkbox_php("rschid-", $checked);
 }
 
-function issues_box() {
 /**
 * Select checked issue boxes
 */
+function issues_box() {
 	global $post;
 	global $issue_checkbox_contents;
 	//var_dump($issue_checkbox_contents);
@@ -813,22 +807,23 @@ function issues_box() {
 	check_checkbox_php("issueid-", $checked);
 }
 
-function check_checkbox_php($prefixID, $checked){
 /**
 * PHP interface to envoke JavaScript
 * @param string $prefixID 
 * @param 
 */
+function check_checkbox_php($prefixID, $checked){
+
 	echo '<script type="text/javascript">
 			var arrayID='.json_encode($checked).';					
 			check_checkbox("'.$prefixID.'",arrayID);
 		  </script>';
 }
 
-function cnpolitics_show_extra_profile_fields( $user ) {
 /**
 * HTML, display the extra_profile_fields
 */
+function cnpolitics_show_extra_profile_fields( $user ) {
 ?>
 	<table class="form-table">
 		<tr>
@@ -839,4 +834,6 @@ function cnpolitics_show_extra_profile_fields( $user ) {
 			</td>
 		</tr>
 	</table>
-<?php } ?>
+<?php 
+} 
+?>

@@ -1,28 +1,4 @@
 <?php
-/**
-* Plugin Name: Simple Local Avatars
-* Plugin URI: http://get10up.com/plugins/simple-local-avatars-wordpress/
-* Description: Adds an avatar upload field to user profiles if the current user has media permissions. Generates requested sizes on demand just like Gravatar! Simple and lightweight.
-* Version: 1.3.1
-* Author: Jake Goldman (10up LLC), Oomph Inc
-* Author URI: http://get10up.com
-* Plugin: Copyright 2011 Jake Goldman (email : jake@get10up.com)
-* This program is free software; you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation; either version 2 of the License, or
-*    (at your option) any later version.
-*    This program is distributed in the hope that it will be useful,
-*    but WITHOUT ANY WARRANTY; without even the implied warranty of
-*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*    GNU General Public License for more details.
-*    You should have received a copy of the GNU General Public License
-*    along with this program; if not, write to the Free Software
-*    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-*    NOTE: Previous versions may have accidentally and incorrectly attributed the
-*    copyright to employers of Mr. Goldman. While credit is given to all contributors
-*    to the current version, including Mr. Goldman's employers, the copyright belongs
-*    - and has always belonged - to Mr. Goldman, personally.
-*/
 
 /**
  * add field to user profiles

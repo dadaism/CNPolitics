@@ -26,18 +26,6 @@ jQuery(document).ready( function($) {
         //   setUserSetting('cats','pop');
         return false;
     });
-    $('#test-tabs a').click(function(){
-        var t = $(this).attr('href');
-        $(this).parent().addClass('tabs').siblings('li').removeClass('tabs');
-        //$('.tabs-panel').hide();
-        $('#taxonomy-test').children('.tabs-panel').hide();
-        $(t).show();
-       	// if ( '#categories-all' == t )
-        //   deleteUserSetting('cats');
-       	// else
-        //   setUserSetting('cats','pop');
-        return false;
-    });
 });
 
 function showtab(tabAreaId, tabId, taxonomyId, divId) {
