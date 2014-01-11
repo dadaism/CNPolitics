@@ -188,7 +188,7 @@ function cnpolitics_list_bookmark($cat_id) {
 	$i = 0;
 	foreach ( $bookmarks as $bm ) {
 		if ( ++$i == '7' )
-			echo '</ul><ul style="font-size:13px;list-style: none;margin:0px;padding:0px;line-height:24px;width:80px;float:left;">';
+			echo '</ul><ul>';
 		echo '<li style="display:block;"><a href="'.$bm->link_url.'">'.__($bm->link_name).'</a></li>';
 	}
 }
@@ -214,10 +214,10 @@ function cnpolitics_list_page() {
 */
 function cnpolitics_list_static() {
 	global $cnpolitics_url;
-	echo '<li><a href="'.$cnpolitics_url.'/static/?static_page=about.php">关于政见｜</a></li>';
-	echo '<li><a href="'.$cnpolitics_url.'/static/?static_page=copyright.php">版权声明｜</a></li>';
-	echo '<li><a href="'.$cnpolitics_url.'/static/?static_page=coop.php">交流合作｜</a></li>';
-	echo '<li><a href="'.$cnpolitics_url.'/static/?static_page=join_us.php">加入我们｜</a></li>';
+	echo '<li><a href="'.$cnpolitics_url.'/static/?static_page=about.php">关于政见<span style="color:#b9b9b9;">｜</span></a></li>';
+	echo '<li><a href="'.$cnpolitics_url.'/static/?static_page=copyright.php">版权声明<span style="color:#b9b9b9;">｜</span></a></li>';
+	echo '<li><a href="'.$cnpolitics_url.'/static/?static_page=coop.php">交流合作<span style="color:#b9b9b9;">｜</span></a></li>';
+	echo '<li><a href="'.$cnpolitics_url.'/static/?static_page=join_us.php">加入我们<span style="color:#b9b9b9;">｜</span></a></li>';
 	echo '<li><a href="'.$cnpolitics_url.'/static/?static_page=team.php">团队成员</a></li>';
 }
 

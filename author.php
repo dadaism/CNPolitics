@@ -10,9 +10,8 @@ else :
 endif;
 ?>
 <div id="researcher-avatar">
-	<!--img src="<?php bloginfo('template_directory'); ?>/images/avatar.png"-->
-	<?php echo get_avatar($curauth->user_email); ?>
-	<!--?php var_dump($curauth->user_email); ?-->
+	<!--?php echo get_avatar($curauth->user_email); ?-->
+	<?php echo get_simple_local_avatar($curauth->user_email, 150); ?>
 	<p style="margin-top:15px;"><?php echo $curauth->display_name; ?></p>
 	<p style="font-weight:normal;font-size:14px;color:#b9b9b9;"><?php echo get_the_author_meta('cnpolitics_title');?></p>
 </div>
@@ -23,9 +22,27 @@ endif;
 		
 		<?php echo nl2br($curauth->user_description); ?>
 		</p>
-		<a href="<?php echo $curauth->user_url; ?>"><img src="<?php bloginfo('template_directory'); ?>/images/sina.png"></a>
-		<a href="" onclick="copyToClipboard('<?php echo get_author_posts_url($curauth->ID);?>')"; ><img src="<?php bloginfo('template_directory'); ?>/images/copy-link.png"></a>
-		<a href="mailto:<?php echo $curauth->user_email;?>"><img src="<?php bloginfo('template_directory'); ?>/images/email-link.png"></a>
+<?php
+	$weibo = get_the_author_meta('cnpolitics_weibo');
+	if ( !empty($weibo) ) {
+		echo '
+		<a href="'. $weibo . '"><img src="'.get_template_directory_uri().'/images/sina.png"></a>
+			';
+	}
+	$website = $curauth->user_url;
+	if ( !empty($website) ) {
+		echo '
+		<a href="'. $website . '"><img src="'.get_template_directory_uri().'/images/copy-link.png"></a>
+			';
+	}
+	$pubemail = get_the_author_meta('cnpolitics_pubemail');
+	if ( !empty($pubemail) ) {
+		echo '
+		<a href="mailto:'. $pubemail .'"><img src="'. get_template_directory_uri().'/images/email-link.png"></a>
+			';
+	}
+?>
+		<!--a href="" onclick="copyToClipboard('<?php echo get_author_posts_url($curauth->ID);?>')"; ><img src="<?php bloginfo('template_directory'); ?>/images/copy-link.png"></a!-->
 	</div>
 </div>
 

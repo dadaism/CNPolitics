@@ -450,6 +450,8 @@ function cnpolitics_save_extra_profile_fields( $user_id ) {
 	if ( !current_user_can( 'edit_user', $user_id ) )
 		return false;
 	update_usermeta( $user_id, 'cnpolitics_title', $_POST['title'] );
+	update_usermeta( $user_id, 'cnpolitics_weibo', $_POST['weibo'] );
+	update_usermeta( $user_id, 'cnpolitics_pubemail', $_POST['pubemail'] );
 }
 
 ?>

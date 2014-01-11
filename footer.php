@@ -26,10 +26,10 @@
 			<img class="emailbox_shadow" src="<?php bloginfo('template_directory'); ?>/images/shadow_emailbox.png">
 		</form>
 		</div>
-		<ul style="font-size:13px; color:#f1f1f1;">
+		<ul class="list-static">
 			<?php cnpolitics_list_static(); ?>
 		</ul>
-		<p style="font-size:13px;margin-top:7px;">&copy; 2011–2013 政见 CNPolitics.org &nbsp;&nbsp;
+		<p style="font-size:13px;margin-top:7px;">&copy; 2011–<?php echo date('Y');?> 政见 CNPolitics.org &nbsp;&nbsp;
 			<a href="http://www.miitbeian.gov.cn/">京ICP备09007572号-2</a>
 		</p>
 		</div>
@@ -37,7 +37,7 @@
 		<div class="grid_5">
 		<div class="partner grid_3 alpha">
 			<p style="font-size:13px;color:#b9b9b9;font-weight:700;margin-bottom:16px;">合作伙伴</p>
-			<ul style="font-size:13px;list-style: none;margin:0px;padding:0px;line-height:24px;width:80px;float:left;">
+			<ul style="">
 				<?php cnpolitics_list_bookmark(8); ?><!-- category 8 is 合作伙伴 -->
 			</ul>
 		</div>

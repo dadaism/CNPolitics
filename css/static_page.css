@@ -1,3 +1,131 @@
+#about-head .head {
+	color:#000000;
+	font-size:24px;
+	margin-top:15px;
+	font-weight: bold;
+}
+
+#about-head .subhead {
+	font-size:16px; 
+	font-weight:bold;
+	line-height: 30px;
+}
+
+#about-head li {
+	display: inline; 
+	font-size:13px;
+}
+
+.about-content {padding-bottom: 10px;}
+
+.about-content p {
+	color:#3b3b3b;
+	font-size: 16px;
+	line-height: 28px;
+	margin-bottom: 15px;
+}
+
+.about-content h3.about-title {
+	color:#000000;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	margin:20px auto;
+}
+
+#about-cn .contribute p {
+	font-size: 15px;
+	color:#777777;
+	text-align: center;
+	margin-bottom: 2px;
+}
+
+#about-en .contribute p {
+	font-size: 14px;
+	color:#777777;
+	text-align: center;
+	margin-bottom: 2px;
+}
+
+#about-en, #about-cn {
+	padding:0 22;
+}
+
+#about-en p {
+	font-size: 15px;
+	color:#3b3b3b;
+	line-height: 24px;
+	margin-bottom: 10px;
+
+}
+
+#about-en ul, #about-cn ul {
+	margin:30px auto; padding-left: 0px;
+}
+
+a {
+	color: #b42800;
+}
+
+
+.about-content footer p{
+	font-size: 14px;
+}
+
+#coop-head ul li {display: inline;}
+#coop-head ul li a {font-size:14px;}
+#coop-head h1 {
+	font-size: 24px;
+	margin-top: 15px;
+	font-weight: bold;
+}
+
+.coop-unit {
+	width: 280px;
+	height: 340px;
+	float: left;
+	margin: 35px 20px 25px; 
+	display: inline;
+}
+
+.coop-unit {display: inline;}
+
+.coop-logo {
+	margin: auto;
+	width: 120px;
+	height: 120px;
+}
+.coop-logo img {
+	/* auto resize image according div size */
+	max-width:100%;
+	height:auto;
+	/* end */
+	border-radius: 50%;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+
+.coop-name { margin-top: 15px; }
+.coop-name h3 { font-size: 18px; font-weight: bold; text-align: center;}
+.coop-name a {color: #b42800;}
+
+.coop-intro {margin-top: 15px;}
+.coop-intro p {font-size: 14px; color: #777777;}
+
+.coop-ack, .coop-contact {
+	width: 340px;
+	margin-top: 70px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 0px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.coop-ack p, .coop-contact p {text-align: center; font-size: 15px; color: #777777;}
+.coop-ack a, .coop-contact a {color: #b42800;}
+
 .clear1	{clear: both;height:0;} 
 
 #join-nav {

@@ -833,6 +833,20 @@ function cnpolitics_show_extra_profile_fields( $user ) {
 				<span class="description">Please enter your Title in CNPolitics.</span>
 			</td>
 		</tr>
+		<tr>
+			<th><label for="Weibo">Weibo</label></th>
+			<td>
+				<input type="text" name="weibo" id="weibo" value="<?php echo esc_attr( get_the_author_meta( 'cnpolitics_weibo', $user->ID ) ); ?>" class="regular-text" /><br />
+				<span class="description">Please enter your weibo url.</span>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="Pubemail">Public Email</label></th>
+			<td>
+				<input type="text" name="pubemail" id="pubemail" value="<?php echo esc_attr( get_the_author_meta( 'cnpolitics_pubemail', $user->ID ) ); ?>" class="regular-text" /><br />
+				<span class="description">Please enter your public email address. You can also leave it blank.</span>
+			</td>
+		</tr>
 	</table>
 <?php 
 } 

@@ -1,10 +1,14 @@
 $(document).ready(function(){
 	$('.language-toggle').click(function()	{
 		if (!$(this).hasClass('active') & $(this).hasClass('english')) {
+			$('#about-cn').css('display','none');
+			$('#about-en').css('display','block');
 			$('#copyright-cn').css('display','none');
 			$('#copyright-en').css('display','block');
 		}
 		else if (!$(this).hasClass('active') & $(this).hasClass('chinese')) {
+			$('#about-cn').css('display','block');
+			$('#about-en').css('display','none');
 			$('#copyright-cn').css('display','block');
 			$('#copyright-en').css('display','none');
 		}
