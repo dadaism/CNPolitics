@@ -677,3 +677,24 @@ li.first-arrow {
 
 
 .list-static li a {font-size:13px; color:#f1f1f1; }
+
+#p404 {
+	margin: 55px auto;
+	text-align: center;
+	width: 480px;
+}
+
+
+#p404 p {
+	font-size: 16px;
+	color:#777777;
+	line-height: 28px;
+	text-align: left;
+}
+
+#p404 p.source {
+	font-size: 14px;
+	color: #b42800;
+	text-align: center;
+	padding-top: 25px;
+}

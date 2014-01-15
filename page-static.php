@@ -3,6 +3,13 @@
 Template Name: Static
 */
 ?>
+<?php
+	if ( isset($_GET['static_page']) &&  $_GET['static_page']=='service_unavailable.html') {
+		global $cnpolitics_dir;
+		include_once($cnpolitics_dir."/inc/".$_GET['static_page']);	
+	}
+	else {
+?>
 <?php  get_header();?>
 <script type="text/javascript" src="<?php bloginfo('template_directory');?>/js/static_page.js"></script>
 <style type="text/css">
@@ -17,3 +24,5 @@ Template Name: Static
 	endif;
 ?>
 <?php get_footer(); ?>
+
+<?php }?>

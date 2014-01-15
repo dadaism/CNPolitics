@@ -1,4 +1,4 @@
-jQuery(document).ready( function($) {
+$(document).ready( function($) {
 	// var newCat, noSyncChecks = false, syncChecks, catAddAfter;
 	// $('#link_name').focus();
     // postboxes
