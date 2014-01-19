@@ -43,7 +43,7 @@ function CNPolitics_add_submenu() {
 */
 function CNPolitics_add_script() {
 	//wp_register_script('CNPolitics-script', plugins_url('/CNPolitics.js', __FILE__));
-	wp_register_script('CNPolitics-script', get_option('siteurl').'/wp-content/themes/CNPolitics/js/CNPolitics.js');
+	wp_register_script('CNPolitics-script', get_template_directory_uri().'/js/CNPolitics.js');
 	wp_enqueue_script( 'CNPolitics-script');
 }
 
