@@ -11,41 +11,48 @@ endif;
 ?>
 <div id="researcher-avatar">
 	<!--?php echo get_avatar($curauth->user_email); ?-->
-	<?php echo get_simple_local_avatar($curauth->user_email, 150); ?>
+<?php 
+	$default_url = get_template_directory_uri().'/images/default-thumb.png';
+	$default_url = str_replace("cnpolitics.org", gethostbyname(gethostname()), $default_url);
+	echo get_simple_local_avatar($curauth->user_email, 150, $default_url); 
+?>
 	<p style="margin-top:15px;"><?php echo $curauth->display_name; ?></p>
 	<p style="font-weight:normal;font-size:14px;color:#b9b9b9;"><?php echo get_the_author_meta('cnpolitics_title');?></p>
 </div>
-		
+
 <div id="column1">
-	<div class="observer-intro">
-		<p>
-		
-		<?php echo nl2br($curauth->user_description); ?>
-		</p>
 <?php
 	$weibo = get_the_author_meta('cnpolitics_weibo');
-	if ( !empty($weibo) ) {
-		echo '
-		<a href="'. $weibo . '"><img src="'.get_template_directory_uri().'/images/sina.png"></a>
-			';
-	}
 	$website = $curauth->user_url;
-	if ( !empty($website) ) {
-		echo '
-		<a href="'. $website . '"><img src="'.get_template_directory_uri().'/images/copy-link.png"></a>
-			';
-	}
 	$pubemail = get_the_author_meta('cnpolitics_pubemail');
-	if ( !empty($pubemail) ) {
+	if ( !empty($curauth->user_description) || !empty($weibo) || !empty($website) ||!empty($pubemail)) :
 		echo '
-		<a href="mailto:'. $pubemail .'"><img src="'. get_template_directory_uri().'/images/email-link.png"></a>
+	<div class="observer-intro">'.
+		nl2p($curauth->user_description, false);
+	
+		if ( !empty($weibo) ) {
+			echo '
+		<a href="'. $weibo . '"><img class="img-hover" src="'.get_template_directory_uri().'/images/sina.png"></a>
 			';
-	}
-?>
-		<!--a href="" onclick="copyToClipboard('<?php echo get_author_posts_url($curauth->ID);?>')"; ><img src="<?php bloginfo('template_directory'); ?>/images/copy-link.png"></a!-->
-	</div>
-</div>
+		}
 
+		if ( !empty($website) ) {
+			echo '
+		<a href="'. $website . '"><img class="img-hover" src="'.get_template_directory_uri().'/images/copy-link.png"></a>
+			';
+		}
+
+		if ( !empty($pubemail) ) {
+			echo '
+		<a href="mailto:'. $pubemail .'"><img class="img-hover" src="'.get_template_directory_uri().'/images/email-link.png"></a>
+			';
+		}
+		/*<!--a href="" onclick="copyToClipboard('<?php echo get_author_posts_url($curauth->ID);?>')"; ><img src="<?php bloginfo('template_directory'); ?>/images/copy-link.png"></a!-->*/
+		echo '
+	</div>';
+	endif;
+?>
+</div>
 <div class="clear"></div>
 <div id="display_bar">
 	<img src="<?php bloginfo('template_directory'); ?>/images/shadow_middle.png">
@@ -99,12 +106,13 @@ endif;
 	endif;
 ?>
 <div class="clear"></div>
-<div class="pagination"><?php wp_pagenavi(); ?></div>
 <div class="post-end-button back-to-top">
 	<p style="padding-top:20px;">回到开头</p>
 </div>
-<div id="display_bar">
+<div id="display_bar" style="height:30px">
 	<img src="<?php bloginfo('template_directory'); ?>/images/shadow_middle.png">
 </div>
+<div class="pagination"><?php wp_pagenavi(); ?></div>
 <?php get_footer(); ?>
 <script type="text/javascript" src="<?php bloginfo('template_directory');?>/js/abstract.js"></script>
+<script type="text/javascript" src="<?php bloginfo('template_directory');?>/js/author.js"></script>

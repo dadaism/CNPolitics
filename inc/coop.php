@@ -137,11 +137,15 @@
 			</div>
 		</div><!---/grid_12-->
 		<div class="clear"></div>
-		<div class="coop-ack">
-			<p>过往合作伙伴——</p>
-			<p>财经网、壹读 iRead、东西文库</p>
+		<div class='coop-footer'>
+			<div class="coop-ack left">
+				<p>过往合作伙伴——</p>
+				<p>财经网、壹读 iRead、东西文库</p>
+			</div>
+			
+			<div class="coop-contact right">
+				<p>欢迎媒体、出版平台以及其他有兴趣的机构！</p>
+				<p>合作细节请询：<a href="mailto:cooperation@cnpolitics.org">Cooperation@CNPolitics.org</a></p>
+			</div>
 		</div>
-		<div class="coop-contact">
-			<p>欢迎媒体、出版平台以及其他有兴趣的机构！</p>
-			<p>合作细节请询：<a href="mailto:cooperation@cnpolitics.org">Cooperation@CNPolitics.org</a></p>
-		</div>
+		<div class="clear"></div>

@@ -5,6 +5,7 @@
 			$(this).animate({ boxShadow : "0 0 5px rgba(0,0,0,0.75)"});
 			$(this).children("p.abstract-full").show();
 			$(this).children("p.abstract-short").hide();
+			$(this).children("p.abstract-full").css("margin","-1px");
 		})
 
 		$(".box-abstract").mouseout(function()	{

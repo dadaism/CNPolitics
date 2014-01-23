@@ -25,6 +25,8 @@ if ( isset($_GET['rsch_id']) ) :
 			$age = date('Y') - $year;
 			$birth = $year." 年（$age 岁）";
 		}
+		if ( empty($r->img_path) )
+			 $r->img_path = '/images/default-thumb.png';
 		echo '	<div id="researcher-avatar">
 					<img src="'.get_bloginfo('template_directory').$r->img_path.'">
 					<p style="margin-top:15px;">'.$r->name.'</p>

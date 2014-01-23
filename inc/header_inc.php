@@ -34,6 +34,9 @@
 			$(this).hide();
 			$(".when-hidden").show();
 			$(".shadow-header").hide();
+			$("body,html").animate({
+				scrollTop: 0
+			}, 400);
 		})
 
 		$('.back-to-top').click(function () {
@@ -67,6 +70,45 @@
         	});
         	return false;
 		});
+
+		/* hover on image */
+		$(".img-hover").hover(function() {
+			var src_url = $(this).attr("src").replace(".png", "-hover.png");
+			$(this).attr("src", src_url);
+				}, function() {
+			var src_url = $(this).attr("src").replace("-hover", "");
+			$(this).attr("src", src_url);
+		});
+
+		/* subscribe */
+		$(".emailbox_input" ).focus(function() {
+  			var src_url = $('input[type="image"].emailbox_img').attr("src").replace(".png", "_light.png");
+  			$('input[type="image"].emailbox_img').attr("src", src_url);
+		});
+
+		$(".emailbox_input" ).blur(function() {
+  			var src_url = $(".emailbox_img").attr("src").replace("_light", "");
+  			$('input[type="image"].emailbox_img').attr("src", src_url);
+		});
+
+		$(".post-sidebar-emailbox-input" ).focus(function() {
+			var src_url = $(".emailbox_img").attr("src").replace("_light", "");
+  			$('input[type="image"].emailbox_img').attr("src", src_url);
+		});
+
+		$(".post-sidebar-emailbox-input" ).blur(function() {
+  			var src_url = $('input[type="image"].emailbox_img').attr("src").replace(".png", "_light.png");
+  			$('input[type="image"].emailbox_img').attr("src", src_url);
+		});
+
+		if ( $(".pagination").length != 0 ) {
+			if ( $(".pagination").children(".next").length != 0 ) {
+				$(".pagination").children(".next").prev().addClass("last-number");
+			}
+			else {
+				$(".pagination").children("span.current").addClass("last-number");
+			}
+		}
 	})
 
 </script>
@@ -124,4 +166,4 @@ function add_favorite() {
 <!-- End fancybox -->
 </head>
 <body>
-<div id="container" style="margin-bottom:70px;">
+<div id="container" style="margin-bottom:30px;">

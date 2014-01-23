@@ -7,8 +7,11 @@ while (have_posts()) : the_post();
 	if ( mb_strlen( $excerpt ) > $charlength ) {
 		$class_name = "box-abstract";
 	}
+	$thumb_url = wp_get_attachment_thumb_url( $post_thumbnail_id );
+	if ( empty($thumb_url) )
+		$thumb_url = get_template_directory_uri().'/images/default-thumb.png';
 	echo	'<div class="article-latest">
-				<img class="latest-img" width="150" height="150" src="'.wp_get_attachment_thumb_url( $post_thumbnail_id ).'">
+				<img class="latest-img" width="150" height="150" src="'.$thumb_url .'">
 				<div class="latest-text">
 					<p class="latest-head"><a href="'.get_permalink().'">'.get_the_title().'</a></p>
 					<p class="latest-author">

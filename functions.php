@@ -71,6 +71,26 @@ function multiple_explode($delimiters = array(), $string = ''){
 }
 
 /**
+* new line to <p> tag
+* @param string $string original string
+* @param boolean $line_breaks wheather allow single line break
+* @param 
+*/
+function nl2p($string, $line_breaks = true, $xml = true) {
+	$string = str_replace(array('<p>', '</p>', '<br>', '<br />'), '', $string);
+
+	// It is conceivable that people might still want single line-breaks
+	// without breaking into a new paragraph.
+	if ($line_breaks == true)
+    	return '<p>'.preg_replace(array("/([\n]{2,})/i", "/([^>])\n([^<])/i"), array("</p>\n<p>", '$1<br'.($xml == true ? ' /' : '').'>$2'), trim($string)).'</p>';
+	else 
+    	return '<p>'.preg_replace(
+    		array("/([\n]{2,})/i", "/([\r\n]{3,})/i","/([^>])\n([^<])/i"),
+    		array("</p>\n<p>", "</p>\n<p>", '$1<br'.($xml == true ? ' /' : '').'>$2'),
+		    trim($string)).'</p>'; 
+}
+
+/**
 * List categories in navigation ( homepage )
 */
 function cnpolitics_list_category() {
@@ -381,9 +401,9 @@ function wp_pagenavi() {
 		'show_all'  => false,
 		'type'      => 'plain',
 		'end_size'  => '1',
-		'mid_size'  => '4',
-		'prev_text' => __(' << '),
-		'next_text' => __(' >> ')
+		'mid_size'  => '3',
+		'prev_text' => __(''),
+		'next_text' => __('')
 	);
 	//echo $wp_query->max_num_pages;
 	echo paginate_links($pagination);

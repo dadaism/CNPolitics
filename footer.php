@@ -6,11 +6,11 @@
 	<div class="grid_7">
 		<p style="font-size:13px;color:#b9b9b9;font-weight:700;margin-bottom:8px;">关注政见动向：</p>
 		<div class="social">
-			<a href="#" class="fav" style="margin-right:14px;"><img src="<?php bloginfo('template_directory'); ?>/images/social_fav.png" onmouseover="this.title='添加至收藏夹'" onClick=add_favorite()></a>
-			<a href="http://cnpolitics.org/feed/" target="_blank" class="rss" style="margin-right:14px;"><img src="<?php bloginfo('template_directory'); ?>/images/social_rss.png" onmouseover="this.title='订阅RSS'"></a>
-			<a href="http://weibo.com/cnpolitics"  target="_blank" class="sina" style="margin-right:14px;"><img src="<?php bloginfo('template_directory'); ?>/images/social_sina.png" onmouseover="this.title='访问新浪微博'"></a>
-			<a href="http://t.qq.com/chinapolitics"  target="_blank" class="tecent" style="margin-right:14px;"><img src="<?php bloginfo('template_directory'); ?>/images/social_tecent.png" onmouseover="this.title='访问腾讯微博'"></a>
-			<a href="http://t.163.com/cnpolitics"  target="_blank" class="a163" style="margin-right:14px;"><img src="<?php bloginfo('template_directory'); ?>/images/social_163.png" onmouseover="this.title='访问网易微博'"></a>
+			<a href="#" class="fav" style="margin-right:14px;"><img class="img-hover" src="<?php bloginfo('template_directory'); ?>/images/social-fav.png" onmouseover="this.title='添加至收藏夹'" onClick=add_favorite()></a>
+			<a href="http://cnpolitics.org/feed/" target="_blank" class="rss" style="margin-right:14px;"><img class="img-hover" src="<?php bloginfo('template_directory'); ?>/images/social-rss.png" onmouseover="this.title='订阅RSS'"></a>
+			<a href="http://weibo.com/cnpolitics"  target="_blank" class="sina" style="margin-right:14px;"><img class="img-hover" src="<?php bloginfo('template_directory'); ?>/images/social-sina.png" onmouseover="this.title='访问新浪微博'"></a>
+			<a href="http://t.qq.com/chinapolitics"  target="_blank" class="tecent" style="margin-right:14px;"><img class="img-hover" src="<?php bloginfo('template_directory'); ?>/images/social-tecent.png" onmouseover="this.title='访问腾讯微博'"></a>
+			<a href="http://t.163.com/cnpolitics"  target="_blank" class="a163" style="margin-right:14px;"><img class="img-hover" src="<?php bloginfo('template_directory'); ?>/images/social-163.png" onmouseover="this.title='访问网易微博'"></a>
 		</div>
 		<p style="font-size:13px;color:#b9b9b9;font-weight:700;padding-bottom:12px;">订阅最新文章，自动推送至你的邮箱：</p>
 		<div class="emailbox">

@@ -13,15 +13,17 @@ if ( isset($_GET['topic_id']) ) :
 		require_once('404.php');
 	else :
 		//$t = $topics['0'];
+		if ( empty($t->img_path) )
+			 $t->img_path = '/images/default-thumb.png';
 		echo '	<div id="researcher-avatar">
 					<img src="'.get_bloginfo('template_directory').$t->img_path.'">
 					<p style="margin-top:15px;">'.$t->subject.'</p>
 				</div>
 				<div id="column1" class="grid_6">
 				<div class="researcher-intro">
-					<p><span style="font-weight:bolder;color:#000;line-height:50px;">主题简介</b></p>
-					<p>'.$t->intro.'</p>
-				</div>
+					<p><span style="font-weight:bolder;color:#000;line-height:50px;">主题简介</b></p>'.
+					nl2p($t->intro, false).
+				'</div>
 				</div>
 				<div id="column2" class="prefix_7 grid_4.1">
 					<div class="researcher-topic">
