@@ -30,26 +30,25 @@
 			$title = get_the_title();
     		$content = strip_tags(get_the_content());
     		$keys = explode(" ",$s);
-    		$title = preg_replace('/('.implode('|', $keys) .')/iu','<span class="search-key">\0</span>',$title);
-    		$content = preg_replace('/('.implode('|', $keys) .')/iu','<span class="search-key">\0</span>',$content);
     		$pos = mb_strpos($content,$keys[0],1);
     		//var_dump( $pos );
-    		if($pos&&$pos>70){//如果搜索关键字位置有了返回值，且大于70
-        		$content = mb_substr($content,$pos-70,200);//substr会出现乱码，
+    		if($pos&&$pos>10){//如果搜索关键字位置有了返回值，且大于30
+        		$content = mb_substr($content,$pos-10,80);//substr会出现乱码，
     		}else{
-        		$content = mb_substr($content,0,200);
+        		$content = mb_substr($content,0,80);
     		}
+    		$title = preg_replace('/('.implode('|', $keys) .')/iu','<span class="search-key">\0</span>',$title);
+    		$content = preg_replace('/('.implode('|', $keys) .')/iu','<span class="search-key">\0</span>',$content);
+
     		$link = get_permalink($post->ID);
 ?>
 			<div class='search-results-item'>
 				<div class='result-head'>
 					<a href="<?php  echo $link;?>"><?php echo $title; ?> | 政见 CNPolitics.org </a>
 				</div>
-				<div class="box-abstract">
-					<p class="latest-abstract"><?php echo "...".$content."..."; ?></p>
-				</div>
+				<p class="latest-abstract"><?php echo "...".$content."..."; ?></p>
 				<div class='result-link'>
-					<a href='<?php  echo $link;?>'><?php  echo $link;?></a>
+					<a href='<?php  echo $link;?>'><?php  echo str_replace("http://", "", $link);?></a>
 				</div>
     		</div>
 <?php 

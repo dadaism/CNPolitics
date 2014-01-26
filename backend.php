@@ -12,7 +12,8 @@ require_once('author-avatar.php');
 add_action( 'admin_menu', 'CNPolitics_add_submenu' );
 add_action( 'submitpost_box', 'CNPolitics_add_box');
 add_action( 'post_updated', 'CNPolitics_save_post');
-add_action( 'init', 'CNPolitics_add_script');
+add_action( 'init', 'CNPolitics_add_scripts');
+add_action( 'admin_print_styles', 'CNPolitics_add_admin_styles');
 
 add_action('add_meta_boxes', 'cnpolitics_create_meta_box');
 add_action('save_post', 'cnpolitics_save_meta_box');
@@ -41,10 +42,19 @@ function CNPolitics_add_submenu() {
 /**
 * Add JavaScript to show tabs
 */
-function CNPolitics_add_script() {
+function CNPolitics_add_scripts() {
 	//wp_register_script('CNPolitics-script', plugins_url('/CNPolitics.js', __FILE__));
 	wp_register_script('CNPolitics-script', get_template_directory_uri().'/js/CNPolitics.js');
+	wp_enqueue_script('media-upload');
+	wp_enqueue_script('thickbox');
 	wp_enqueue_script( 'CNPolitics-script');
+}
+
+/**
+* Add styles for admin page
+*/
+function CNPolitics_add_admin_styles() {
+	wp_enqueue_style('thickbox');
 }
 
 /**

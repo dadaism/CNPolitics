@@ -782,9 +782,6 @@ function get_topic_bypostid( $post_id ) {
 
 function get_topic_byrsch( $rid ) {
 	global $wpdb;
-	//var_dump( $rsch_regions );
-	//$region_id = array_search( $rsch_region, $regions);
-	//var_dump($myrsch);
 	$sql = "SELECT topic_id
 			FROM {$wpdb->prefix}topics_rschs
 			WHERE rsch_id = $rid";// LIMIT 4";

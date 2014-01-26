@@ -42,14 +42,13 @@ Template Name: Archives
 
 ?>
 
-	<div class="pagination"><?php wp_pagenavi(); ?></div>
-
 	<div class="post-end-button back-to-top">
 		<p style="padding-top:20px;">回到开头</p>
 	</div>
 	<div id="display_bar">
 		<img width="556px;" src="<?php bloginfo('template_directory'); ?>/images/shadow-post-end.png">
 	</div>
+	<div class="pagination"><?php wp_pagenavi(); ?></div>
 </div> <!-- End column1 -->
 
 <div id="column2" class="prefix_1 grid_4">	

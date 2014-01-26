@@ -1,9 +1,5 @@
-﻿<?php
-
-//error_reporting(E_ALL);
-//ini_set('display_errors',1);
+<?php
 if ( isset($_GET['rsch_id']) ) :
-	global $wpdb;
 	global $sexes;
 	$rid = $_GET['rsch_id']; 	// researcher id
 	$r = get_rsch_byID($rid);
@@ -13,7 +9,6 @@ if ( isset($_GET['rsch_id']) ) :
 		echo '<h2>你所要找的研究者不存在！</h2>';
 		require_once('404.php');
 	else :
-		//$r = $rschs['0'];
 		if ( $r->sex==NULL )
 			$r->sex = 0;
 		$gender = $sexes;

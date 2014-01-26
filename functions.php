@@ -270,9 +270,17 @@ function theme_option_admin() {
 		if ( $_POST['action']=="save" ) {
 			for ( $i=0; $i<=5; $i++) {
 				//echo $_POST["cnpolitics_recommend_title_".$i];
-				update_option("cnpolitics_recommend_title_".$i, $_POST["cnpolitics_recommend_title_".$i]);
-				update_option("cnpolitics_recommend_content_".$i, $_POST["cnpolitics_recommend_content_".$i]);
-				update_option("cnpolitics_recommend_link_".$i, $_POST["cnpolitics_recommend_link_".$i]);	
+				update_option("cnpolitics_recommend_title_".$i, $_POST["cnpolitics_recommend_title_".$i] );
+				update_option("cnpolitics_recommend_content_".$i, $_POST["cnpolitics_recommend_content_".$i] );
+				update_option("cnpolitics_recommend_link_".$i, esc_url_raw( $_POST["cnpolitics_recommend_link_".$i] ) );	
+			}
+			for ( $i=0; $i<=2; $i++) {
+				update_option("cnpolitics_graphics_imgurl_".$i, esc_url_raw( $_POST["cnpolitics_graphics_imgurl_".$i]) );
+				update_option("cnpolitics_graphics_link_".$i, esc_url_raw( $_POST["cnpolitics_graphics_link_".$i]) );	
+			}
+			for ( $i=0; $i<=2; $i++) {
+				update_option("cnpolitics_collections_imgurl_".$i, esc_url_raw( $_POST["cnpolitics_collections_imgurl_".$i]) );
+				update_option("cnpolitics_collections_link_".$i, esc_url_raw( $_POST["cnpolitics_collections_link_".$i]) );	
 			}
 			$categories = get_categories('orderby=id');
 			foreach ( $categories as $key => $value ) {
@@ -292,6 +300,14 @@ function theme_option_admin() {
 				update_option("cnpolitics_recommend_title_".$i, '');
 				update_option("cnpolitics_recommend_content_".$i, '');
 				update_option("cnpolitics_recommend_link_".$i, '');
+			}
+			for ( $i=0; $i<=2; $i++) {
+				update_option("cnpolitics_graphics_imgurl_".$i, '');
+				update_option("cnpolitics_graphics_link_".$i, '');	
+			}
+			for ( $i=0; $i<=2; $i++) {
+				update_option("cnpolitics_collections_imgurl_".$i, '');
+				update_option("cnpolitics_collections_link_".$i, '');	
 			}
 			$categories = get_categories('orderby=id');
 			foreach ( $categories as $key => $value ) {	
@@ -340,7 +356,7 @@ function theme_option_admin() {
 		  <table class="widefat" width="100%" border="0" cellpadding="0" cellspacing="0">
 		  	<thead>
 		  		<tr>
-				<th colspan="2">Recommended reading</th>
+				<th colspan="2">Recommended Reading</th>
 				</tr>
 			</thead>
 		  </table>
@@ -358,10 +374,108 @@ function theme_option_admin() {
 				</tr>
 				<tr class="form-field form-required">
 					<td width="30%" valign="middle"><strong>Link '.$i.'</strong></td>
-					<td width="70%"><input style="width:400px;" name="cnpolitics_recommend_link_'.$i.'" id="cnpolitics_recommend_link_'.$i.'" type="text" value="'.get_option("cnpolitics_recommend_link_".$i).'"></td>
+					<td width="70%"><input style="width:400px;" name="cnpolitics_recommend_link_'.$i.'" id="cnpolitics_recommend_link_'.$i.'" type="text" value="'.esc_url( get_option("cnpolitics_recommend_link_".$i) ).'"></td>
 				</tr>
 				<tr><td colspan="2" style="margin-bottom:5px;border-bottom:1px dotted #000000;">&nbsp;</td></tr>
 				<tr><td colspan="2">&nbsp;</td></tr>';
+	}
+	echo	'
+		  	</tbody>
+		  </table>
+		  <table class="widefat" width="100%" border="0" cellpadding="0" cellspacing="0">
+		  	<thead>
+		  		<tr>
+				<th colspan="2">Recommended Graphics</th>
+				</tr>
+			</thead>
+		  </table>
+		  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#f4f4f4; padding:10px">
+		  	<tbody>';
+	/* Graphics */
+	for ($i=0; $i<=2; $i++){
+		echo	'
+				<tr class="form-field form-required">
+					<td width="30%" valign="middle" ><strong>Graphics Image '.$i.'</strong></td>
+					<td width="45%">
+						<input style="width:400px;" 
+							name="cnpolitics_graphics_imgurl_'.$i.'" 
+							id="cnpolitics_graphics_imgurl_'.$i.'" 
+							type="text" 
+							value="'.esc_url( get_option("cnpolitics_graphics_imgurl_".$i) ).'"
+						/>
+					</td>
+					<td width="25%">
+						<input style="width:150px;"
+							type="button" 
+							value="Media Library Image" 
+							class="button-secondary upload_image_button"
+						/>
+					</td>
+				</tr>
+				<tr class="form-field form-required">
+					<td width="30%" ></td>
+					<td colspan="2" valign="middle"><small>Enter an image URL or use an image from the Media Library</small></td>
+				</tr>
+				<tr class="form-field form-required">
+					<td width="30%" valign="middle"><strong>Link '.$i.'</strong></td>
+					<td width="70%" colspan="2">
+						<input style="width:400px;" 
+							name="cnpolitics_graphics_link_'.$i.'" 
+							id="cnpolitics_graphics_link_'.$i.'" 
+							type="text" value="'.esc_url( get_option("cnpolitics_graphics_link_".$i) ).'">
+					</td>
+				</tr>
+				<tr><td colspan="3" style="margin-bottom:5px;border-bottom:1px dotted #000000;">&nbsp;</td></tr>
+				<tr><td colspan="3">&nbsp;</td></tr>';
+	}
+	echo	'
+		  	</tbody>
+		  </table>
+		  <table class="widefat" width="100%" border="0" cellpadding="0" cellspacing="0">
+		  	<thead>
+		  		<tr>
+				<th colspan="2">Recommended Collections</th>
+				</tr>
+			</thead>
+		  </table>
+		  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#f4f4f4; padding:10px">
+		  	<tbody>';
+	/* Collections */
+	for ($i=0; $i<=2; $i++){
+		echo	'
+				<tr class="form-field form-required">
+					<td width="30%" valign="middle" ><strong>Collections Image '.$i.'</strong></td>
+					<td width="45%">
+						<input style="width:400px;" 
+							name="cnpolitics_collections_imgurl_'.$i.'" 
+							id="cnpolitics_collections_imgurl_'.$i.'" 
+							type="text" 
+							value="'.esc_url( get_option("cnpolitics_collections_imgurl_".$i) ).'"
+						/>
+					</td>
+					<td width="25%">
+						<input style="width:150px;"
+							type="button" 
+							value="Media Library Image" 
+							class="button-secondary upload_image_button"
+						/>
+					</td>
+				</tr>
+				<tr class="form-field form-required">
+					<td width="30%" ></td>
+					<td colspan="2" valign="middle"><small>Enter an image URL or use an image from the Media Library</small></td>
+				</tr>
+				<tr class="form-field form-required">
+					<td width="30%" valign="middle"><strong>Link '.$i.'</strong></td>
+					<td width="70%" colspan="2">
+						<input style="width:400px;" 
+							name="cnpolitics_collections_link_'.$i.'" 
+							id="cnpolitics_collections_link_'.$i.'" 
+							type="text" value="'.esc_url( get_option("cnpolitics_collections_link_".$i) ).'">
+					</td>
+				</tr>
+				<tr><td colspan="3" style="margin-bottom:5px;border-bottom:1px dotted #000000;">&nbsp;</td></tr>
+				<tr><td colspan="3">&nbsp;</td></tr>';
 	}
 	echo	'
 		  	</tbody>

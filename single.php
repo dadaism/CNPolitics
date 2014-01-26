@@ -4,7 +4,7 @@
 	<?php if (have_posts()) : ?>
 	<?php while (have_posts()) : the_post(); ?>
 
-	<h1 class="post-head"><a href="#"><?php the_title(); ?></a></h1>
+	<h1 class="post-head"><?php the_title(); ?></h1>
 	<p class="post-subhead"><?php 
 				$subtitle = get_post_meta( $post->ID, 'cnpolitics_subtitle', true );
 				echo $subtitle;?></p>

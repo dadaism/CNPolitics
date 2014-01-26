@@ -4,8 +4,6 @@ if ( isset($_GET['topic_id']) ) :
 	global $toptopics;
 	global $topic_image_dir;
 	$tid = $_GET['topic_id']; 	// topic id
-	error_reporting(E_ALL);
-	ini_set('display_errors',1);
 	$t = get_topic_byID($tid);
 	$rschs = get_rsch_bytopic($tid);
 	if ( empty($t) ) :

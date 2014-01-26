@@ -1,4 +1,4 @@
-<div class="post-sidebar">
+<div class="post-sidebar-filter">
 	<div class="post-filter-box">
 		<div class="filter-header">
 			<img class="expand-topic-filter" src="<?php bloginfo('template_directory'); ?>/images/arrow-expand.png">

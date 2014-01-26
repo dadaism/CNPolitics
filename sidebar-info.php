@@ -11,7 +11,7 @@
 	);
 	$posts = $query->posts;
 ?>
-	<div class="post-sidebar">
+	<div class="post-sidebar-info">
 		<div class="post-info-box">
 			<img class="expand-observer-info" src="<?php bloginfo('template_directory'); ?>/images/arrow-expand.png">
 			<img class="collapse-observer-info" src="<?php bloginfo('template_directory'); ?>/images/arrow-collapse.png">
@@ -34,36 +34,32 @@
 		</div>
 <?php
 		$r = get_rsch_bypostid($post->ID);
-		if ( !empty($r) ) {
+		if ( !empty($r) ) :
 			$rid = $r->id;
 			$rname = $r->name;
 			$rintro = $r->intro;
-		}
-		else {
-			$rid = $rname = $rintro = "";
-		}
-
 ?>
 		<div class="post-info-box">
 			<img class="expand-researcher-info" src="<?php bloginfo('template_directory'); ?>/images/arrow-expand.png">
 			<img class="collapse-researcher-info" src="<?php bloginfo('template_directory'); ?>/images/arrow-collapse.png">
 <?php
-	echo '	研究者：	<a href="'.get_bloginfo('url')."/researcher/?rsch_id=".$rid.'">'.$rname. '</a>
+			echo '	
+			研究者：	<a href="'.get_bloginfo('url')."/researcher/?rsch_id=".$rid.'">'.$rname. '</a>
 			<div class="researcher-info">
 				<p style="margin-top:20px;">个人简介：</p> 
 				<p style="color:#777;">'.$rintro.'</p>
 				<p style="margin-top:20px;">相关文章：</p>
 				<p>
 				<ul>';
-	$post_id_array = get_postid_byrschid($rid);
-	foreach ( (array)$post_id_array as $post_id ) :
-		//if ( $post_id!=$post->ID ) {
-			$related_post = get_post($post_id);
-			//var_dump($related_post);
-			echo '<li><a href="'.$related_post->guid.'">'.$related_post->post_title.'</a></li>';
-		//}
-	endforeach;
-	echo '
+			$post_id_array = get_postid_byrschid($rid);
+			foreach ( (array)$post_id_array as $post_id ) :
+				//if ( $post_id!=$post->ID ) {
+				$related_post = get_post($post_id);
+				//var_dump($related_post);
+				echo '<li><a href="'.$related_post->guid.'">'.$related_post->post_title.'</a></li>';
+			//}
+			endforeach;
+			echo '
 				</ul>
 				</p>
 				<p style="margin-bottom:20px;margin-top:0px;">
@@ -71,45 +67,45 @@
 				</p>
 			</div>
 		</div>';
+		endif;
+
 		$t = get_topic_bypostid($post->ID);
-		if ( !empty($t) ) {
+		if ( !empty($t) ) :
 			$tid = $t->id;
 			$tsubject = $t->subject;
 			$tintro = $t->intro;
-		}
-		else {
-			$tid = $tsubject = $tintro = "";
-		}
 ?>
 		<div class="post-info-box">
 			<img class="expand-theme-info" src="<?php bloginfo('template_directory'); ?>/images/arrow-expand.png">
 			<img class="collapse-theme-info" src="<?php bloginfo('template_directory'); ?>/images/arrow-collapse.png">
 <?php
-	echo '	主题名：<a href="'.get_bloginfo('url')."/topic/?topic_id=".$tid.'">'.$tsubject.'</a>
+			echo '	
+			主题名：<a href="'.get_bloginfo('url')."/topic/?topic_id=".$tid.'">'.$tsubject.'</a>
 			<div class="theme-info">
 				<p style="margin-top:20px;">主题简介：</p>
 				<p style="color:#777;">'.$tintro.'</p>
 				<p style="margin-top:20px;">相关文章：</p>
 				<p>
 				<ul>';
-	$post_id_array = get_postid_bytopicid($tid);
-	$count = 0;
-	foreach ( (array)$post_id_array as $post_id ) :
-		if ( $post_id!=$post->ID ) {
-			$related_post = get_post($post_id); $count = $count+1;
-			echo '<li><a href="'.$related_post->guid.'">'.$related_post->post_title.'</a></li>';
-			if ($count>=4)	break;
-		}
-	endforeach;
-	echo '
+			$post_id_array = get_postid_bytopicid($tid);
+			$count = 0;
+			foreach ( (array)$post_id_array as $post_id ) :
+				if ( $post_id!=$post->ID ) {
+					$related_post = get_post($post_id); $count = $count+1;
+					echo '<li><a href="'.$related_post->guid.'">'.$related_post->post_title.'</a></li>';
+					if ($count>=4)	break;
+				}
+			endforeach;
+			echo '
 				</ul>
 				</p>
 				<p style="margin-bottom:20px;margin-top:0px;">
 					<a href="'.get_bloginfo('url')."/topic/?topic_id=".$tid.'" style="color:#b9b9b9;font-size:12px;float:right;">浏览更多 »</a>
 				</p>
-			</div>';
+			</div>
+		</div>';
+		endif;
 ?>
-		</div>
 		<p><a href="<?php echo get_site_url();?>"><b>政见 CNPolitics.org</b></a> 是一个独立团队，向你介绍世界上最聪明的脑袋是怎样分析中国的。我们致力于发掘海内外学者和智库的智慧成果，引进思想资源。｜更多关于我们 »</p>
 		<p style="color:#777777;margin-bottom:10px;">关注政见动向：</p>
 		<div class="post-sidebar-social">

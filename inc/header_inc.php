@@ -67,6 +67,9 @@
                 'href': $form.attr("action") + "?" + $form.serialize(),
                 'type': 'iframe',
                 'padding':0,
+                tpl: {
+        			closeBtn: '<a title="Close" style="top:20px; right:20px;" class="fancybox-item fancybox-close " href="javascript:;"></a>'
+   				}
         	});
         	return false;
 		});
@@ -161,6 +164,7 @@ function add_favorite() {
         		}
     		}
 		});
+
 	});
 </script>
 <!-- End fancybox -->

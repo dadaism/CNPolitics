@@ -47,19 +47,21 @@
 		</div>
 		<div class="additional-img1">
 		<?php
+			/*
 			$postslist = get_posts( array( 'numberposts' => '3', 'category' => $category_id, 'orderby' => 'rand' ) );
 			foreach ($postslist as $post) {
 				setup_postdata($post);
 				$post_thumbnail_id = get_post_thumbnail_id();
 				echo '<a href="'.get_permalink().'"><img width="180" height="180" src="'.wp_get_attachment_thumb_url( $post_thumbnail_id ).'"></a>';
 			}
+			*/
+			for ($i=0; $i<=2; $i++){
+				$imgurl = esc_url( get_option("cnpolitics_graphics_imgurl_".$i) );
+				$linkurl = esc_url( get_option("cnpolitics_graphics_link_".$i) );
+				echo '<a href="'.$linkurl.'"><img width="180" height="180" src="'.$imgurl.'"></a>';
+			}
 		?>		
 		</div>
-		<!--div class="dots">
-			<a href="#" data-slidejs-item="0"><div class="circle1-1"></div></a>
-			<a href="#" data-slidejs-item="1"><div class="circle1-2"></div></a>
-			<a href="#" data-slidejs-item="1"><div class="circle1-3"></div></a>
-		</div-->
 	</div>
 
 	<div id="collections" class="grid_5_1 prefix_1">
@@ -78,19 +80,19 @@
 		</div>
 		<div class="additional-img2">
 		<?php
-			$postslist = get_posts( array( 'numberposts' => '3', 'category' => $category_id, 'orderby' => 'rand' ) );
+			/*$postslist = get_posts( array( 'numberposts' => '3', 'category' => $category_id, 'orderby' => 'rand' ) );
 			foreach ($postslist as $post) {
 				setup_postdata($post);
 				$post_thumbnail_id = get_post_thumbnail_id();
 				echo '<a href="'.get_permalink().'"><img width="120" height="180" src="'.wp_get_attachment_thumb_url( $post_thumbnail_id ).'"></a>';
+			}*/
+			for ($i=0; $i<=2; $i++){
+				$imgurl = esc_url( get_option("cnpolitics_collections_imgurl_".$i) );
+				$linkurl = esc_url( get_option("cnpolitics_collections_link_".$i) );
+				echo '<a href="'.$linkurl.'"><img width="120" height="180" src="'.$imgurl.'"></a>';
 			}
 		?>	
 		</div>
-<!--	<div class="dots">
-			<div class="circle1-1"></div>
-			<div class="circle1-2"></div>
-			<div class="circle1-3"></div>
-		</div>-->
 	</div>
 </div>
 <?php get_footer(); ?>

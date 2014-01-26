@@ -26,7 +26,39 @@ jQuery(document).ready( function($) {
         //   setUserSetting('cats','pop');
         return false;
     });
+
 });
+
+
+// theme admin page media libray usage
+jQuery(document).ready( function($) {
+	var formfield = null;
+
+	$('.upload_image_button').click(function(){
+		$('html').addClass('Image');
+		formfield = $(this).parent().siblings().children('input[type=text]').attr('name');
+		tb_show('', 'media-upload.php?type=image&TB_iframe=true');
+		return false;
+	})
+
+	window.original_send_to_editor = window.send_to_editor;
+	window.send_to_editor = function(html) {
+		var fileurl;
+
+		if (formfield !=null ) {
+			imgurl = $('img', html).attr('src');
+			$("#"+formfield).val(imgurl);
+			tb_remove();
+			$('html').removeClass('Image');
+			formfield = null;
+		}
+		else {
+			window.original_send_to_editor(html);
+		}
+	};
+});
+
+
 
 function showtab(tabAreaId, tabId, taxonomyId, divId) {
 /*

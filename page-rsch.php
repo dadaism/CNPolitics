@@ -22,19 +22,16 @@ Template Name: Researcher
 				var quarter = '.json_encode($quarter).';
 				decorate_filter_box(issue, authorid, quarter);
 			  </script>';
-//	elseif ( isset($_GET['region']) ) :
-//		require_once('region-researcher.php');
+		//	elseif ( isset($_GET['region']) ) :
+		//		require_once('region-researcher.php');
 		
 	else :
 ?>
-
 <div id="column1" class="grid_6">
 <div>按照主题浏览</div>
 <?php
 	global $wpdb;
 	global $regions;
-	//error_reporting(E_ALL);
-	//ini_set('display_errors',1);
 	$reg = 1;	// region id
 	foreach ($regions as $value) {
 		$sql = "SELECT id, name
