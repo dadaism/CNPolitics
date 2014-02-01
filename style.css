@@ -369,11 +369,16 @@ h1 {color:#000;font-size: 24px;line-height: 36px;font-weight: bold;font-weight: 
 h1.post-head {margin:0px;}
 
 .post-subhead	{color:#000;font-size: 16px;line-height: 28px;font-weight: bold;}
-.post-author	{margin:28px 0;width: 200px;}
-.post-author a	{font-size:14px;color:#b42800;line-height: 28px;}
+.post-author	{
+	margin:35px 0;
+	line-height: 14px;
+	width: 200px;
+}
+.post-author a	{font-size:14px;color:#b42800;line-height: 14px;}
 .post-tag	{margin:28px 0;float: right;text-align: right;font-size:14px;line-height: 28px;color:#b9b9b9;}
 .post-body {width: 576px;}
 .post-body p {
+	color: #3b3b3b;
 	margin-top: 16px;
 }
 .post-body a:link {color:#b42800;}
@@ -456,11 +461,11 @@ blockquote footer p a {color:#b42800;}
 	margin: 28px auto;
 	text-align: center;
 	padding:0 22px;
-	max-width: 566px;
 	padding: 0px;
 }/*figure in body*/
 .post-body figure img {
 	margin: 0px auto;
+	max-width: 566px;
 }
 
 .post-body figcaption {

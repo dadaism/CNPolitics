@@ -9,7 +9,7 @@
 			<a href="#" class="fav" style="margin-right:14px;"><img class="img-hover" src="<?php bloginfo('template_directory'); ?>/images/social-fav.png" onmouseover="this.title='添加至收藏夹'" onClick=add_favorite()></a>
 			<a href="http://cnpolitics.org/feed/" target="_blank" class="rss" style="margin-right:14px;"><img class="img-hover" src="<?php bloginfo('template_directory'); ?>/images/social-rss.png" onmouseover="this.title='订阅RSS'"></a>
 			<a href="http://weibo.com/cnpolitics"  target="_blank" class="sina" style="margin-right:14px;"><img class="img-hover" src="<?php bloginfo('template_directory'); ?>/images/social-sina.png" onmouseover="this.title='访问新浪微博'"></a>
-			<a href="http://t.qq.com/chinapolitics"  target="_blank" class="tecent" style="margin-right:14px;"><img class="img-hover" src="<?php bloginfo('template_directory'); ?>/images/social-tecent.png" onmouseover="this.title='访问腾讯微博'"></a>
+			<a href="http://t.qq.com/chinapolitics"  target="_blank" class="tecent" style="margin-right:14px;"><img class="img-hover" src="<?php bloginfo('template_directory'); ?>/images/social-tencent.png" onmouseover="this.title='访问腾讯微博'"></a>
 			<a href="http://t.163.com/cnpolitics"  target="_blank" class="a163" style="margin-right:14px;"><img class="img-hover" src="<?php bloginfo('template_directory'); ?>/images/social-163.png" onmouseover="this.title='访问网易微博'"></a>
 		</div>
 		<p style="font-size:13px;color:#b9b9b9;font-weight:700;padding-bottom:12px;">订阅最新文章，自动推送至你的邮箱：</p>
@@ -21,8 +21,8 @@
 		<form style="display:inline;" action="http://list.qq.com/cgi-bin/qf_compose_send" target='_blank' method="post">
 			<input type="hidden" name="t" value="qf_booked_feedback">
 			<input type="hidden" name="id" value="384aadf45363c5d64f96fe9a5b020d0b8acee304fd40cdee">
-			<input type="text" id="to" name="to" value="输入你的Email地址" onblur="if (this.value==''){this.value='输入你的Email地址'}" onfocus="if (this.value=='输入你的Email地址') {this.value=''}" class="emailbox_input"/>
-			<input type="image" class="emailbox_img" src="<?php bloginfo('template_directory'); ?>/images/footer_input.png">
+			<input type="text" id="to" name="to" value="输入你的Email地址" onblur="if (this.value==''){this.value='输入你的Email地址'}" onfocus="if (this.value=='输入你的Email地址') {this.value=''}" class="emailbox_input footer-emailbox-input"/>
+			<input type="image" class="emailbox_img footer-emailbox-img" src="<?php bloginfo('template_directory'); ?>/images/footer_input.png">
 			<img class="emailbox_shadow" src="<?php bloginfo('template_directory'); ?>/images/shadow_emailbox.png">
 		</form>
 		</div>
