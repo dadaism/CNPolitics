@@ -78,7 +78,11 @@ a {
 
 .about-content footer p{
 	font-size: 14px;
+	color: #9e9e9e;
+	line-height: 24px;
 }
+
+.about-content footer p a {color:#b42800;}
 
 #coop-head {margin:30px auto 20px;}
 #coop-head ul li {display: inline;}

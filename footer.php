@@ -12,7 +12,7 @@
 			<a href="http://t.qq.com/chinapolitics"  target="_blank" class="tecent" style="margin-right:14px;"><img class="img-hover" src="<?php bloginfo('template_directory'); ?>/images/social-tencent.png" onmouseover="this.title='访问腾讯微博'"></a>
 			<a href="http://t.163.com/cnpolitics"  target="_blank" class="a163" style="margin-right:14px;"><img class="img-hover" src="<?php bloginfo('template_directory'); ?>/images/social-163.png" onmouseover="this.title='访问网易微博'"></a>
 		</div>
-		<p style="font-size:13px;color:#b9b9b9;font-weight:700;padding-bottom:12px;">订阅最新文章，自动推送至你的邮箱：</p>
+		<p style="font-size:13px;color:#b9b9b9;font-weight:700;padding-bottom:12px;"><br>订阅最新文章，自动推送至你的邮箱：</p>
 		<div class="emailbox">
 		<!--以下是QQ邮件列表订阅嵌入代码-->
 		<script >var nId = "384aadf45363c5d64f96fe9a5b020d0b8acee304fd40cdee"</script>
@@ -26,12 +26,12 @@
 			<img class="emailbox_shadow" src="<?php bloginfo('template_directory'); ?>/images/shadow_emailbox.png">
 		</form>
 		</div>
-		<ul class="list-static">
+		<div class='footer-about'>
+			<ul style="font-size:13px; color:#f1f1f1;">
 			<?php cnpolitics_list_static(); ?>
-		</ul>
-		<p style="font-size:13px;margin-top:7px;">&copy; 2011–<?php echo date('Y');?> 政见 CNPolitics.org &nbsp;&nbsp;
-			<a href="http://www.miitbeian.gov.cn/">京ICP备09007572号-2</a>
-		</p>
+			</ul>
+		</div>
+		<p style="font-size:13px;margin-top:7px;">&copy; 2011–<?php echo date('Y');?> 政见 CNPolitics.org</p>
 		</div>
 
 		<div class="grid_5">
@@ -51,7 +51,7 @@
 		<div class="clear"></div>
 		<div id="footer-end">
 			<p><a href="http://www.foundertype.com/">方正字库</a>授权“政见”网站及微博使用方正字体。</p>
-			<p>Powered by <a href="http://www.wordpress.org/">WordPress</a>.</p>
+			<p>Powered by <a href="http://www.wordpress.org/">WordPress</a>.&nbsp;&nbsp;<a href="http://www.miitbeian.gov.cn/" style='font-size:11px;'>京ICP备09007572号-2</a></p>
 		</div>
 	</div>  <!-- grid end-->
 	</div> <!-- container-copy end-->

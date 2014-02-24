@@ -64,7 +64,7 @@
 		</div>
 	</div>
 
-	<div id="collections" class="grid_5_1 prefix_1">
+	<div id="collections" class="grid_5_1">
 		<div class="additional-text-collections">
 			<div class="additional-head">
 			<?php

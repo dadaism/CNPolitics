@@ -39,8 +39,7 @@ body {
 .grid_10,
 .grid_11,
 .grid_12,
-.grid_5_1,
-.grid_6_1 {
+.grid_5_1 {
   display: inline;
   float: left;
   margin-left: 10px;
@@ -110,6 +109,14 @@ body {
 
 #container .grid_6_1 {
   width: 440px;
+  display: inline;
+  float: left;
+  margin-left:0;
+  margin-right:0;
+}
+
+#graphics.grid_6_1 {
+  margin:0;
 }
 
 #container .grid_7 {
