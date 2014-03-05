@@ -51,7 +51,7 @@
 		<div class="clear"></div>
 		<div id="footer-end">
 			<p><a href="http://www.foundertype.com/">方正字库</a>授权“政见”网站及微博使用方正字体。</p>
-			<p>Powered by <a href="http://www.wordpress.org/">WordPress</a>.&nbsp;&nbsp;<a href="http://www.miitbeian.gov.cn/" style='font-size:11px;'>京ICP备09007572号-2</a></p>
+			<p>Powered by <a style="color:#b9b9b9;" href="http://www.wordpress.org/">WordPress</a>｜<a href="http://www.miitbeian.gov.cn/" style="font-size:11px; color:#b9b9b9;">京ICP备09007572号-2</a></p>
 		</div>
 	</div>  <!-- grid end-->
 	</div> <!-- container-copy end-->

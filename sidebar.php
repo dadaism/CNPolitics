@@ -28,7 +28,7 @@
 	}
 */
 	for ($i=0; $i<=5; $i++) {
-		echo '<div class="article-select-first">
+		echo '<div class="article-select">
 				<p class="select-head"><a href="'.get_option("cnpolitics_recommend_link_".$i).'">'.get_option("cnpolitics_recommend_title_".$i).'</a></p>
 					<p class="select-abstract">'.get_option("cnpolitics_recommend_content_".$i).'</p>
 				</div>';

@@ -26,9 +26,12 @@
 }
 
 .about-content footer p {
-	font-size: 14px;
+ 	font-size: 14px;
+ 	line-height: 24px;
 	color: #9e9e9e;
-	line-height: 24px;
+	margin-bottom: 0px !important;
+	margin-top: 0px !important;
+	/*这里的两个 !important 未必需要，但在 Inspector 中调试时会被某些父级样式覆盖，原因暂时还没有查清。*/
 }
 
 .about-content footer p a {color:#b42800;}
@@ -37,8 +40,9 @@
 	color:#000000;
 	font-size: 18px;
 	font-weight: bold;
+	line-height: 28px;
 	text-align: center;
-	margin:20px auto;
+	margin: 28px 0px 0px 0px;
 }
 
 #about-cn .contribute p {
@@ -299,7 +303,12 @@ li.language-toggle.inactive {
 }
 
 .contribute {
-	margin-top: 40px;
+	margin: 0px auto;
+	margin-bottom:30px;
+	text-align:center;
+    border:#b9b9b9 dashed 1px;
+	padding:10px;
+	width:340px;
 }
 
 #copyright-cn .contribute p {

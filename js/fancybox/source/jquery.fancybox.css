@@ -75,8 +75,8 @@
 	max-height: 100%;
 }
 
-#fancybox-loading, .fancybox-close, .fancybox-prev span, .fancybox-next span {
-	background-image: url('fancybox_sprite.png');
+.fancybox-close, .fancybox-prev span, .fancybox-next span {
+	background-image: url('button-close-default.png');
 }
 
 #fancybox-loading {
@@ -101,8 +101,8 @@
 	position: absolute;
 	top: -18px;
 	right: -18px;
-	width: 36px;
-	height: 36px;
+	width: 10px;
+	height: 10px;
 	cursor: pointer;
 	z-index: 8040;
 }
@@ -262,9 +262,11 @@
 	   only screen and (min--moz-device-pixel-ratio: 1.5),
 	   only screen and (min-device-pixel-ratio: 1.5){
 
-	#fancybox-loading, .fancybox-close, .fancybox-prev span, .fancybox-next span {
-		background-image: url('fancybox_sprite@2x.png');
-		background-size: 44px 152px; /*The size of the normal image, half the size of the hi-res image*/
+	.fancybox-close, .fancybox-prev span, .fancybox-next span {
+		background-image: url('button-close-default.png');
+		background-size:10px 10px;
+/*		background-image: url('fancybox_sprite@2x.png');*/
+/*		background-size: 44px 152px; The size of the normal image, half the size of the hi-res image*/
 	}
 
 	#fancybox-loading div {

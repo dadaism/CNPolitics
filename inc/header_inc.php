@@ -67,9 +67,15 @@
                 'href': $form.attr("action") + "?" + $form.serialize(),
                 'type': 'iframe',
                 'padding':0,
+                'width':660,
                 tpl: {
-        			closeBtn: '<a title="Close" style="top:20px; right:20px;" class="fancybox-item fancybox-close " href="javascript:;"></a>'
+        			closeBtn: '<a title="Close" style="top:20px; right:20px;" class="fancybox-item fancybox-close" href="javascript:;"></a>'
+   				},
+ /*  				'afterLoad': function() {
+   					alert( $("div.fancybox-wrap").css("top") );
+      				$("div.fancybox-wrap").css({'top':'0px', 'bottom':'0px'});
    				}
+ */
         	});
         	return false;
 		});
@@ -165,6 +171,7 @@ function add_favorite() {
 		$("a[href$='.jpg'],a[href$='.jpeg'],a[href$='.png'],a[href$='.gif']").attr('rel', 'gallery').fancybox({
 			'autoSize': false,
 			'autoDimensions': false,
+			'width':660,
 			'autoScale'	: false,
 			'fitToView': false,
 			helpers : {
@@ -181,4 +188,4 @@ function add_favorite() {
 <!-- End fancybox -->
 </head>
 <body>
-<div id="container" style="margin-bottom:70px;">
+<div id="container">

@@ -4,6 +4,8 @@
 <style type="text/css">
 @import url("<?php bloginfo('template_directory');?>/css/search.css");
 </style>
+<div id='search-page'>
+   <!-- <div class='close'></div> the close button-->
 	<div class="search-box">
 	<!--div id="search-box"-->
 		<form id="search-form" method="get" action="<?php bloginfo('siteurl'); ?>/">
@@ -68,6 +70,7 @@
 ?>
 	</div>
 <div class="pagination"><?php wp_pagenavi(); ?></div>
+</div><!--search-page ends-->
 <script>
 	$(document).ready(function() {
 		$("a:not(.page-numbers)").attr("target", "_parent");
