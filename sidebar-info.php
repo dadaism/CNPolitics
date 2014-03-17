@@ -107,7 +107,7 @@
 		endif;
 ?>
 		<p><a href="<?php echo get_site_url();?>"><b>政见 CNPolitics.org</b></a> 是一个独立团队，向你介绍世界上最聪明的脑袋是怎样分析中国的。我们致力于发掘海内外学者和智库的智慧成果，引进思想资源。｜更多关于我们 »</p>
-		<p style="color:#777777;margin-bottom:10px;">关注政见动向：</p>
+		<p style="color:#777777;margin-bottom:5px;">关注政见动向：</p>
 		<div class="post-sidebar-social">
 			<ul>
 			<li><a href="#" class="fav" style="margin-right:14px;"><img class="img-hover" src="<?php bloginfo('template_directory'); ?>/images/post-fav.png" onmouseover="this.title='添加至收藏夹'"></a></li>
@@ -117,7 +117,7 @@
 			<li><a href="http://t.163.com/cnpolitics" class="a163" style="margin-right:14px;"><img class="img-hover" src="<?php bloginfo('template_directory'); ?>/images/post-163.png" onmouseover="this.title='访问网易微博'"></a></li>
 			</ul>
 		</div>
-		<p style="color:#777777;margin-bottom:15px;float:left;">订阅最新文章，自动推送至你的邮箱：</p>
+		<p style="color:#777777;margin-bottom:10px;float:left;">订阅最新文章，自动推送至你的邮箱：</p>
 		<!--以下是QQ邮件列表订阅嵌入代码-->
 		<script >var nId = "384aadf45363c5d64f96fe9a5b020d0b8acee304fd40cdee"</script>
 		<script src="http://list.qq.com/zh_CN/htmledition/js/qf/page/qfcode.js" charset="gb18030"></script>
@@ -127,7 +127,8 @@
 			<input type="hidden" name="id" value="384aadf45363c5d64f96fe9a5b020d0b8acee304fd40cdee">
 			<input type="text" id="to" name="to" value="输入你的Email地址" onblur="if (this.value==''){this.value='输入你的Email地址'}" onfocus="if (this.value=='输入你的Email地址') {this.value=''}" class="post-sidebar-emailbox-input"/>
 			<input type="image" class="emailbox_img sidebar-emailbox-img" src="<?php bloginfo('template_directory'); ?>/images/sidebar_input.png">
-			<img style="margin-left:-15px;" class="emailbox_shadow" src="<?php bloginfo('template_directory'); ?>/images/shadow_emailbox.png">
 		</form>
+		<div class="post-sidebar-emailbox-sample"></div>
+		<img class="emailbox_shadow post-sidebar" src="<?php bloginfo('template_directory'); ?>/images/emailbox_shadow_post.png">
 </div>
 <script type="text/javascript" src="<?php bloginfo('template_directory');?>/js/info_box.js"></script>

@@ -12,6 +12,7 @@
 			<input type="text" name="s" value="<?php echo $s;?>" onblur="if (this.value==''){this.value='搜索'}" onfocus="if (this.value=='搜索') {this.value=''}" class="topsearch_input"/>
 			<input type="image" class="topsearch_img" src="<?php bloginfo('template_directory'); ?>/images/search.png"/>
 		</form>
+		<div id='box-sample-fancybox'></div>
 		<div class='search-box-shadow'></div>
 <?php
 	$mySearch = new WP_Query("s=$s  & showposts=-1 & post_type=post ");

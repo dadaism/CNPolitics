@@ -23,8 +23,9 @@
 			<input type="hidden" name="id" value="384aadf45363c5d64f96fe9a5b020d0b8acee304fd40cdee">
 			<input type="text" id="to" name="to" value="输入你的Email地址" onblur="if (this.value==''){this.value='输入你的Email地址'}" onfocus="if (this.value=='输入你的Email地址') {this.value=''}" class="emailbox_input footer-emailbox-input"/>
 			<input type="image" class="emailbox_img footer-emailbox-img" src="<?php bloginfo('template_directory'); ?>/images/footer_input.png">
-			<img class="emailbox_shadow" src="<?php bloginfo('template_directory'); ?>/images/shadow_emailbox.png">
 		</form>
+			<div class='emailbox_footer_sample'></div>
+			<img class="emailbox_shadow" src="<?php bloginfo('template_directory'); ?>/images/shadow_emailbox.png">
 		</div>
 		<div class='footer-about'>
 			<ul style="font-size:13px; color:#f1f1f1;">
