@@ -974,11 +974,12 @@ a.next.page-numbers:active:after {border-left:7px solid #b42800;}
 }
 
 .close {
-	position:fixed;
+	position:absolute;
 	width: 10px;
 	height: 10px;
 /*	margin-top:20px;*/
 	background-image: url(images/button-close-default.png);
+	background-size:10px 10px;
 	cursor: pointer;
 }
 

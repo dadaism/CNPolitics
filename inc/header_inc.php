@@ -66,15 +66,24 @@
             /*    'title': "search results",  */
                 'href': $form.attr("action") + "?" + $form.serialize(),
                 'type': 'iframe',
-                'padding':0,
-                'width':660,
+                'padding': 0,
+                'width': 660,
+                'topRatio': 0,
                 tpl: {
-        			closeBtn: '<a title="Close" style="top:20px; right:20px;" class="fancybox-item fancybox-close" href="javascript:;"></a>'
+        			/*closeBtn: '<a title="Close" style="top:20px; right:20px;" class="fancybox-item fancybox-close" href="javascript:;"></a>'*/  				
+        			closeBtn: '<a title="Close" style="top:20px; right:20px;" class="close" href="javascript:;"></a>'
+        		},
+  				'afterLoad': function() {
+   				//	alert( $("div.fancybox-wrap").css("top") ); 
+      			//	$("div.fancybox-wrap").css({'top':'0px !important', 'bottom':'0px'});
    				},
-  			/*	'afterLoad': function() {
-   					alert( $("div.fancybox-wrap").css("top") ); 
-      				$("div.fancybox-wrap").css({'top':'0px !important', 'bottom':'0px'});
-   				}*/
+   				helpers : {
+        			overlay : {
+            			css : {
+            	  		  	'background' : 'rgba(0, 0, 0, 0.5)',
+            			}
+        			}
+    			}
         	});
         	return false;
 		});
@@ -183,7 +192,7 @@ function add_favorite() {
 			helpers : {
         		overlay : {
             		css : {
-            	    	'background' : 'rgba(58, 42, 45, 0.95)',
+            	    	'background' : 'rgba(0, 0, 0, 0.5)',
             		}
         		}
     		}
