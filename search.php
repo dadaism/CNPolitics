@@ -49,7 +49,7 @@
 				<div class='result-head'>
 					<a href="<?php  echo $link;?>"><?php echo $title; ?> | 政见 CNPolitics.org </a>
 				</div>
-				<p class="latest-abstract"><?php echo "...".$content."..."; ?></p>
+				<p class="result-abstract"><?php echo "...".$content."..."; ?></p>
 				<div class='result-link'>
 					<a href='<?php  echo $link;?>'><?php  echo str_replace("http://", "", $link);?></a>
 				</div>
@@ -59,11 +59,8 @@
 	else : 
 ?>
 	<article>
-		<header class="entry-header">
-			<h1 class="entry-title"><?php _e( '没有找到该文章', 'leizi' ); ?></h1>
-		</header>
 		<div class="entry-content">
-			<p><?php _e( '抱歉没有找到该文章', 'leizi' ); ?></p>
+			<p style="text-align: center;"><?php _e( '没有找到相关内容', 'leizi' ); ?></p>
 		</div>
 	</article>
 <?php 

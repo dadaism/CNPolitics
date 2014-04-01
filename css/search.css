@@ -95,6 +95,10 @@ input#search-form .topsearch_input:focus	{
 	color:#3b3b3b;
 }
 
+.result-abstract {
+	text-decoration: none;
+}
+
 .search-results-item p {
 	line-height: 25px;
 	font-size: 14px;
