@@ -87,30 +87,46 @@
 		$("#search_form").bind("submit", function(){
 
 			$('.front-search-box-shadow-hover').removeClass('front-search-box-shadow-hover').addClass('front-search-box-shadow');
-
+			var mHeight = $( window ).height();
 			$form = $(this);
     		$.fancybox({
             /*    'title': "search results",  */
                 'href': $form.attr("action") + "?" + $form.serialize(),
                 'type': 'iframe',
+                'margin': 0,
                 'padding': 0,
                 'width': 660,
+                'minHeight': mHeight,
                 'topRatio': 0,
                 tpl: {
+                	wrap     : '<div class="fancybox-wrap" tabIndex="-1"><div class="fancybox-skin"><div class="fancybox-outer"><div class="fancybox-inner"></div></div></div></div>',
         			/*closeBtn: '<a title="Close" style="top:20px; right:20px;" class="fancybox-item fancybox-close" href="javascript:;"></a>'*/  				
         			closeBtn: '<a title="Close" style="top:20px; right:20px;" class="close" href="javascript:;"></a>'
         		},
   				'afterLoad': function() {
    				//	alert( $("div.fancybox-wrap").css("top") ); 
       			//	$("div.fancybox-wrap").css({'top':'0px !important', 'bottom':'0px'});
+      				//alert( $(".fancybox-inner").css("top") ); 
    				},
    				helpers : {
         			overlay : {
             			css : {
             	  		  	'background-color' : 'rgba(0, 0, 0, 0.25)',
+            	  		  	'background-image' : 'none',
             			}
         			}
-    			}
+    			},
+    			beforeShow: function() {
+        			var newWidth = 250; // set new image display width
+        			$(".fancybox-inner").css({
+            			width  : newWidth,
+            			height : "auto"
+        			}); // apply new size to img
+        			// optionally :
+     	   			// set new values for parent container IF you want to match the image size
+        			// this.width  = newWidth;
+        			// this.height = $(".fancybox-inner img").innerHeight();
+   				}
         	});
         	return false;
 		});

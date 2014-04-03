@@ -71,7 +71,13 @@
 </div><!--search-page ends-->
 <script>
 	$(document).ready(function() {
+		var mHeight = $( document ).height();
 		$("a:not(.page-numbers)").attr("target", "_parent");
+		//alert( $( window ).height() );
+		//alert( $(".fancybox-inner").css("height"));
+		//alert( $("iframe").css("height"));
+		//$("#search-page").css("height", mHeight);
+		//alert( $("#search-page").css("height") );
 	});
 </script>
 <?php require_once( get_template_directory().'/inc/footer_inc.php' ); ?>
