@@ -1,19 +1,22 @@
-body {min-width: 0px;}
+body,html {min-width: 0px;height:100%;}
 
 #container{
 	width: auto;
 	margin:0;
 	padding:0;
+	height: 100%;
+	min-height: 100%;
 }
 
 #search-page	{
 	margin:0;
 	width: 660px;
 	height: 100%;
+	min-height: 100%;
 	text-align: center;
-	-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+/*	-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 	-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);     */
 	z-index: 1000;
 	background-color:#f9f9f9;
 }

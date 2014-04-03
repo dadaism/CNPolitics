@@ -71,7 +71,7 @@
 </div><!--search-page ends-->
 <script>
 	$(document).ready(function() {
-		var mHeight = $( document ).height();
+		//var mHeight = $( document ).height();
 		$("a:not(.page-numbers)").attr("target", "_parent");
 		//alert( $( window ).height() );
 		//alert( $(".fancybox-inner").css("height"));
