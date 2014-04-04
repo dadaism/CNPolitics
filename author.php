@@ -89,18 +89,18 @@ endif;
 				echo '</div><div id="column2" class="prefix_1 grid_5">';
 			
 			echo '<div class="article-latest">
-					<div class="latest-text-observer">
+					<div class="latest-text">
 						<p class="latest-head"><a href="'.get_permalink($post->ID).'">'.get_the_title().'</a></p>
-						<div class="'.$class_name.'">
-							<p class="latest-abstract abstract-full" hidden="true">'.get_the_excerpt().'</p>
-							<p class="latest-abstract abstract-short">'.get_excerpt($charlength).'</p>
+						<div class="box-abstract"  hidden="true" style="display: none;">
+							<p class="latest-abstract abstract-full">'.get_the_excerpt().'</p>
 						</div>
+						<p class="latest-abstract abstract-short" style="display: block;"></p>
 					</div>
 				</div>
 				<div class="clear"></div>';
 			$count = $count + 1;
 		endwhile;
-		echo '</div>';
+		echo '</div><!-- End column1 -->';
 	else:
 	
 	endif;

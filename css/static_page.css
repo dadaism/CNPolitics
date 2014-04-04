@@ -169,7 +169,7 @@ a {
     width: 960px;
 }
 
-#join-nav p { font-size:24pt;margin:0 auto; text-align:center; padding:38px 0;font-weight:bold;}
+#join-nav h1 { font-size:24px;margin:0 auto; text-align:center; padding:38px 0;font-weight:bold;}
 #join-nav ul {margin:0px; text-align:center;padding: 0px;}
 #join-nav ul li {display: inline;color:#b9b9b9;}
 #join-nav ul li a {font-size:14px; color: b9b9b9;}

@@ -45,9 +45,9 @@
 <div id='scroller-anchor'></div>
 <div id='fixed-top'>
 	<div id="join-nav">
-		<p>团队成员</p>
+		<h1>团队成员</h1>
 		<ul>
-			<li class="team-nav-obs">观察员 |</li>
+			<li class="join-nav-obs">观察员 |</li>
 			<li class="join-nav-gra"> 制图师 |</li>
 			<li class="join-nav-ops"> 新媒体运营 |</li>
 			<li class="join-nav-des"> 设计师 |</li>

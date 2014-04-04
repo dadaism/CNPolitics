@@ -1,7 +1,7 @@
 <div id='scroller-anchor'></div>
 <div id='fixed-top'>
 	<div id="join-nav">
-		<p>加入我们</p>
+		<h1>加入我们</h1>
 		<ul>
 			<li class="join-nav-obs"> 观察中心 |</li>
 			<li class="join-nav-gra"> 图解中心 |</li>
