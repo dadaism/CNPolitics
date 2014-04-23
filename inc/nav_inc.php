@@ -22,5 +22,5 @@
 	<div class="clear"></div>
 	<div class="when-shown"><p style="padding-top:20px;">隐藏导航</p></div>
 	<div class="shadow-header" style="margin-top:-41px;"></div>
-	<div class="when-hidden"><p style="padding-top:5px;">展开导航</p></div>
+	<div style="display: block;" class="when-hidden"><p style="padding-top:5px;">展开导航</p></div>
 </div><!--/header-->

@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/css/style_grid.css" type="text/css" />
 <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/js/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
 <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/js/fancybox/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" type="text/css" media="screen" />
-
+<link rel="icon" type="image/png" href="<?php bloginfo('template_directory'); ?>/images/favicon.ico" ></link>
 
 <!--WP Head-->
 <?php wp_head(); ?>
@@ -226,4 +226,8 @@ function add_favorite() {
 <!-- End fancybox -->
 </head>
 <body>
+<div id="deco-top">
+	<div class="grey"></div>
+	<div class="white"></div>
+</div>
 <div id="container">

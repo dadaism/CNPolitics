@@ -57,20 +57,18 @@ endif;
 <div id="display_bar">
 	<img src="<?php bloginfo('template_directory'); ?>/images/shadow_middle.png">
 </div>
-
 <div class="observer-summary">
 <?php  
 	$reg_date = $curauth->user_registered;
 	echo date("Y 年 n 月", strtotime($reg_date)).'至今，已发表 '.count_user_posts($curauth->ID).' 篇政见';
 
 ?>
-	
 </div>
 <?php 
 	//echo $curauth->ID;
 	// The Loop
 	$count = 0;
-	$posts_per_column = 3;
+	$posts_per_column = 4;
 	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 	$args = array('posts_per_page' =>$posts_per_column*2, 'paged' => $paged, 'author' => $curauth->ID );
 	query_posts($args);
@@ -84,13 +82,14 @@ endif;
 				$class_name = "box-abstract";
 			}
 			if ( $count==0 )
-				echo '<div id="column1" class="grid_5">';
+				echo '<div id="column1" class="grid_5" style="padding-left:60px">';
 			if ( $count==$posts_per_column )
 				echo '</div><div id="column2" class="prefix_1 grid_5">';
 			
-			echo '<div class="article-latest">
-					<div class="latest-text">
-						<p class="latest-head"><a href="'.get_permalink($post->ID).'">'.get_the_title().'</a></p>
+			//echo '<div class="article-latest">
+			echo '<div class="observer-article">
+					<div class="observer-article-text">
+						<p class="latest-head" ><a href="'.get_permalink($post->ID).'">'.get_the_title().'</a></p>
 						<div class="box-abstract"  hidden="true" style="display: none;">
 							<p class="latest-abstract abstract-full">'.get_the_excerpt().'</p>
 						</div>
