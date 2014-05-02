@@ -294,6 +294,8 @@ function theme_option_admin() {
     				update_option("cnpolitics_cat_vis_".$value->cat_ID, 0);
 				}
 			}
+			update_option("cnpolitics_member_other", $_POST["cnpolitics_member_other"]);
+			update_option("cnpolitics_member_past", $_POST["cnpolitics_member_past"]);
 		}
 		else if ( $_POST['action']=="reset" ) {
 			for ( $i=0; $i<=5; $i++) {
@@ -313,6 +315,8 @@ function theme_option_admin() {
 			foreach ( $categories as $key => $value ) {	
    					update_option("cnpolitics_cat_vis_".$value->cat_ID, 1);
 			}
+			update_option("cnpolitics_member_other", '');
+			update_option("cnpolitics_member_past", '');
 		}
 	}
 	echo '<div class="wrap">
@@ -478,6 +482,25 @@ function theme_option_admin() {
 				<tr><td colspan="3">&nbsp;</td></tr>';
 	}
 	echo	'
+		  	</tbody>
+		  </table>
+		  <table class="widefat" width="100%" border="0" cellpadding="0" cellspacing="0">
+		  	<thead>
+		  		<tr>
+				<th colspan="2">Team Page</th>
+				</tr>
+			</thead>
+		  </table>
+		  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#f4f4f4; padding:10px">
+		  	<tbody>
+		  		<tr class="form-field form-required">
+					<td width="30%" valign="middle"><strong>Other CNPoliticser</strong></td>
+					<td width="70%"><textarea name="cnpolitics_member_other" style="width:400px; height:110px;" type="textarea" cols="" rows="">'.get_option("cnpolitics_member_other").'</textarea></td>
+				</tr>
+				<tr class="form-field form-required">
+					<td width="30%" valign="middle"><strong>Past CNPoliticser</strong></td>
+					<td width="70%"><textarea name="cnpolitics_member_past" style="width:400px; height:110px;" type="textarea" cols="" rows="">'.get_option("cnpolitics_member_past").'</textarea></td>
+				</tr>
 		  	</tbody>
 		  </table>
 		  <p class="submit" style="display:inline; float:right;">

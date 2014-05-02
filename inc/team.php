@@ -167,28 +167,30 @@
 
 	<div id='team-more'>
 		<div id='invited-members'>
-			<p>特邀成员：</p>
+			<p>其他成员：</p>	
 			<ul>
-				<li>柏蔚林</li>
-				<li>常仁豪</li>
-				<li>戴磊</li>
-				<li>郭毅</li>
-				<li>郝时远</li>
-				<li>侯浩然</li>
-				<li>娜迪娅</li>
-				<li>吴红毓然</li>
-				<li>张友谊</li>
+<?php
+	$delimiters = array(',','，');
+	$others = get_option("cnpolitics_member_other"); 
+	$result = multiple_explode($delimiters, $others);
+	foreach ($result as $key => $name) {
+		echo 	'<li>'.$name.'</li>';
+	}
+?>
 			</ul>
 		</div>
 
 		<div id='contributors'>
 			<p>感谢曾经为政见团队做出贡献的：</p>
 			<ul>
-				<li>李一</li>
-				<li>钱二</li>
-				<li>孙三</li>
-				<li>赵四</li>
-				<li>周五</li>
+<?php
+	$delimiters = array(',','，');
+	$pasts = get_option("cnpolitics_member_past"); 
+	$result = multiple_explode($delimiters, $pasts);
+	foreach ($result as $key => $name) {
+		echo 	'<li>'.$name.'</li>';
+	}
+?>
 			</ul>
 		</div>
 
