@@ -2,7 +2,41 @@
 <html>
 <head> 
 <meta http-equiv="Content-Type" content="text/html; charset=<?php bloginfo( 'charset' ); ?>" />
-<title><?php wp_title(); ?> <?php bloginfo( 'name' ); ?></title>
+<title>
+<?php 
+	if ( is_home() ) {
+		echo get_bloginfo('name').' - '.get_bloginfo('description');
+	}
+	else if ( is_page_template('page-static.php') && isset($_GET['static_page']) ) {
+		if ( "about.php" == $_GET['static_page'] )
+			echo "关于政见";
+		else if ( "copyright.php" == $_GET['static_page'] )
+			echo "版权声明";
+		else if ( "coop.php" == $_GET['static_page'] )
+			echo "交流合作";
+		else if ( "join_us.php" == $_GET['static_page'] )
+			echo "加入我们";
+		else if ( "team.php" == $_GET['static_page'] )
+			echo "团队成员";
+
+		echo ' | '.get_bloginfo('name');
+	}
+	else if ( is_page_template('page-rsch.php') && isset($_GET['rsch_id']) ) {
+		$rid = $_GET['rsch_id']; 	// researcher id
+		$r = get_rsch_byID($rid);
+		echo $r->name.' | '.get_bloginfo('name');
+	}
+	else if ( is_page_template('page-topic.php') && isset($_GET['topic_id']) ) {
+		$tid = $_GET['topic_id']; 	// topic id
+		$t = get_topic_byID($tid);
+		echo $t->subject.' | '.get_bloginfo('name');
+	}
+	else {
+		wp_title('|', true, 'right');
+		echo get_bloginfo('name');
+	}
+?> 
+</title>
 <link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' );?>" type="text/css" media="screen" />
 <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/css/style_grid.css" type="text/css" />
 <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/js/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
@@ -28,7 +62,7 @@
 			$(".when-shown").show();
 			$(".shadow-header").show();
 		})
-	
+
 		$(".when-shown").click(function(){
 			$("#slidecontent").slideUp();
 			$(this).hide();
@@ -39,12 +73,25 @@
 			}, 400);
 		})
 
+		$(".nav-header").click(function(){
+			if ( $(this).parent(".nav-box").find(".nav-collapse-content").css("display")=="none" ) {
+				$(this).parent(".nav-box").find(".nav-collapse-content").slideDown();
+				$(this).find(".expand-nav").hide();
+				$(this).find(".collapse-nav").show();
+			}
+			else if ( $(this).parent(".nav-box").find(".nav-collapse-content").css("display")=="block" ) {
+				$(this).parent(".nav-box").find(".nav-collapse-content").slideUp();
+				$(this).find(".collapse-nav").hide();
+				$(this).find(".expand-nav").show();
+			}
+		})
+		
 		$('.back-to-top').click(function () {
 			$('body,html').animate({
 				scrollTop: 0
 			}, 400);
 		})
-
+/*
 		$(".expand-nav").click(function(){
 			$(this).parents(".nav-box").find(".nav-collapse-content").slideDown();
 			$(this).hide();
@@ -57,7 +104,7 @@
 			$(this).hide();
 			$(this).parent().find(".expand-nav").show();
 		})
-
+*/
 		/* search shadow on focus */
 		$(".topsearch_input").focus(function() {
   			//$('input[type="image"].topsearch_img_shadow').css("margin", '28px 0 0 -329px');

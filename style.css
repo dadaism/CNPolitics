@@ -221,6 +221,8 @@ input.topsearch_input:focus	{
 	margin:0px;
 }
 
+.nav-header {cursor:pointer;}
+
 #nav .last {border-bottom:1px dashed #B9B9B9;margin-bottom: 30px;}
 #nav .nav-box	{height:100%;}
 #nav .nav-box a {font-size:14px;color:#b42800;line-height: 25px;}
@@ -786,7 +788,7 @@ span.inline-note {color: #b42800;}
 	content: "• ";     
     color: #b9b9b9;
 }
-.researcher-info ul li a {color: #777;}
+.researcher-info ul li span {color: #777;}
 
 .researcher-info ul {display: inline;}
 
@@ -825,54 +827,23 @@ span.inline-note {color: #b42800;}
 	background-color:rgba(95,60,0,0.05);
 }
 
-.topic-filter p {margin-top:5px;margin-left: 0px;}
-.topic-filter ul li {width:130px; float:left; padding-left:10px; line-height: 28px;}
-.topic-filter  ul li :before{
+.filter-content p {margin-top:5px;margin-left: 0px;}
+.filter-content ul li {width:130px; float:left; padding-left:10px; line-height: 28px;}
+.filter-content  ul li :before{
 	content: "• ";     
     color: #b9b9b9;
 }
-.topic-filter ul li a {color: #777;}
-
-.topic-filter ul {min-height: 1px;} /* avoid collapse */
-.topic-filter ul {margin-left:0px; padding:0px; display:block; list-style-type:disc; }
-
-.author-filter p {margin-top:5px;margin-left: 0px;}
-.author-filter ul li {width:85px;float:left; padding-left:10px;line-height: 28px;}
-.author-filter  ul li :before{
-	content: "• ";     
-    color: #b9b9b9;
-}
-.author-filter ul li a {color: #777;}
-
-.author-filter ul {min-height: 1px;} /* avoid collapse */
-.author-filter ul {margin-left:0px; padding:0px; list-style-type:disc;}
-
-.quarter-filter p {margin-top:5px;margin-left: 0px;}
-.quarter-filter ul li {width:85px;float:left; padding-left:10px; line-height: 28px;}
-.quarter-filter  ul li :before{
-	content: "• ";     
-    color: #b9b9b9;
-}
-.quarter-filter ul li a {color: #777;}
-
-.quarter-filter ul {min-height: 1px;} /* avoid collapse */
-.quarter-filter ul {margin-left:0px; padding:0px; list-style-type:disc;}
-
+.filter-content ul li a {color: #777;}
+.filter-content ul {min-height: 1px;} /* avoid collapse */
+.filter-content ul {margin-left:0px; padding:0px; display:block; list-style-type:disc; }
 
 .nav-collapse-content,
-.collapse-topic-filter,
-.collapse-author-filter,
-.collapse-quarter-filter,
-.topic-filter,
-.author-filter,
-.quarter-filter	{display: none;}
+.collapse-filter,
+.filter-content	{display: none;}
 
-.collapse-topic-filter,
-.collapse-author-filter,
-.collapse-quarter-filter,
-.expand-topic-filter,
-.expand-author-filter,
-.expand-quarter-filter	{cursor:pointer;}
+.filter-header,
+.collapse-filter,
+.expand-filter	{cursor:pointer;}
 
 /*CATEGORY 404 
 ---------------------------------------------------------------------------------------*/
@@ -881,9 +852,6 @@ span.inline-note {color: #b42800;}
 .category404 p {font-size:15px;color:#777;}
 .category404 p a {color: #b42800;}
 .column1404	{padding-bottom: 280px;}
-
-
-
 
 /*06 _ Researcher Page
 ---------------------------------------------------------------------------------------*/

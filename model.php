@@ -638,14 +638,14 @@ function CNPolitics_save_post($post_id) {
 		// delete unselected
 		//wp_die( var_dump($post_id) );
 		foreach ( $old_checked_issues as $iid) {
-			if ( !in_array($iid, $checked_issues) ) {
+			if ( !in_array($iid, (array)$checked_issues) ) {
 				//echo "delete".$tid."\n";
 				delete_post_info($post_id, "issue", $iid);
 			}
 		}
 		// add new
 		//echo "add new selected checkbox\n";
-		foreach ( $checked_issues as $iid) {
+		foreach ( (array)$checked_issues as $iid) {
 				//wp_die( 'add new' );
 			if ( !in_array($iid, $old_checked_issues) ) {
 				//echo "add".$iid."\n";
@@ -716,7 +716,7 @@ function get_rsch_bytopic( $tid ) {
 function get_rsch_byID( $id )
 {
 	global $wpdb;
-	$sql = "SELECT id, name, alias, sex, birth, title, experience, rep, intro, img_path
+	$sql = "SELECT id, name, alias, sex, birth, region, title, experience, rep, intro, img_path
 			FROM {$wpdb->prefix}rschs WHERE id = $id";
 	$rsch_array = $wpdb->get_results($sql);
 	if ( empty($rsch_array) )
@@ -1012,6 +1012,7 @@ function get_issues_bypostids($pid_array) {
 		$issue = get_issue_bypostid($pid);
 		array_push($issue_array, $issue);	
 	}
+	$issue_array = array_filter($issue_array, 'strlen');
 	$issue_array = array_unique($issue_array);
 	$issue_array = array_values($issue_array);
 	return $issue_array;
@@ -1021,7 +1022,6 @@ function get_issues_bypostids($pid_array) {
 * @param pid post id
 */
 function get_issue_bypostid($pid) {
-	//$issue = "haha";
 	global $wpdb;
 	$sql = "SELECT info_id
 			FROM {$wpdb->prefix}post_info
@@ -1041,8 +1041,14 @@ function get_authorids_bypostids($pid_array) {
 	if ( empty($pid_array) ) 	return $authorid_array;
 	foreach ( $pid_array as $pid ) {
 		$mypost = get_post( $pid );
-		array_push($authorid_array, $mypost->post_author);	
+		if ( is_null($mypost) ) {
+			echo "In ". __FUNCTION__ ." the post id: ". $pid . " is deleted. Please clean the post_info table.<br>";
+		}
+		else 
+			array_push($authorid_array, $mypost->post_author);	
 	}
+
+	$authorid_array = array_filter($authorid_array, 'strlen');
 	$authorid_array = array_unique($authorid_array);
 	$authorid_array = array_values($authorid_array);
 	return $authorid_array;
@@ -1054,8 +1060,14 @@ function get_quarters_bypostids($pid_array) {
 	if ( empty($pid_array) ) 	return $quarter_array;
 	foreach ( $pid_array as $pid ) {
 		$mypost = get_post( $pid );
-		array_push( $quarter_array,  substr($mypost->post_date, 0, 7) );
+		if ( is_null($mypost) ) {
+			echo "In ". __FUNCTION__ ." the post id: ". $pid . " is deleted. Plese clean the post_info table.<br>";
+		}
+		else
+			array_push( $quarter_array,  substr($mypost->post_date, 0, 7) );
 	}
+
+	$quarter_array = array_filter($quarter_array, 'strlen');
 	$quarter_array = array_unique($quarter_array);
 	$quarter_array = array_values($quarter_array);
 	arsort($quarter_array);

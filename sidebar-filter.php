@@ -1,11 +1,11 @@
 <div class="post-sidebar-filter">
 	<div class="post-filter-box">
 		<div class="filter-header">
-			<img class="expand-topic-filter" src="<?php bloginfo('template_directory'); ?>/images/arrow-expand.png">
-			<img class="collapse-topic-filter" src="<?php bloginfo('template_directory'); ?>/images/arrow-collapse.png">
+			<img class="expand-topic-filter expand-filter" src="<?php bloginfo('template_directory'); ?>/images/arrow-expand.png">
+			<img class="collapse-topic-filter collapse-filter" src="<?php bloginfo('template_directory'); ?>/images/arrow-collapse.png">
 			按<a href="">专题</a>筛选
 		</div>
-	<div class="topic-filter">
+	<div class="topic-filter filter-content">
 		<ul>
 <?php
 	$page_url = preg_replace('/page\/[0-9]+\//','',$_SERVER['REQUEST_URI']);
@@ -22,11 +22,11 @@
 	</div>
 	<div class="post-filter-box">
 		<div class="filter-header">
-			<img class="expand-author-filter" src="<?php bloginfo('template_directory'); ?>/images/arrow-expand.png">
-			<img class="collapse-author-filter" src="<?php bloginfo('template_directory'); ?>/images/arrow-collapse.png">
+			<img class="expand-author-filter expand-filter" src="<?php bloginfo('template_directory'); ?>/images/arrow-expand.png">
+			<img class="collapse-author-filter collapse-filter" src="<?php bloginfo('template_directory'); ?>/images/arrow-collapse.png">
 			按<a href="">作者</a>筛选
 		</div>
-		<div class="author-filter">
+		<div class="author-filter filter-content">
 			<ul>
 <?php
 	global $authorid_array;
@@ -46,11 +46,11 @@
 	</div>
 	<div class="post-filter-box" style="border-bottom: #b9b9b9 dashed 1px;">
 		<div class="filter-header">
-			<img class="expand-quarter-filter" src="<?php bloginfo('template_directory'); ?>/images/arrow-expand.png">
-			<img class="collapse-quarter-filter" src="<?php bloginfo('template_directory'); ?>/images/arrow-collapse.png">
+			<img class="expand-quarter-filter expand-filter" src="<?php bloginfo('template_directory'); ?>/images/arrow-expand.png">
+			<img class="collapse-quarter-filter collapse-filter" src="<?php bloginfo('template_directory'); ?>/images/arrow-collapse.png">
 			按<a href="">季度</a>筛选
 		</div>
-		<div class="quarter-filter">
+		<div class="quarter-filter filter-content">
 			<ul>
 <?php
 	global $quarter_array;

@@ -9,52 +9,78 @@ if ( isset($_GET['rsch_id']) ) :
 		echo '<h2>你所要找的研究者不存在！</h2>';
 		require_once('404.php');
 	else :
-		if ( $r->sex==NULL )
-			$r->sex = 0;
-		$gender = $sexes;
-		$year = substr($r->birth, 0, 4);
-		if ( $year == '0000' ) {
-			$birth = "未知";			
-		}
-		else {
-			$age = date('Y') - $year;
-			$birth = $year." 年（$age 岁）";
-		}
 		if ( empty($r->img_path) )
 			 $r->img_path = '/images/default-thumb.png';
 		echo '	<div id="researcher-avatar">
 					<img src="'.get_bloginfo('template_directory').$r->img_path.'">
 					<p style="margin-top:15px;">'.$r->name.'</p>
 					<p style="font-weight:normal;font-size:14px;color:#b9b9b9;">'.$r->alias.'</p>
-				</div>
+				</div>';
+
+		if ( $r->region == '7' ) : // for 智库
+			$year = substr($r->birth, 0, 4);
+			if ( $year == '0000' ) {
+				$birth = "未知";	
+			}
+			else {
+				$birth = $year." 年";
+			}
+		echo '	<div id="column1" class="grid_6">
+					<div class="researcher-intro">
+						<p><span style="font-weight:bolder;color:#000;">成立时间：</span>'.$birth.'</p>
+						<p><span style="font-weight:bolder;color:#000;line-height:50px;">智库简介</b></p>
+						<p>'.$r->intro.'</p>
+						<ul><span style="font-weight:bolder;color:#000;line-height:50px;">代表作品</span>';
+						$delimiters = array( ';' , '、', '；');
+						$reps = multiple_explode($delimiters,$r->rep);
+						//$reps = explode("，", $r->rep); //var_dump($rep);
+						foreach ( $reps as $rep ) {
+							echo '<li><span>'.$rep.'</span></li>';
+						}
+		echo '			</ul>
+					</div>
+				</div><!-- End column1 -->';
+		else :
+			if ( $r->sex==NULL )
+				$r->sex = 0;
+			$gender = $sexes;
+			$year = substr($r->birth, 0, 4);
+			if ( $year == '0000' ) {
+				$birth = "未知";			
+			}
+			else {
+				$age = date('Y') - $year;
+				$birth = $year." 年（$age 岁）";
+			}
+			echo '
 				<div id="column1" class="grid_6">
 					<div class="researcher-intro">
 						<p><span style="font-weight:bolder;color:#000;">性别：</span>'.$gender[$r->sex].'</p>
 						<p><span style="font-weight:bolder;color:#000;">出生：</span>'.$birth.'</p>
 						<p><span style="font-weight:bolder;color:#000;">现职：</span>'.$r->title.'</p>
 						<p><span style="font-weight:bolder;color:#000;line-height:50px;">相关经历</b></p>';
-		$exps = explode("；", $r->experience);
-		if ( empty($exps) )
-			echo '			<p></p>';
-		else {
-			foreach ( $exps as $exp ) {
-				echo '		<p>'.$exp.'</p>';
+			$exps = explode("；", $r->experience);
+			if ( empty($exps) )
+				echo '			<p></p>';
+			else {
+				foreach ( $exps as $exp ) {
+					echo '		<p>'.$exp.'</p>';
+				}
 			}
-		}
-		echo '				<p><span style="font-weight:bolder;color:#000;line-height:50px;">个人简介</b></p>
+			echo '		<p><span style="font-weight:bolder;color:#000;line-height:50px;">个人简介</b></p>
 						<p>'.$r->intro.'</p>
 						<ul><span style="font-weight:bolder;color:#000;line-height:50px;">代表作品</span>';
 						$delimiters = array( ',' , '，' , ';' , '、', '；');
 						$reps = multiple_explode($delimiters,$r->rep);
 						//$reps = explode("，", $r->rep); //var_dump($rep);
 						foreach ( $reps as $rep ) {
-							echo '<li><a href="">'.$rep.'</a></li>';
+							echo '<li><span>'.$rep.'</span></li>';
 						}
-		echo '			</ul>
+			echo '		</ul>
 					</div>
-				</div><!-- End column1 -->
-
-				<div id="column2" class="prefix_7 grid_4.1">
+				</div><!-- End column1 -->';
+		endif;
+		echo '	<div id="column2" class="prefix_7 grid_4.1">
 				<div class="researcher-topic">
 					<p>
 					<span style="color:#000;font-weight:bolder;line-height:50px;">研究主题</span>
@@ -74,7 +100,6 @@ if ( isset($_GET['rsch_id']) ) :
 				</div>
 				</div><!-- End column2 -->
 			<div class="clear"></div>';
-
 ?>
 <div id="display_bar">
 	<img src="<?php bloginfo('template_directory'); ?>/images/shadow_middle.png">

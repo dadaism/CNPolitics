@@ -71,8 +71,8 @@
 				$category_obj = get_category_by_slug('publish'); 
     			$category_id = $category_obj->term_id;
     			$category_link = get_category_link( $category_id );
-				echo '<b>政见合集</b>';
-				echo '<a href="'.$category_link.'"><span style="font-size:13px;color:#b9b9b9;font-weight:500;">｜更多合集 »</span></a>';
+				echo '<b>政见合辑</b>';
+				echo '<a href="'.$category_link.'"><span style="font-size:13px;color:#b9b9b9;font-weight:500;">｜更多合辑 »</span></a>';
 			?>
 			</div>
 			<p class="additional-abstract">合辑是由政见网站内容重新编辑并整合而成的电子出版物。每个季度合辑都会与你见面。</p>

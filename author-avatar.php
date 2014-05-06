@@ -38,7 +38,31 @@ class Simple_Local_Avatars {
             
             $upload_path = wp_upload_dir();
             $avatar_full_path = get_template_directory().$local_avatars['relative'];
-            $image_sized = image_resize( $avatar_full_path, $size, $size, true ); 
+            // checking support for wp_image_editor
+            $arg = array(
+                'methods' => array(
+                                'rotate',
+                                'resize',
+                                'save'
+                                )
+                        );
+            $img_editor_test = wp_image_editor_supports($arg);
+            if ($img_editor_test === true) {
+
+                $image = wp_get_image_editor( $avatar_full_path );
+                if ( is_wp_error( $image ) ) {
+                    $image_sized = $image;
+                }
+                else {
+                    $image->resize( $size, $size, true );
+                    $filename = $image->generate_filename();
+                    $image->save($filename);
+                    $image_sized = $filename;
+                }
+            }
+            else {
+                $image_sized = image_resize( $avatar_full_path, $size, $size, true ); 
+            }
             // deal with original being >= to original image (or lack of sizing ability)
             $local_avatars[$size] = is_wp_error($image_sized) ? $local_avatars['relative'] : str_replace( get_template_directory(), "", $image_sized );
             // save updated avatar sizes

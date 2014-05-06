@@ -209,7 +209,7 @@ function cnpolitics_list_bookmark($cat_id) {
 	foreach ( $bookmarks as $bm ) {
 		if ( ++$i == '7' )
 			echo '</ul><ul>';
-		echo '<li style="display:block;"><a href="'.$bm->link_url.'">'.__($bm->link_name).'</a></li>';
+		echo '<li style="display:block;"><a href="'.$bm->link_url.'" target="_blank">'.__($bm->link_name).'</a></li>';
 	}
 }
 

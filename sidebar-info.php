@@ -106,7 +106,7 @@
 		</div>';
 		endif;
 ?>
-		<p><a href="<?php echo get_site_url();?>"><b>政见 CNPolitics.org</b></a> 是一个独立团队，向你介绍世界上最聪明的脑袋是怎样分析中国的。我们致力于发掘海内外学者和智库的智慧成果，引进思想资源。｜更多关于我们 »</p>
+		<p><a href="<?php echo get_site_url();?>"><b>政见 CNPolitics.org</b></a> 是一个独立团队，向你介绍世界上最聪明的脑袋是怎样分析中国的。我们致力于发掘海内外学者和智库的智慧成果，引进思想资源。｜<a href="http://cnpolitics.org/static/?static_page=about.php">更多关于我们 »</a></p>
 		<p style="color:#777777;margin-bottom:5px;">关注政见动向：</p>
 		<div class="post-sidebar-social">
 			<ul>

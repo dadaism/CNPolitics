@@ -30,7 +30,7 @@
 						<img src="<?php bloginfo('template_directory'); ?>/images/nobusiness.png">
 					</div>
 					<div class="content-item">
-						<span>个人非商业使用</span>－－不得将本网站的内容用于商业目的；任何媒体（包括但不限于平面媒体，广播电视，非个人性质的网站、博客或微博）欲转载本站内容，须提前获取授权。
+						<span>个人非商业使用</span>－－不得将本网站的内容用于商业目的；任何媒体（包括但不限于平面媒体，广播电视，非个人性质的网站、博客、微博或微信公号）欲转载本站内容，须提前获取授权。
 					</div>
 				</div>
 				<div class="clear"></div>

@@ -1,37 +1,14 @@
 $(document).ready(function(){
-	$(".expand-topic-filter").click(function(){
-		$(".topic-filter").slideDown();
-		$(this).hide();
-		$(".collapse-topic-filter").show();
-	})
-
-	$(".collapse-topic-filter").click(function(){
-		$(".topic-filter").slideUp();
-		$(this).hide();
-		$(".expand-topic-filter").show();
-	})
-
-	$(".expand-author-filter").click(function(){
-		$(".author-filter").slideDown();
-		$(this).hide();
-		$(".collapse-author-filter").show();
-	})
-
-	$(".collapse-author-filter").click(function(){
-		$(".author-filter").slideUp();
-		$(this).hide();
-		$(".expand-author-filter").show();
-	})
-
-	$(".expand-quarter-filter").click(function(){
-		$(".quarter-filter").slideDown();
-		$(this).hide();
-		$(".collapse-quarter-filter").show();
-	})
-
-	$(".collapse-quarter-filter").click(function(){
-		$(".quarter-filter").slideUp();
-		$(this).hide();
-		$(".expand-quarter-filter").show();
+	$(".filter-header").click(function(){
+		if ( $(this).parent(".post-filter-box").find(".filter-content").css("display")=="none" ) {
+				$(this).parent(".post-filter-box").find(".filter-content").slideDown();
+				$(this).find(".expand-filter").hide();
+				$(this).find(".collapse-filter").show();
+			}
+			else if ( $(this).parent(".post-filter-box").find(".filter-content").css("display")=="block" ) {
+				$(this).parent(".post-filter-box").find(".filter-content").slideUp();
+				$(this).find(".collapse-filter").hide();
+				$(this).find(".expand-filter").show();
+			}
 	})
 });

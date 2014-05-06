@@ -1,6 +1,6 @@
 <?php
 
-	$cnpoliticsers = get_users();
+	$cnpoliticsers = get_users('orderby=post_count&order=DESC');
 
 	/* Observer */
 	$obs = array();
@@ -12,6 +12,12 @@
 	$des = array();
 	/* engineer */
 	$eng = array();
+
+	/* other */
+	$other = array();
+	
+	/* past */
+	$past = array();
 
 	foreach ($cnpoliticsers as $key => $user) {
 		$titles = get_the_author_meta( 'cnpolitics_title', $user->ID );
@@ -36,6 +42,12 @@
 			}
 			else if ( $title === "工程师") {
 	 			array_push($eng, $user->ID);
+			}
+			else if ( $title === "其他") {
+	 			array_push($other, $user->ID);
+			}
+			else if ( $title === "离职") {
+	 			array_push($past, $user->ID);
 			}
 	 	} 
 	}
@@ -170,12 +182,11 @@
 			<p>其他成员：</p>	
 			<ul>
 <?php
-	$delimiters = array(',','，');
-	$others = get_option("cnpolitics_member_other"); 
-	$result = multiple_explode($delimiters, $others);
-	foreach ($result as $key => $name) {
-		echo 	'<li>'.$name.'</li>';
-	}
+	foreach ($other as $key => $uid) :
+		$name = get_the_author_meta('display_name', $uid);
+		$url = get_the_author_meta('user_url', $uid);
+		echo 	'<li><a style="color:#000" href='.$url.'>'.$name.'</a></li>';
+	endforeach;
 ?>
 			</ul>
 		</div>
@@ -184,12 +195,11 @@
 			<p>感谢曾经为政见团队做出贡献的：</p>
 			<ul>
 <?php
-	$delimiters = array(',','，');
-	$pasts = get_option("cnpolitics_member_past"); 
-	$result = multiple_explode($delimiters, $pasts);
-	foreach ($result as $key => $name) {
-		echo 	'<li>'.$name.'</li>';
-	}
+	foreach ($past as $key => $uid) :
+		$name = get_the_author_meta('display_name', $uid);
+		$url = get_the_author_meta('user_url', $uid);
+		echo 	'<li><a style="color:#000" href='.$url.'>'.$name.'</a></li>';
+	endforeach;
 ?>
 			</ul>
 		</div>

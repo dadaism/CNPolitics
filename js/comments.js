@@ -12,17 +12,17 @@ $(document).ready(function(){
 		$(".expand-comments").show();
 	})
 
-/*
-	$(".expand-comments").click(function(){
-		$(".comment-box").slideDown();
-		$(this).hide();
-		$(".collapse-comments").show();
+	$(".comment-click").click(function(){
+		if ( $(".comment-body").css("display")=="none" ) {
+				$(".comment-body").slideDown();
+				$(".expand-comments").hide();
+				$(".collapse-comments").show();
+				$( "#uyan_cmt_tit" ).text("选择评分");
+			}
+			else if ( $(".comment-body").css("display")=="block" ) {
+				$(".comment-body").slideUp();
+				$(".collapse-comments").hide();
+				$(".expand-comments").show();
+			}
 	})
-
-	$(".collapse-comments").click(function(){
-		$(".comment-box").slideUp();
-		$(this).hide();
-		$(".expand-comments").show();
-	})
-*/
 });
