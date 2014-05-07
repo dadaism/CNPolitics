@@ -31,8 +31,6 @@ Template Name: Topic
 <?php
 	global $wpdb;
 	global $toptopics;
-	error_reporting(E_ALL);
-	ini_set('display_errors',1);
 	$numItems = count($toptopics);
 	$cat = 1;	// category id
 	foreach ($toptopics as $value) {

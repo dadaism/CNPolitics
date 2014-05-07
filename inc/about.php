@@ -86,7 +86,7 @@
 		</div>
 		<div class="contribute" >
 			<p>欢迎你的投稿或推荐！</p>
-			<p>来稿请致：<a href="mailto:contribute@cnpolitics.org">Contribute@CNPolitics.org</a></p>
+			<p>来稿请致：<a href="mailto:contribute@cnpolitics.org">Webmaster@CNPolitics.org</a></p>
 		</div>
 	</div> <!-- about-cn end-->
 
@@ -105,7 +105,7 @@
 		</div>
 		<div class="contribute" >
 			<p>Welcome to contribute to us via</p>
-			<p><a href="mailto:contribute@cnpolitics.org">Contribute@CNPolitics.org</a></p>
+			<p><a href="mailto:contribute@cnpolitics.org">Webmaster@CNPolitics.org</a></p>
 		</div>
 	</div><!--copyright-en end-->
 

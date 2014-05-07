@@ -4,8 +4,6 @@ if ( isset($_GET['region']) ) :
 	global $wpdb;
 	global $regions;
 	$reg = $_GET['region']; 	// region id
-	error_reporting(E_ALL);
-	ini_set('display_errors',1);
 	$sql = "SELECT id, name
 			FROM {$wpdb->prefix}rsch WHERE region = $reg";
 	$rschs = $wpdb->get_results($sql);

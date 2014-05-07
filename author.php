@@ -13,7 +13,8 @@ endif;
 	<!--?php echo get_avatar($curauth->user_email); ?-->
 <?php 
 	$default_url = get_template_directory_uri().'/images/default-thumb.png';
-	$default_url = str_replace("cnpolitics.org", gethostbyname(gethostname()), $default_url);
+	// Does it really necessary to replace the domain name with IP address? Just comment it out first..
+	//$default_url = str_replace("cnpolitics.org", gethostbyname(gethostname()), $default_url);
 	echo get_simple_local_avatar($curauth->user_email, 150, $default_url); 
 ?>
 	<p style="margin-top:15px;"><?php echo $curauth->display_name; ?></p>
