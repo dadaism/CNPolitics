@@ -12,26 +12,26 @@
 		})
 
 		$(".expand-researcher-info").click(function(){
-			$(".researcher-info").slideDown();
+			$(this).siblings(".researcher-info").slideDown();
 			$(this).hide();
-			$(".collapse-researcher-info").show();
+			$(this).siblings(".collapse-researcher-info").show();
 		})
 
 		$(".collapse-researcher-info").click(function(){
-			$(".researcher-info").slideUp();
+			$(this).siblings(".researcher-info").slideUp();
 			$(this).hide();
-			$(".expand-researcher-info").show();
+			$(this).siblings(".expand-researcher-info").show();
 		})
 
 		$(".expand-theme-info").click(function(){
-			$(".theme-info").slideDown();
+			$(this).siblings(".theme-info").slideDown();
 			$(this).hide();
-			$(".collapse-theme-info").show();
+			$(this).siblings(".collapse-theme-info").show();
 		})
 
 		$(".collapse-theme-info").click(function(){
-			$(".theme-info").slideUp();
+			$(this).siblings(".theme-info").slideUp();
 			$(this).hide();
-			$(".expand-theme-info").show();
+			$(this).siblings(".expand-theme-info").show();
 		})
 	})

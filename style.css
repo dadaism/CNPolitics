@@ -326,7 +326,15 @@ input.topsearch_input:focus	{
 #display_bar {height:50px;text-align: center;}
 
 .article-latest	{margin-top: 30px;}
-.latest-img	{margin: 0 20px 0 0;border:1px solid #777;float:left;}
+.latest-img	{
+	width: 150px;
+	height: 150px; 
+	margin: 0 20px 0 0;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	border:1px solid #777;
+	float:left;
+}
 .latest-text	{width:375px;float:left; position: relative;margin-right: -5px;max-height: 150px;}
 .latest-head {max-height: 50px;overflow: hidden;}
 .latest-head a {width:375px;margin-right: -5px;font-size:18px;font-weight:700;color:#000;text-decoration: none;line-height: 24px;}
@@ -788,7 +796,7 @@ span.inline-note {color: #b42800;}
 	content: "• ";     
     color: #b9b9b9;
 }
-.researcher-info ul li span {color: #777;}
+.researcher-info ul li a {color: #777;}
 
 .researcher-info ul {display: inline;}
 

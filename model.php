@@ -671,7 +671,7 @@ function get_issue_byID( $id )
 		return $issue_array[0];
 }
 
-function get_rsch_bypostid( $post_id ) {
+function get_rschs_bypostid( $post_id ) {
 	global $wpdb;
 	//var_dump( $rsch_regions );
 	//$region_id = array_search( $rsch_region, $regions);
@@ -680,11 +680,13 @@ function get_rsch_bypostid( $post_id ) {
 			FROM {$wpdb->prefix}post_info
 			 WHERE type = '2' AND post_id = '$post_id';";
 	$rsch_id_array = $wpdb->get_results($sql);
-	//var_dump($rsch_id_array[0]);
-	$rsch = "";
-	if ( !empty($rsch_id_array) )
-		$rsch = get_rsch_byID( $rsch_id_array[0]->info_id );
-	return $rsch;
+	$rschs_array = array();
+	foreach ($rsch_id_array as $r) {
+		$rsch = get_rsch_byID( $r->info_id );
+		if ( $rsch!=NULL )
+			array_push($rschs_array, $rsch);
+	}
+	return $rschs_array;
 }
 
 function get_rsch_bytopic( $tid ) {
@@ -764,20 +766,20 @@ function get_checked_id($post_id, $type) {
 	}
 }
 
-function get_topic_bypostid( $post_id ) {
+function get_topics_bypostid( $post_id ) {
 	global $wpdb;
-	//var_dump( $rsch_regions );
-	//$region_id = array_search( $rsch_region, $regions);
-	//var_dump($myrsch);
 	$sql = "SELECT info_id
 			FROM {$wpdb->prefix}post_info
 			 WHERE type = '1' AND post_id = '$post_id';";
 	$topic_id_array = $wpdb->get_results($sql);
-	//var_dump($rsch_id_array[0]);
-	$topic = "";
-	if ( !empty($topic_id_array) )
-		$topic = get_topic_byID( $topic_id_array[0]->info_id );
-	return $topic;
+	
+	$topics_array = array();
+	foreach ($topic_id_array as $t) {
+		$topic = get_topic_byID( $t->info_id );
+		if ( $topic!=NULL )
+			array_push($topics_array, $topic);
+	}
+	return $topics_array;
 }
 
 function get_topic_byrsch( $rid ) {

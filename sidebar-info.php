@@ -33,8 +33,8 @@
 			</div>
 		</div>
 <?php
-		$r = get_rsch_bypostid($post->ID);
-		if ( !empty($r) ) :
+		$r_array = get_rschs_bypostid($post->ID);
+		foreach ($r_array as $r) :
 			$rid = $r->id;
 			$rname = $r->name;
 			$rintro = $r->intro;
@@ -52,12 +52,13 @@
 				<p>
 				<ul>';
 			$post_id_array = get_postid_byrschid($rid);
+			$count = 0;
 			foreach ( (array)$post_id_array as $post_id ) :
-				//if ( $post_id!=$post->ID ) {
-				$related_post = get_post($post_id);
-				//var_dump($related_post);
-				echo '<li><a href="'.$related_post->guid.'">'.$related_post->post_title.'</a></li>';
-			//}
+				if ( $post_id!=$post->ID ) {
+					$related_post = get_post($post_id); $count = $count+1;
+					echo '<li><a href="'.$related_post->guid.'">'.$related_post->post_title.'</a></li>';
+					if ($count>=4) break;
+				}
 			endforeach;
 			echo '
 				</ul>
@@ -67,10 +68,10 @@
 				</p>
 			</div>
 		</div>';
-		endif;
+		endforeach;
 
-		$t = get_topic_bypostid($post->ID);
-		if ( !empty($t) ) :
+		$t_array = get_topics_bypostid($post->ID);
+		foreach ($t_array as $t) :
 			$tid = $t->id;
 			$tsubject = $t->subject;
 			$tintro = $t->intro;
@@ -104,7 +105,7 @@
 				</p>
 			</div>
 		</div>';
-		endif;
+		endforeach;
 ?>
 		<p><a href="<?php echo get_site_url();?>"><b>政见 CNPolitics.org</b></a> 是一个独立团队，向你介绍世界上最聪明的脑袋是怎样分析中国的。我们致力于发掘海内外学者和智库的智慧成果，引进思想资源。｜<a href="http://cnpolitics.org/static/?static_page=about.php">更多关于我们 »</a></p>
 		<p style="color:#777777;margin-bottom:5px;">关注政见动向：</p>
