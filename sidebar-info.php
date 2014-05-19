@@ -44,7 +44,7 @@
 			<img class="collapse-researcher-info" src="<?php bloginfo('template_directory'); ?>/images/arrow-collapse.png">
 <?php
 			echo '	
-			研究者：	<a href="'.get_bloginfo('url')."/researcher/?rsch_id=".$rid.'">'.$rname. '</a>
+			研究者：<a href="'.get_bloginfo('url')."/researcher/?rsch_id=".$rid.'">'.$rname. '</a>
 			<div class="researcher-info">
 				<p style="margin-top:20px;">个人简介：</p> 
 				<p style="color:#777;">'.$rintro.'</p>
