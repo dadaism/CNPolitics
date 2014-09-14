@@ -1105,8 +1105,9 @@ function pid_filter($pid_array, $issue, $authorid, $quarter) {
 	//var_dump($quarter);
 	//echo strlen($quarter);
 	if ( !empty($quarter) ) {
+		$year_sel = substr($quarter, 0, 4);
 		$season = substr($quarter,7);
-		//var_dump($season);
+		//var_dump($year_sel);
 		if ( $season=="春季" ){
 			$mon_min = "01";
 			$mon_max = "03";		
@@ -1145,8 +1146,9 @@ function pid_filter($pid_array, $issue, $authorid, $quarter) {
 		if ( !empty($quarter) ) {
 			//echo $mypost->post_date."<br>";
 			$date = substr($mypost->post_date,0,7);
+			$year = substr($date, 0, 4);
 			$mon = substr($date, 5, 6);
-			if ( $mon<$mon_min || $mon>$mon_max ) {
+			if ( $year!=$year_sel || $mon<$mon_min || $mon>$mon_max) {
 				unset($pid_array[$key]);
 				continue;
 			}
