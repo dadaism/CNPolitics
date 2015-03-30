@@ -112,6 +112,7 @@ if ( isset($_GET['rsch_id']) ) :
 <?php 
 	// get post id via rsch_id
 	$pid_array = get_postid_byrschid($rid);
+	$pid_array = check_postinfo_bypostids($pid_array);
 	global $issue_array;
 	global $authorid_array;
 	global $quarter_array;

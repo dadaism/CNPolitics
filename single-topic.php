@@ -54,6 +54,7 @@ if ( isset($_GET['topic_id']) ) :
 
 	// get post id via topic_id
 	$pid_array = get_postid_bytopicid($tid);
+	$pid_array = check_postinfo_bypostids($pid_array);
 	global $issue_array;	
 	global $authorid_array;
 	global $quarter_array;

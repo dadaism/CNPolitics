@@ -592,24 +592,24 @@ function CNPolitics_save_post($post_id) {
 			WHERE type = '3' AND post_id = '$post_id';";
 	$array_checked = $wpdb->get_results($sql, ARRAY_N);
 	$old_checked_issues = array();
-	foreach( $array_checked as $key => $value ) {
+	foreach( (array)$array_checked as $key => $value ) {
 		$old_checked_issues[$key] = $value[0];
 	}
 	// update checked topics
 	if ( $old_checked_topics!=$checked_topics ) {
 		// delete unselected
-		foreach ( $old_checked_topics as $tid) {
-			if ( !in_array($tid, $checked_topics) ) {
+		foreach ( (array)$old_checked_topics as $tid) {
+			if ( empty($checked_topics) || !in_array($tid, $checked_topics) ) {
 				//echo "delete".$tid."\n";
 				delete_post_info($post_id, "topic", $tid);
 			}
 		}
 		// add new
 		//echo "add new selected checkbox\n";
-		foreach ( $checked_topics as $tid) {
-			if ( !in_array($tid, $old_checked_topics) ) {
+		foreach ( (array)$checked_topics as $tid) {
+			if ( empty($old_checked_topics) || !in_array($tid, $old_checked_topics) ) {
 				//echo "add".$tid."\n";
-				add_post_info($post_id, "topic", $tid);								
+				add_post_info($post_id, "topic", $tid);			
 			}
 		}
 	}
@@ -617,17 +617,17 @@ function CNPolitics_save_post($post_id) {
 	if ( $old_checked_rschs!=$checked_rschs ) {
 		// delete unselected
 		//wp_die( var_dump($post_id) );
-		foreach ( $old_checked_rschs as $rid) {
-			if ( !in_array($rid, $checked_rschs) ) {
+		foreach ( (array)$old_checked_rschs as $rid) {
+			if ( empty($checked_rschs) || !in_array($rid, $checked_rschs) ) {
 				//echo "delete".$tid."\n";
 				delete_post_info($post_id, "rsch", $rid);
 			}
 		}
 		// add new
 		//echo "add new selected checkbox\n";
-		foreach ( $checked_rschs as $rid) {
+		foreach ( (array)$checked_rschs as $rid) {
 				//wp_die( 'add new' );
-			if ( !in_array($rid, $old_checked_rschs) ) {
+			if ( empty($old_checked_rschs) || !in_array($rid, $old_checked_rschs) ) {
 				//echo "add".$tid."\n";
 				add_post_info($post_id, "rsch", $rid);								
 			}
@@ -637,8 +637,8 @@ function CNPolitics_save_post($post_id) {
 	if ( $old_checked_issues!=$checked_issues ) {
 		// delete unselected
 		//wp_die( var_dump($post_id) );
-		foreach ( $old_checked_issues as $iid) {
-			if ( !in_array($iid, (array)$checked_issues) ) {
+		foreach ( (array)$old_checked_issues as $iid) {
+			if ( empty($checked_issues) || !in_array($iid, (array)$checked_issues) ) {
 				//echo "delete".$tid."\n";
 				delete_post_info($post_id, "issue", $iid);
 			}
@@ -647,7 +647,7 @@ function CNPolitics_save_post($post_id) {
 		//echo "add new selected checkbox\n";
 		foreach ( (array)$checked_issues as $iid) {
 				//wp_die( 'add new' );
-			if ( !in_array($iid, $old_checked_issues) ) {
+			if ( empty($old_checked_issues) || !in_array($iid, $old_checked_issues) ) {
 				//echo "add".$iid."\n";
 				add_post_info($post_id, "issue", $iid);								
 			}
@@ -1196,5 +1196,19 @@ function get_edit_issue($id) {
 		die("DB connection fails!");
 
 	return $issue_array[0];
+}
+
+function check_postinfo_bypostids($pid_array) {
+	global $wpdb;
+	foreach ( (array)$pid_array as $key => $pid ) {
+		$mypost = get_post( $pid );
+		if ( is_null($mypost) ) { // delete entries in post_info table, not sure the root cause
+			unset($pid_array[$key]);
+			$sql = "DELETE FROM {$wpdb->prefix}post_info
+			WHERE post_id = '$pid';";
+			$wpdb->query($sql);
+		}
+	}
+	return $pid_array;
 }
 ?>
