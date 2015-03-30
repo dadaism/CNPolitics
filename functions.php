@@ -8,6 +8,7 @@ require_once('backend.php');
 /* For wordpress theme admin page */
 add_action('admin_menu', 'setup_theme_admin_menus');
 
+add_theme_support('post-thumbnails');
 
 function setup_theme_admin_menus() {
 	add_theme_page("CNPolitics Options", "CNPolitics Option", 'edit_themes', basename(__FILE__),  'theme_option_admin');
